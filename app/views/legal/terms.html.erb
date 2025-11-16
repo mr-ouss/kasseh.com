@@ -1,0 +1,235 @@
+<% content_for :skip_navigation, true %>
+
+<%= render "shared/site_header" %>
+
+<div class="legal-container">
+  <div class="legal-header">
+    <h1>Terms of Service</h1>
+    <p class="legal-updated">Last updated: November 4, 2025</p>
+  </div>
+
+  <div class="legal-content">
+    <section>
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing or using RailsRocket ("Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the Service.</p>
+    </section>
+
+    <section>
+      <h2>2. Description of Service</h2>
+      <p>RailsRocket provides a file transfer management platform that enables users to:</p>
+      <ul>
+        <li>Manage connections to Amazon S3 buckets, FTP servers, and SFTP servers</li>
+        <li>Upload, download, and delete files</li>
+        <li>Browse remote file systems</li>
+        <li>Interact with file storage through AI assistants via our Model Context Protocol (MCP) server</li>
+        <li>Integrate with ChatGPT, Claude, and other MCP-compatible AI assistants</li>
+        <li>Authenticate AI assistants via OAuth 2.0 to perform file operations on your behalf</li>
+        <li>Track file transfer activity and audit logs</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. Account Registration</h2>
+      <p>To use the Service, you must:</p>
+      <ul>
+        <li>Provide accurate and complete registration information</li>
+        <li>Maintain the security of your account credentials</li>
+        <li>Be at least 13 years old</li>
+        <li>Comply with all applicable laws</li>
+      </ul>
+      <p>You are responsible for all activities that occur under your account.</p>
+    </section>
+
+    <section>
+      <h2>4. Subscription Plans</h2>
+      
+      <h3>4.1 Plan Types</h3>
+      <p>We offer the following subscription plans:</p>
+      <ul>
+        <li><strong>Free Plan:</strong> 5 file transfers per month</li>
+        <li><strong>Individual Plan:</strong> 100 file transfers per month ($9/month or $90/year)</li>
+        <li><strong>Professional Plan:</strong> 500 file transfers per month ($19/month or $190/year)</li>
+      </ul>
+
+      <h3>4.2 Billing</h3>
+      <ul>
+        <li>Subscriptions are billed in advance on a monthly or yearly basis</li>
+        <li>Transfer limits reset at the beginning of each billing period</li>
+        <li>All fees are non-refundable except as required by law</li>
+        <li>We use Stripe for payment processing</li>
+      </ul>
+
+      <h3>4.3 Cancellation</h3>
+      <ul>
+        <li>You may cancel your subscription at any time</li>
+        <li>Upon cancellation, you retain access until the end of your billing period</li>
+        <li>After cancellation, your account reverts to the Free plan</li>
+        <li>No refunds are provided for partial billing periods</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. API Access, OAuth, and AI Assistant Integration</h2>
+      
+      <h3>5.1 API Tokens</h3>
+      <ul>
+        <li>You may generate API tokens to authenticate programmatic access</li>
+        <li>Keep your API tokens secure and do not share them publicly</li>
+        <li>You are responsible for all actions performed using your API tokens</li>
+        <li>We may revoke API tokens that violate these Terms</li>
+      </ul>
+
+      <h3>5.2 OAuth Authorization for AI Assistants</h3>
+      <ul>
+        <li>You may authorize AI assistants (ChatGPT, Claude, etc.) to access your RailsRocket account via OAuth 2.0</li>
+        <li>When authorizing an AI assistant, you grant specific permissions (scopes) that control what actions it can perform</li>
+        <li>You can view and revoke authorized applications at any time from your account settings</li>
+        <li>We are not responsible for how third-party AI assistants use the data they receive from our API</li>
+        <li>Authorized applications count toward your account's transfer limits and usage quotas</li>
+      </ul>
+
+      <h3>5.3 API Access</h3>
+      <ul>
+        <li>API access is controlled through OAuth tokens that you grant to applications</li>
+        <li>Applications can only perform actions you've explicitly authorized through their requested scopes</li>
+        <li>We may rate-limit API requests to ensure fair usage and service stability</li>
+        <li>You must comply with the terms of service of any third-party applications you authorize</li>
+        <li>We reserve the right to suspend API access for accounts that violate these Terms</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>6. Data and Content</h2>
+      
+      <h3>6.1 Your Content</h3>
+      <ul>
+        <li>You retain ownership of all files you transfer through the Service</li>
+        <li>We do not access, view, or store the contents of your files</li>
+        <li>You are responsible for ensuring you have rights to all transferred content</li>
+        <li>You must comply with all applicable laws regarding your content</li>
+      </ul>
+
+      <h3>6.2 Storage Credentials</h3>
+      <ul>
+        <li>We securely store your S3 and FTP credentials to provide the Service</li>
+        <li>We will not use your credentials for any purpose other than providing the Service</li>
+        <li>You are responsible for the security of your S3 and FTP accounts</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>7. Acceptable Use</h2>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Use the Service for any illegal purpose</li>
+        <li>Transfer content that infringes intellectual property rights</li>
+        <li>Attempt to circumvent usage limits or security measures</li>
+        <li>Interfere with or disrupt the Service</li>
+        <li>Use the Service to distribute malware or harmful content</li>
+        <li>Share your account credentials or API tokens with others</li>
+        <li>Reverse engineer or attempt to extract source code</li>
+        <li>Use the Service to compete with us or create similar services</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>8. Service Availability</h2>
+      <ul>
+        <li>We strive to maintain 99.9% uptime but do not guarantee uninterrupted access</li>
+        <li>We may perform maintenance with or without notice</li>
+        <li>We are not liable for service interruptions or data loss</li>
+        <li>Third-party services (S3, FTP, Stripe, OpenAI) may affect availability</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>9. Limitation of Liability</h2>
+      <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW:</p>
+      <ul>
+        <li>THE SERVICE IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND</li>
+        <li>WE ARE NOT LIABLE FOR ANY INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES</li>
+        <li>OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID IN THE PAST 12 MONTHS</li>
+        <li>WE ARE NOT RESPONSIBLE FOR DATA LOSS ON YOUR S3 OR FTP SERVERS</li>
+        <li>WE ARE NOT LIABLE FOR ACTIONS TAKEN BY OPENAI'S GPT OR THIRD PARTIES</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>10. Indemnification</h2>
+      <p>You agree to indemnify and hold us harmless from any claims, damages, or expenses arising from:</p>
+      <ul>
+        <li>Your use of the Service</li>
+        <li>Your content and file transfers</li>
+        <li>Your violation of these Terms</li>
+        <li>Your violation of any third-party rights</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>11. Account Termination</h2>
+      
+      <h3>11.1 By You</h3>
+      <ul>
+        <li>You may delete your account at any time from your profile settings</li>
+        <li>Account deletion is permanent and cannot be undone</li>
+        <li>We will delete your personal data within 30 days</li>
+      </ul>
+
+      <h3>11.2 By Us</h3>
+      <p>We may suspend or terminate your account if:</p>
+      <ul>
+        <li>You violate these Terms</li>
+        <li>Your payment fails</li>
+        <li>We detect fraudulent or abusive behavior</li>
+        <li>Required by law or legal process</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>12. Changes to Terms</h2>
+      <ul>
+        <li>We may modify these Terms at any time</li>
+        <li>Material changes will be announced via email or service notification</li>
+        <li>Continued use after changes constitutes acceptance</li>
+        <li>If you disagree with changes, you may cancel your account</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>13. Privacy</h2>
+      <p>Your use of the Service is also governed by our <a href="/privacy">Privacy Policy</a>.</p>
+    </section>
+
+    <section>
+      <h2>14. Governing Law</h2>
+      <p>These Terms are governed by the laws of the United States and the State of Delaware, without regard to conflict of law provisions.</p>
+      <p style="margin-top: 16px;"><strong>Company Information:</strong></p>
+      <p>
+        RailsRocket is a product of <strong>Syntaxia</strong>, a DBA of <strong>Nomad Engineers LLC</strong>, a Delaware limited liability company.<br>
+        Operating offices: Atlanta, GA, USA
+      </p>
+    </section>
+
+    <section>
+      <h2>15. Dispute Resolution</h2>
+      <ul>
+        <li>Any disputes shall be resolved through binding arbitration</li>
+        <li>Arbitration will be conducted by a single arbitrator</li>
+        <li>You waive your right to participate in class action lawsuits</li>
+        <li>Either party may seek injunctive relief in court when necessary</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>16. Contact</h2>
+      <p>For questions about these Terms:</p>
+      <ul>
+        <li><strong>Legal inquiries:</strong> <a href="mailto:legal@example.com">legal@example.com</a></li>
+        <li><strong>Support:</strong> <a href="mailto:support@example.com">support@example.com</a></li>
+        <li><strong>Website:</strong> <%= link_to support_path do %><%= request.base_url %><% end %></li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<%= render "shared/site_footer" %>

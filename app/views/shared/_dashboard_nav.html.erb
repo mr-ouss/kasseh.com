@@ -1,0 +1,31 @@
+<nav class="dashboard-nav" data-controller="mobile-menu">
+  <div class="dashboard-nav__inner">
+    <div class="dashboard-nav__logo">
+      <%= link_to root_path, class: "dashboard-nav__brand" do %>
+        <span class="auth-page__logo-text"><%= ENV.fetch("APP_NAME", "RailsRocket") %></span>
+      <% end %>
+    </div>
+
+    <button type="button" class="dashboard-nav__toggle"
+            data-mobile-menu-target="toggle"
+            data-action="click->mobile-menu#toggle"
+            aria-expanded="false"
+            aria-label="Toggle navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="dashboard-nav__menu" data-mobile-menu-target="menu">
+      <%= link_to "API Tokens", api_tokens_path,
+          class: "dashboard-nav__link #{'dashboard-nav__link--active' if current_page?(api_tokens_path)}" %>
+      <%= link_to "Profile", profile_path,
+          class: "dashboard-nav__link #{'dashboard-nav__link--active' if current_page?(profile_path) || current_page?(edit_profile_path)}" %>
+      <% if Current.user.admin? %>
+        <%= link_to "Admin", admin_root_path,
+            class: "dashboard-nav__link #{'dashboard-nav__link--active' if request.path.start_with?('/admin')}" %>
+      <% end %>
+      <%= button_to "Logout", session_path, method: :delete, class: "dashboard-nav__logout" %>
+    </div>
+  </div>
+</nav>

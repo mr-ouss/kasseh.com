@@ -1,0 +1,101 @@
+<% content_for :title, "Profile · RailsRocket" %>
+<% content_for :skip_navigation, true %>
+<% content_for :body_class, "" %>
+
+<div class="dashboard dashboard--wide">
+  <%= render "shared/dashboard_nav" %>
+
+  <main class="dashboard-main">
+    <div class="dashboard-content dashboard-content--wide">
+      <%= tag.div(flash[:notice], class: "alert alert--success") if flash[:notice] %>
+      <%= tag.div(flash[:alert], class: "alert alert--error") if flash[:alert] %>
+
+      <div class="profile-header">
+        <h1 class="profile-header__title">My Profile</h1>
+        <p class="profile-header__subtitle">Manage your account information</p>
+      </div>
+
+      <div class="profile-card">
+        <h2 class="profile-card__title">Personal Information</h2>
+        
+        <dl class="profile-info">
+          <div class="profile-info__row">
+            <dt class="profile-info__label">First Name</dt>
+            <dd class="profile-info__value"><%= @user.first_name.presence || "Not set" %></dd>
+          </div>
+          
+          <div class="profile-info__row">
+            <dt class="profile-info__label">Last Name</dt>
+            <dd class="profile-info__value"><%= @user.last_name.presence || "Not set" %></dd>
+          </div>
+          
+          <div class="profile-info__row">
+            <dt class="profile-info__label">Email</dt>
+            <dd class="profile-info__value"><%= @user.email_address %></dd>
+          </div>
+        </dl>
+
+        <div class="profile-card__actions">
+          <%= link_to "Edit Profile", edit_profile_path, class: "button button--primary" %>
+        </div>
+      </div>
+
+      <!-- API Tokens Section -->
+      <div class="profile-card">
+        <h2 class="profile-card__title">API Access</h2>
+        <p class="profile-card__description">
+          Generate API tokens to access RailsRocket programmatically. Use tokens with REST API endpoints to automate file transfers, integrate with other tools, or build custom applications.
+        </p>
+        
+        <dl class="profile-info">
+          <div class="profile-info__row">
+            <dt class="profile-info__label">Active Tokens</dt>
+            <dd class="profile-info__value"><%= @user.api_tokens.active.count %></dd>
+          </div>
+          
+          <div class="profile-info__row">
+            <dt class="profile-info__label">Total Tokens</dt>
+            <dd class="profile-info__value"><%= @user.api_tokens.count %></dd>
+          </div>
+        </dl>
+
+        <div class="profile-card__actions">
+          <%= link_to "Manage API Tokens", api_tokens_path, class: "button button--primary" %>
+        </div>
+      </div>
+
+      <!-- Danger Zone: Delete Account -->
+      <div class="profile-card profile-card--danger">
+        <h2 class="profile-card__title">Delete Account</h2>
+        
+        <div class="alert alert--warning">
+          <strong>⚠️ Warning:</strong> This action is permanent and cannot be undone.
+        </div>
+
+        <p class="profile-card__description">
+          Deleting your account will permanently remove:
+        </p>
+        <ul class="profile-card__list">
+          <li>Your profile and account information</li>
+          <li>All connections (SFTP, S3, Google Drive)</li>
+          <li>All file transfer history and activity logs</li>
+          <li>All authentication sessions</li>
+          <li>All OAuth integrations</li>
+        </ul>
+
+        <p class="profile-card__description">
+          You will receive a confirmation email once the deletion is complete.
+        </p>
+
+        <%= button_to "Delete My Account", 
+            profile_path, 
+            method: :delete, 
+            class: "button button--danger",
+            data: { 
+              turbo_confirm: "Are you absolutely sure? This will permanently delete your account and all associated data. This action cannot be undone.\n\nType 'DELETE' to confirm.",
+              turbo_method: :delete 
+            } %>
+      </div>
+    </div>
+  </main>
+</div>

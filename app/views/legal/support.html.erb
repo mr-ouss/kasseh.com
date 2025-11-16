@@ -1,0 +1,73 @@
+<% content_for :skip_navigation, true %>
+
+<%= render "shared/site_header" %>
+
+<div class="legal-container">
+  <div class="legal-header">
+    <h1>Support & Contact</h1>
+    <p class="legal-updated">Get help with <%= ENV.fetch("APP_NAME", "RailsRocket") %></p>
+  </div>
+
+  <div class="legal-content">
+    <section>
+      <h2>Getting Help</h2>
+      <p>We're here to help you get the most out of <%= ENV.fetch("APP_NAME", "RailsRocket") %>. Here are the best ways to reach us:</p>
+    </section>
+
+    <section>
+      <h2>Email Support</h2>
+      <p>For technical issues or general inquiries:</p>
+      <p><strong>Email:</strong> <a href="mailto:support@example.com">support@example.com</a></p>
+      <p>We typically respond within 24 hours on business days.</p>
+    </section>
+
+    <section>
+      <h2>Documentation</h2>
+      <p>Visit our documentation to learn how to:</p>
+      <ul>
+        <li>Manage your account and profile</li>
+        <li>Use OAuth authentication with GitHub, Google, or Apple</li>
+        <li>Create and manage API tokens</li>
+        <li>Integrate with your applications</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Report a Security Issue</h2>
+      <p>If you've discovered a security vulnerability, please report it responsibly:</p>
+      <p><strong>Email:</strong> <a href="mailto:security@example.com">security@example.com</a></p>
+      <p>We take security seriously and will respond promptly to verified reports.</p>
+    </section>
+
+    <section>
+      <h2>Legal Inquiries</h2>
+      <p>For legal matters, terms of service questions, or compliance inquiries:</p>
+      <p><strong>Email:</strong> <a href="mailto:legal@example.com">legal@example.com</a></p>
+    </section>
+
+    <section>
+      <h2>About This Template</h2>
+      <p><%= ENV.fetch("APP_NAME", "RailsRocket") %> is built on RailsRocket, a production-ready Rails 8 template with authentication, deployment, and best practices built-in.</p>
+      <p><strong>Template repository:</strong> <a href="https://github.com/Syntaxia/RailsRocket" target="_blank" rel="noopener">github.com/Syntaxia/RailsRocket</a></p>
+    </section>
+
+    <section>
+      <h2>Common Questions</h2>
+
+      <h3>How do I reset my password?</h3>
+      <p>Visit the <%= link_to "password reset page", new_password_path %> and enter your email address. We'll send you instructions to reset your password.</p>
+
+      <h3>How do I manage API tokens?</h3>
+      <p>Visit your <%= link_to "API tokens page", api_tokens_path %> to create, view, and revoke access tokens for integrations.</p>
+
+      <h3>How do I delete my account?</h3>
+      <p>You can delete your account from your <%= link_to "profile page", profile_path %>. This action is permanent and will remove all your data.</p>
+    </section>
+
+    <div style="margin-top: 40px; padding: 20px; background-color: var(--color-surface-secondary); border-radius: 8px;">
+      <p style="margin: 0;"><strong>Need immediate help?</strong> Email us at <a href="mailto:support@example.com">support@example.com</a></p>
+    </div>
+  </div>
+</div>
+
+<%= render "shared/site_footer" %>

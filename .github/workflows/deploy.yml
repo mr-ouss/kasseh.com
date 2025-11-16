@@ -1,0 +1,113 @@
+# actionlint: disable=all
+name: Deploy Rails App
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - 'README.md'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  # Check if deployment should run (only on configured repositories with secrets)
+  check_configured:
+    runs-on: ubuntu-latest
+    outputs:
+      should_deploy: ${{ steps.check.outputs.configured }}
+    steps:
+      - name: Check if repository is configured for deployment
+        id: check
+        run: |
+          # Deployment only runs if OP_SERVICE_ACCOUNT_TOKEN is configured
+          # This prevents deployment from running on the RailsRocket template repo
+          if [ -n "${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}" ]; then
+            echo "configured=true" >> $GITHUB_OUTPUT
+            echo "✅ Repository is configured - Deployment will proceed"
+          else
+            echo "configured=false" >> $GITHUB_OUTPUT
+            echo "⏭️  Repository not configured (missing OP_SERVICE_ACCOUNT_TOKEN) - Deployment skipped"
+            echo "This is expected for the RailsRocket template repository."
+            echo "After cloning and setting up your project, add OP_SERVICE_ACCOUNT_TOKEN to GitHub Secrets."
+          fi
+
+  deploy:
+    name: Deploy with Kamal
+    needs: check_configured
+    if: needs.check_configured.outputs.should_deploy == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://transferchat.ai
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Install 1Password CLI
+        uses: 1password/install-cli-action@v2
+
+      - name: Deploy application
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+        run: |
+          op run --env-file .github/workflows/.env.deploy -- bash -c '
+            # Configure SSH for the deploy server
+            mkdir -p ~/.ssh
+            echo "$KAMAL_SSH_KEY" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            
+            # SSH config to skip host key checking for the deploy server
+            echo "Host 134.199.203.230" >> ~/.ssh/config
+            echo "  StrictHostKeyChecking no" >> ~/.ssh/config
+            echo "  UserKnownHostsFile /dev/null" >> ~/.ssh/config
+            
+            # Write secrets to .kamal/secrets file so Kamal can read them
+            # This bypasses the environment variable inheritance issue in CI
+            mkdir -p .kamal
+            {
+              echo "# Rails master key for encrypted credentials"
+              echo "RAILS_MASTER_KEY=$RAILS_MASTER_KEY"
+              echo ""
+              echo "# SMTP credentials for email delivery"
+              echo "SMTP_USERNAME=$SMTP_USERNAME"
+              echo "SMTP_PASSWORD=$SMTP_PASSWORD"
+              echo "SMTP_SERVER=$SMTP_SERVER"
+              echo ""
+              echo "# Version information"
+              echo "APP_VERSION=${GITHUB_SHA:0:8}"
+              echo "DEPLOYED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              echo ""
+              echo "OAuth Clients"
+              echo "GITHUB_CLIENT_ID=$GITHUB_CLIENT_ID"
+              echo "GITHUB_CLIENT_SECRET=$GITHUB_CLIENT_SECRET"
+              echo "GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID"
+              echo "GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET"
+              echo "APPLE_CLIENT_ID=$APPLE_CLIENT_ID"
+              echo "APPLE_TEAM_ID=$APPLE_TEAM_ID"  
+              echo "APPLE_KEY_ID=$APPLE_KEY_ID"
+              echo "APPLE_PRIVATE_KEY=$(echo "$APPLE_PRIVATE_KEY" | base64 -w 0)"
+              echo ""
+              echo "# Stripe payment processing"
+              echo "STRIPE_PUBLISHABLE_KEY=$STRIPE_PUBLISHABLE_KEY"
+              echo "STRIPE_SECRET_KEY=$STRIPE_SECRET_KEY"
+              echo "STRIPE_WEBHOOK_SECRET=$STRIPE_WEBHOOK_SECRET"
+              echo "STRIPE_INDIVIDUAL_MONTHLY_PRICE_ID=$STRIPE_INDIVIDUAL_MONTHLY_PRICE_ID"
+              echo "STRIPE_INDIVIDUAL_YEARLY_PRICE_ID=$STRIPE_INDIVIDUAL_YEARLY_PRICE_ID"
+              echo "STRIPE_PROFESSIONAL_MONTHLY_PRICE_ID=$STRIPE_PROFESSIONAL_MONTHLY_PRICE_ID"
+              echo "STRIPE_PROFESSIONAL_YEARLY_PRICE_ID=$STRIPE_PROFESSIONAL_YEARLY_PRICE_ID"
+            } > .kamal/secrets
+            
+                        
+            # Deploy
+            bundle exec kamal deploy
+          '

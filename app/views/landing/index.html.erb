@@ -1,0 +1,425 @@
+<% content_for :title, "RailsRocket · Production-Ready Rails Template" %>
+<% content_for :skip_navigation, true %>
+
+<div class="landing-page">
+  <header class="landing-header" data-controller="mobile-menu">
+    <div class="container">
+      <div class="landing-header__inner">
+        <div class="landing-logo">
+          <h1 class="landing-logo__text">
+            Kasseh
+          </h1>
+          <p class="landing-logo__tagline">Launch faster. Build better.</p>
+        </div>
+
+        <nav class="landing-nav" aria-label="Primary" data-mobile-menu-target="menu">
+          <% if authenticated? %>
+            <%= link_to "Dashboard", profile_path, class: "landing-nav__link" %>
+            <%= link_to "Logout", session_path, method: :delete, data: { turbo_method: :delete }, class: "button button--ghost" %>
+          <% else %>
+            <%= link_to "Login", new_session_path, class: "landing-nav__link" %>
+            <%= link_to "Get Started", new_registration_path, class: "button button--primary" %>
+          <% end %>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="landing-main">
+    <section class="hero">
+      <div class="container">
+        <div class="hero__content">
+          <h2 class="hero__title">
+            Kasseh
+          </h2>
+          <p class="hero__subtitle">
+            Skip the boilerplate. Start building your next great idea with authentication,
+            deployment, and best practices already configured. AI-ready with GitHub Copilot instructions.
+          </p>
+          <div class="hero__actions">
+            <%= link_to "Get Started", new_registration_path, class: "button button--primary button--large" unless authenticated? %>
+            <%= link_to "Dashboard", profile_path, class: "button button--primary button--large" if authenticated? %>
+            <a href="https://github.com/Syntaxia/RailsRocket" target="_blank" rel="noopener noreferrer" class="button button--ghost button--large">
+              View on GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <h3 class="features__title">Everything You Need to Launch</h3>
+        <div class="features__grid">
+          <div class="feature-card">
+            <div class="feature-card__icon">🔐</div>
+            <h4 class="feature-card__title">Authentication Ready</h4>
+            <p class="feature-card__description">
+              Email/password auth with bcrypt, OAuth (GitHub, Google, Apple),
+              password reset, and session management built-in.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon">🚀</div>
+            <h4 class="feature-card__title">Deploy Anywhere</h4>
+            <p class="feature-card__description">
+              Kamal 2 deployment configuration with 1Password secrets management.
+              Docker-ready with multi-stage builds.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon">⚡</div>
+            <h4 class="feature-card__title">Modern Stack</h4>
+            <p class="feature-card__description">
+              Rails 8, Hotwire (Turbo + Stimulus), SQLite with Solid Queue,
+              Solid Cache, and Solid Cable. No Redis needed.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon">🎨</div>
+            <h4 class="feature-card__title">Beautiful UI</h4>
+            <p class="feature-card__description">
+              Clean, responsive design with custom CSS. Dark theme with
+              glassmorphism effects and smooth animations.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon">🔑</div>
+            <h4 class="feature-card__title">API Tokens</h4>
+            <p class="feature-card__description">
+              Secure API token management with SHA256 hashing, expiration,
+              and last-used tracking for building APIs.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon">🛡️</div>
+            <h4 class="feature-card__title">Security First</h4>
+            <p class="feature-card__description">
+              Brakeman security scanning, RuboCop linting, encrypted credentials,
+              and GDPR-compliant account deletion.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon">✅</div>
+            <h4 class="feature-card__title">Test Coverage</h4>
+            <p class="feature-card__description">
+              Minitest with SimpleCov, system tests with Capybara,
+              and GitHub Actions CI/CD pipeline.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon">👤</div>
+            <h4 class="feature-card__title">Admin Panel</h4>
+            <p class="feature-card__description">
+              Basic admin dashboard with user management, role assignment,
+              and protected primary admin account.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon">🤖</div>
+            <h4 class="feature-card__title">AI-Ready</h4>
+            <p class="feature-card__description">
+              Comprehensive GitHub Copilot instructions included. Get intelligent,
+              context-aware code suggestions that understand your architecture.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tech-stack">
+      <div class="container">
+        <h3 class="tech-stack__title">Built With Modern Tools</h3>
+        <div class="tech-stack__items">
+          <div class="tech-item">Rails 8.1</div>
+          <div class="tech-item">Ruby 3.4</div>
+          <div class="tech-item">SQLite 3</div>
+          <div class="tech-item">Hotwire</div>
+          <div class="tech-item">Stimulus</div>
+          <div class="tech-item">Kamal 2</div>
+          <div class="tech-item">Docker</div>
+          <div class="tech-item">1Password CLI</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta__content">
+          <h3 class="cta__title">Ready to Build Something Amazing?</h3>
+          <p class="cta__description">
+            Get started in minutes. Focus on your unique features, not infrastructure.
+          </p>
+          <div class="cta__actions">
+            <% if authenticated? %>
+              <%= link_to "Go to Dashboard", profile_path, class: "button button--primary button--large" %>
+            <% else %>
+              <%= link_to "Create Account", new_registration_path, class: "button button--primary button--large" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="landing-footer">
+    <div class="container">
+      <div class="landing-footer__inner">
+        <p class="landing-footer__text">
+          © <%= Time.current.year %> Kasseh. A production-ready Rails template.
+        </p>
+        <nav class="landing-footer__links" aria-label="Footer">
+          <%= link_to "Privacy", privacy_path %>
+          <%= link_to "Terms", terms_path %>
+          <%= link_to "Support", support_path %>
+        </nav>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<style>
+.landing-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 1.5rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.landing-header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.landing-logo__text {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.landing-logo__tagline {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.landing-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.landing-nav__link {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.landing-nav__link:hover {
+  color: var(--color-accent);
+}
+
+.landing-main {
+  flex: 1;
+}
+
+.hero {
+  padding: 6rem 0;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+}
+
+.hero__title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.hero__subtitle {
+  font-size: 1.25rem;
+  color: var(--color-muted);
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+  line-height: 1.6;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.features {
+  padding: 5rem 0;
+}
+
+.features__title {
+  font-size: 2rem;
+  text-align: center;
+  margin: 0 0 3rem 0;
+}
+
+.features__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card__icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+}
+
+.feature-card__description {
+  color: var(--color-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.tech-stack {
+  padding: 5rem 0;
+  background: var(--color-surface);
+}
+
+.tech-stack__title {
+  font-size: 2rem;
+  text-align: center;
+  margin: 0 0 3rem 0;
+}
+
+.tech-stack__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.tech-item {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+}
+
+.cta {
+  padding: 6rem 0;
+  text-align: center;
+}
+
+.cta__title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+}
+
+.cta__description {
+  font-size: 1.25rem;
+  color: var(--color-muted);
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+}
+
+.cta__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.landing-footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: 2rem 0;
+  margin-top: auto;
+}
+
+.landing-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.landing-footer__text {
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.landing-footer__links {
+  display: flex;
+  gap: 2rem;
+}
+
+.landing-footer__links a {
+  color: var(--color-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.landing-footer__links a:hover {
+  color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .hero__title {
+    font-size: 2rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1rem;
+  }
+
+  .landing-header__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .landing-footer__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+</style>

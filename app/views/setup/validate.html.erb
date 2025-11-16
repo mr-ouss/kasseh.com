@@ -1,0 +1,303 @@
+<div class="setup-wizard">
+  <div class="setup-container">
+    <header class="setup-header">
+      <div class="setup-logo">
+        <h1>🔐 Validate 1Password Secrets</h1>
+        <p class="setup-tagline">Optional but recommended: Check that your vault has all required secrets</p>
+      </div>
+    </header>
+
+    <main class="setup-main">
+      <div class="setup-section">
+        <div class="setup-field">
+          <label class="setup-label">Vault Name</label>
+          <div class="setup-input" style="background-color: #f3f4f6; cursor: default;">
+            <%= @vault_name %>
+          </div>
+          <p class="setup-help">
+            Make sure you're signed in to 1Password CLI: <code>eval $(op signin)</code>
+          </p>
+        </div>
+
+        <!-- GitHub Actions Secret Reminder -->
+        <div class="github-secret-reminder" style="margin-top: 2rem;">
+          <div class="reminder-header">
+            <span style="font-size: 1.5rem;">🔑</span>
+            <h3 style="margin: 0 0 0.5rem 0; font-size: 1rem; font-weight: 600;">GitHub Actions Setup Required</h3>
+          </div>
+          <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">
+            For CI/CD deployment to work, you need to configure a GitHub repository secret.
+          </p>
+          <div class="reminder-steps" style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 1rem; font-size: 0.875rem;">
+            <p style="margin: 0 0 0.75rem 0; font-weight: 600;">Steps to configure:</p>
+            <ol style="margin: 0; padding-left: 1.5rem;">
+              <li style="margin-bottom: 0.5rem;">
+                Create a 1Password Service Account token with read access to <strong><%= @vault_name %></strong> vault
+                <br><a href="https://1password.com/" target="_blank" style="color: #3b82f6; text-decoration: none;">→ Go to 1Password Settings</a>
+              </li>
+              <li style="margin-bottom: 0.5rem;">
+                Add it to your GitHub repository secrets as <code style="background: #fff; padding: 2px 6px; border-radius: 3px; border: 1px solid #e5e7eb;">OP_SERVICE_ACCOUNT_TOKEN</code>
+                <% if @github_repo_path.present? %>
+                  <br><a href="https://github.com/<%= @github_repo_path %>/settings/secrets/actions" target="_blank" style="color: #3b82f6; text-decoration: none;" id="github-secrets-link">→ Go to GitHub Secrets</a>
+                <% else %>
+                  <br><span style="color: #6b7280; font-size: 0.8125rem;">→ Go to your GitHub repository → Settings → Secrets and variables → Actions</span>
+                <% end %>
+              </li>
+            </ol>
+            <p style="margin: 1rem 0 0 0; color: #6b7280; font-size: 0.8125rem;">
+              📖 For detailed instructions, see the <strong>GitHub Actions Secrets Setup</strong> section in README.md
+            </p>
+          </div>
+        </div>
+
+        <div id="validation-results" style="display: none; margin-top: 2rem;">
+          <!-- Results will be inserted here via JavaScript -->
+        </div>
+
+        <div class="setup-actions">
+          <%= button_tag "Validate Secrets",
+              type: "button",
+              class: "button button--primary",
+              onclick: "validateSecrets()",
+              id: "validate-button" %>
+
+          <%= button_to "Skip Validation & Continue",
+              setup_skip_validation_path,
+              method: :post,
+              class: "button button--ghost",
+              data: { confirm: "Are you sure? It's recommended to validate your secrets before deploying." } %>
+        </div>
+
+        <%= button_to "Continue to Complete Setup",
+            setup_complete_path,
+            method: :get,
+            class: "button button--success",
+            id: "continue-button",
+            style: "display: none; margin-top: 1.5rem;" %>
+      </div>
+    </main>
+  </div>
+</div>
+
+<style>
+  .validation-result {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .validation-result.success {
+    border-color: #10b981;
+    background-color: #f0fdf4;
+  }
+
+  .validation-result.warning {
+    border-color: #f59e0b;
+    background-color: #fffbeb;
+  }
+
+  .validation-result.error {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+  }
+
+  .validation-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .validation-status {
+    font-size: 1.25rem;
+  }
+
+  .validation-name {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .validation-required {
+    font-size: 0.75rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    background-color: #fee2e2;
+    color: #991b1b;
+  }
+
+  .validation-optional {
+    font-size: 0.75rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    background-color: #e0e7ff;
+    color: #3730a3;
+  }
+
+  .validation-details {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+  }
+
+  .validation-fields {
+    margin-top: 0.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .validation-field {
+    font-size: 0.875rem;
+    color: #374151;
+  }
+
+  .validation-field.missing {
+    color: #dc2626;
+  }
+
+  .summary-card {
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .summary-card.success {
+    border-color: #10b981;
+    background-color: #f0fdf4;
+  }
+
+  .summary-card.warning {
+    border-color: #f59e0b;
+    background-color: #fffbeb;
+  }
+
+  .summary-card.error {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+  }
+
+  .summary-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .summary-message {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .summary-details {
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+</style>
+
+<script>
+async function validateSecrets() {
+  const button = document.getElementById('validate-button');
+  const resultsDiv = document.getElementById('validation-results');
+  const continueButton = document.getElementById('continue-button');
+
+  // Disable button and show loading
+  button.disabled = true;
+  button.textContent = 'Validating...';
+  resultsDiv.style.display = 'block';
+  resultsDiv.innerHTML = '<p class="text-center">🔍 Checking 1Password secrets...</p>';
+
+  try {
+    const response = await fetch('<%= setup_check_secrets_path %>', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+      }
+    });
+
+    const data = await response.json();
+    displayResults(data);
+
+    // Show continue button if validation is successful or user can proceed anyway
+    if (data.summary.status === 'success' || data.summary.status === 'warning') {
+      continueButton.style.display = 'block';
+    }
+
+  } catch (error) {
+    resultsDiv.innerHTML = `
+      <div class="validation-result error">
+        <div class="validation-header">
+          <span class="validation-status">❌</span>
+          <span class="validation-name">Error</span>
+        </div>
+        <p class="validation-details">${error.message}</p>
+      </div>
+    `;
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Re-validate Secrets';
+  }
+}
+
+function displayResults(data) {
+  const resultsDiv = document.getElementById('validation-results');
+  let html = '';
+
+  // Summary card
+  const summaryClass = data.summary.status;
+  const summaryIcon = {
+    success: '✅',
+    warning: '⚠️',
+    error: '❌'
+  }[data.summary.status] || '❓';
+
+  html += `
+    <div class="summary-card ${summaryClass}">
+      <div class="summary-icon">${summaryIcon}</div>
+      <div class="summary-message">${data.summary.message}</div>
+      ${data.summary.missing_count !== undefined ? `
+        <div class="summary-details">
+          ${data.summary.total_count - data.summary.missing_count} of ${data.summary.total_count} required secrets configured
+        </div>
+      ` : ''}
+    </div>
+  `;
+
+  // Individual secret results
+  if (data.secrets && data.secrets.length > 0) {
+    data.secrets.forEach(secret => {
+      const hasIssues = !secret.exists || !secret.accessible || secret.missing_fields.length > 0 || secret.error;
+      const statusClass = secret.error ? 'error' : (hasIssues ? 'warning' : 'success');
+      const statusIcon = secret.error ? '❌' : (hasIssues ? '⚠️' : '✅');
+
+      html += `
+        <div class="validation-result ${statusClass}">
+          <div class="validation-header">
+            <span class="validation-status">${statusIcon}</span>
+            <span class="validation-name">${secret.name}</span>
+            <span class="${secret.required ? 'validation-required' : 'validation-optional'}">
+              ${secret.required ? 'Required' : 'Optional'}
+            </span>
+          </div>
+          <div class="validation-details">
+            <strong>1Password Item:</strong> <code>${secret.item_name}</code>
+            ${secret.error ? `<br><strong>Error:</strong> ${secret.error}` : ''}
+            ${!secret.exists && !secret.error ? '<br><strong>Status:</strong> Item not found in vault' : ''}
+            ${secret.exists && !secret.accessible ? '<br><strong>Status:</strong> Item exists but cannot be accessed' : ''}
+          </div>
+          ${secret.missing_fields && secret.missing_fields.length > 0 ? `
+            <div class="validation-fields">
+              <strong>Missing fields:</strong>
+              <ul>
+                ${secret.missing_fields.map(field => `<li class="validation-field missing">❌ ${field}</li>`).join('')}
+              </ul>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    });
+  }
+
+  resultsDiv.innerHTML = html;
+}
+</script>

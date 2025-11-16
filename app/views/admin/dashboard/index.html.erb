@@ -1,0 +1,259 @@
+<% content_for :title, "Admin Dashboard · RailsRocket" %>
+<% content_for :skip_navigation, true %>
+<% content_for :body_class, "" %>
+
+<% content_for :head do %>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<% end %>
+
+<div class="dashboard dashboard--wide">
+  <%= render "shared/dashboard_nav" %>
+
+  <main class="dashboard-main">
+    <div class="dashboard-content dashboard-content--wide">
+      <%= tag.div(flash[:notice], class: "alert alert--success") if flash[:notice] %>
+      <%= tag.div(flash[:alert], class: "alert alert--error") if flash[:alert] %>
+
+      <!-- Admin Navigation Tabs -->
+      <div class="admin-tabs">
+        <%= link_to "Dashboard", admin_root_path, 
+            class: "admin-tabs__tab admin-tabs__tab--active" %>
+        <%= link_to "Users", admin_users_path, 
+            class: "admin-tabs__tab" %>
+      </div>
+
+      <div class="admin-header">
+        <div>
+          <h1 class="admin-header__title">Admin Dashboard</h1>
+          <p class="admin-header__subtitle">Overview of platform metrics and user activity</p>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="admin-stats-grid">
+        <div class="admin-stat-card">
+          <div class="admin-stat-card__icon">👥</div>
+          <div class="admin-stat-card__content">
+            <div class="admin-stat-card__label">Total Users</div>
+            <div class="admin-stat-card__value"><%= number_with_delimiter(@total_users) %></div>
+          </div>
+        </div>
+
+        <div class="admin-stat-card">
+          <div class="admin-stat-card__icon">🆕</div>
+          <div class="admin-stat-card__content">
+            <div class="admin-stat-card__label">New This Month</div>
+            <div class="admin-stat-card__value"><%= number_with_delimiter(@new_users_this_month) %></div>
+          </div>
+        </div>
+
+        <div class="admin-stat-card">
+          <div class="admin-stat-card__icon">💳</div>
+          <div class="admin-stat-card__content">
+            <div class="admin-stat-card__label">Active Subscriptions</div>
+            <div class="admin-stat-card__value"><%= number_with_delimiter(@active_subscriptions) %></div>
+          </div>
+        </div>
+
+        <div class="admin-stat-card">
+          <div class="admin-stat-card__icon">💰</div>
+          <div class="admin-stat-card__content">
+            <div class="admin-stat-card__label">Current MRR</div>
+            <div class="admin-stat-card__value">$<%= number_with_delimiter(@current_mrr, precision: 2) %></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Grid -->
+      <div class="admin-charts-grid">
+        <!-- User Growth Chart -->
+        <div class="admin-chart-card">
+          <div class="admin-chart-card__header">
+            <h2 class="admin-chart-card__title">User Growth</h2>
+            <p class="admin-chart-card__subtitle">New vs Total Users (Last 12 Months)</p>
+          </div>
+          <div class="admin-chart-card__body">
+            <canvas id="userGrowthChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Subscription Distribution Chart -->
+        <div class="admin-chart-card">
+          <div class="admin-chart-card__header">
+            <h2 class="admin-chart-card__title">Subscription Plans</h2>
+            <p class="admin-chart-card__subtitle">Users per Plan</p>
+          </div>
+          <div class="admin-chart-card__body">
+            <canvas id="subscriptionChart"></canvas>
+          </div>
+        </div>
+
+        <!-- MRR Chart -->
+        <div class="admin-chart-card admin-chart-card--full">
+          <div class="admin-chart-card__header">
+            <h2 class="admin-chart-card__title">Monthly Recurring Revenue</h2>
+            <p class="admin-chart-card__subtitle">MRR Trend (Last 12 Months)</p>
+          </div>
+          <div class="admin-chart-card__body">
+            <canvas id="mrrChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Chart.js default configuration
+    Chart.defaults.color = '#cbd5f5';
+    Chart.defaults.borderColor = 'rgba(148, 163, 184, 0.28)';
+    Chart.defaults.font.family = '"Inter", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+
+    // User Growth Chart
+    const userGrowthData = <%= raw @user_growth_data.to_json %>;
+    const userGrowthCtx = document.getElementById('userGrowthChart');
+    if (userGrowthCtx) {
+      new Chart(userGrowthCtx, {
+        type: 'line',
+        data: {
+          labels: userGrowthData.map(d => d.month),
+          datasets: [
+            {
+              label: 'New Users',
+              data: userGrowthData.map(d => d.new_users),
+              borderColor: '#38bdf8',
+              backgroundColor: 'rgba(56, 189, 248, 0.1)',
+              tension: 0.4,
+              fill: true
+            },
+            {
+              label: 'Total Users',
+              data: userGrowthData.map(d => d.total_users),
+              borderColor: '#0ea5e9',
+              backgroundColor: 'rgba(14, 165, 233, 0.1)',
+              tension: 0.4,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                padding: 15,
+                usePointStyle: true
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(148, 163, 184, 0.1)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // Subscription Distribution Pie Chart
+    const subscriptionData = <%= raw @subscription_data.to_json %>;
+    const planColors = {
+      'free': '#64748b',
+      'individual': '#38bdf8',
+      'professional': '#0ea5e9'
+    };
+    
+    const subscriptionCtx = document.getElementById('subscriptionChart');
+    if (subscriptionCtx) {
+      new Chart(subscriptionCtx, {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(subscriptionData).map(plan => plan.charAt(0).toUpperCase() + plan.slice(1)),
+          datasets: [{
+            data: Object.values(subscriptionData),
+            backgroundColor: Object.keys(subscriptionData).map(plan => planColors[plan] || '#64748b'),
+            borderWidth: 2,
+            borderColor: '#020617'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                padding: 15,
+                usePointStyle: true
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // MRR Chart
+    const mrrData = <%= raw @mrr_data.to_json %>;
+    const mrrCtx = document.getElementById('mrrChart');
+    if (mrrCtx) {
+      new Chart(mrrCtx, {
+        type: 'bar',
+        data: {
+          labels: mrrData.map(d => d.month),
+          datasets: [{
+            label: 'Monthly Recurring Revenue',
+            data: mrrData.map(d => d.mrr),
+            backgroundColor: 'rgba(56, 189, 248, 0.6)',
+            borderColor: '#38bdf8',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return '$' + context.parsed.y.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(148, 163, 184, 0.1)'
+              },
+              ticks: {
+                callback: function(value) {
+                  return '$' + value.toLocaleString('en-US');
+                }
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          }
+        }
+      });
+    }
+  });
+</script>

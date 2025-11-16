@@ -1,0 +1,41 @@
+<% content_for :title, "Forgot Password · RailsRocket" %>
+<% content_for :skip_navigation, true %>
+<% content_for :body_class, "" %>
+
+<div class="auth-page">
+  <div class="auth-page__container">
+    <div class="auth-page__header">
+      <%= link_to root_path, class: "auth-page__logo" do %>
+        <span class="auth-page__logo-text"><%= ENV.fetch("APP_NAME", "RailsRocket") %></span>
+      <% end %>
+    </div>
+
+    <div class="auth-page__card">
+      <div class="auth-form">
+        <h1 class="auth-form__title">Forgot your password?</h1>
+        <p class="auth-form__subtitle">We'll send you instructions to reset it</p>
+        
+        <%= tag.div(flash[:alert], class: "alert alert--error") if flash[:alert] %>
+        <%= tag.div(flash[:notice], class: "alert alert--success") if flash[:notice] %>
+
+        <%= form_with url: passwords_path, class: "auth-form__form" do |form| %>
+          <div class="auth-form__field">
+            <%= form.label :email_address, "Email address", class: "auth-form__label" %>
+            <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "you@example.com", value: params[:email_address], class: "auth-form__input" %>
+          </div>
+
+          <%= form.submit "Email reset instructions", class: "auth-form__submit" %>
+        <% end %>
+
+        <div class="auth-form__footer">
+          Remember your password? <%= link_to "Sign in", new_session_path, class: "auth-form__link" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-page__footer">
+      <%= link_to "← Back to home", root_path, class: "auth-page__back" %>
+    </div>
+  </div>
+</div>
+

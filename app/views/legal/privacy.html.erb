@@ -1,0 +1,168 @@
+<% content_for :skip_navigation, true %>
+
+<%= render "shared/site_header" %>
+
+<div class="legal-container">
+  <div class="legal-header">
+    <h1>Privacy Policy</h1>
+    <p class="legal-updated">Last updated: November 4, 2025</p>
+  </div>
+
+  <div class="legal-content">
+    <section>
+      <h2>1. Introduction</h2>
+      <p>Welcome to RailsRocket ("we," "our," or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our file transfer management service.</p>
+    </section>
+
+    <section>
+      <h2>2. Information We Collect</h2>
+      
+      <h3>2.1 Account Information</h3>
+      <p>When you create an account, we collect:</p>
+      <ul>
+        <li>Email address</li>
+        <li>Name (first and last)</li>
+        <li>Password (encrypted and never stored in plain text)</li>
+      </ul>
+
+      <h3>2.2 Connection Credentials</h3>
+      <p>To provide our file transfer services, we securely store:</p>
+      <ul>
+        <li>S3 bucket credentials (access keys, region, bucket names)</li>
+        <li>FTP server credentials (hostnames, usernames, passwords, ports)</li>
+        <li>Connection names and configurations</li>
+      </ul>
+      <p>All credentials are encrypted at rest and in transit using industry-standard encryption.</p>
+
+      <h3>2.3 Usage Data</h3>
+      <p>We automatically collect:</p>
+      <ul>
+        <li>File transfer activity logs (operation type, timestamps, success/failure status)</li>
+        <li>API usage statistics</li>
+        <li>Subscription and billing information</li>
+      </ul>
+
+      <h3>2.4 Payment Information</h3>
+      <p>Payment processing is handled by Stripe. We do not store your full credit card numbers. We receive limited payment information from Stripe such as:</p>
+      <ul>
+        <li>Last 4 digits of card</li>
+        <li>Card brand</li>
+        <li>Billing status</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. How We Use Your Information</h2>
+      <p>We use your information to:</p>
+      <ul>
+        <li>Provide and maintain our file transfer services</li>
+        <li>Authenticate your API requests and GPT actions</li>
+        <li>Process your file transfer operations</li>
+        <li>Send you service-related emails (subscription updates, transfer limit notifications)</li>
+        <li>Process payments and manage subscriptions</li>
+        <li>Improve our services and develop new features</li>
+        <li>Comply with legal obligations</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. AI Assistant Integration (MCP & OpenAI)</h2>
+      <p>When you use RailsRocket through AI assistants like ChatGPT or Claude via our Model Context Protocol (MCP) server:</p>
+      <ul>
+        <li>You authenticate via OAuth 2.0 to grant the AI assistant access to your RailsRocket account</li>
+        <li>The AI assistant can only perform actions you've explicitly authorized (read connections, manage files, etc.)</li>
+        <li>Your storage credentials (S3, FTP, SFTP) are never shared with the AI assistant or OpenAI/Anthropic</li>
+        <li>File transfers are executed directly between our servers and your storage destinations</li>
+        <li>We log the source of operations (e.g., "chatgpt", "claude") for audit purposes</li>
+        <li>The AI assistant may process your conversation according to their own privacy policy (OpenAI, Anthropic, etc.)</li>
+        <li>You can revoke AI assistant access at any time from your account settings</li>
+      </ul>
+      <p>Our MCP server communicates with AI assistants using Server-Sent Events (SSE) and follows the Model Context Protocol specification. No file content passes through the AI assistant—only commands and metadata.</p>
+    </section>
+
+    <section>
+      <h2>5. Data Security</h2>
+      <p>We implement appropriate security measures including:</p>
+      <ul>
+        <li>Encryption of sensitive data at rest and in transit (TLS/SSL)</li>
+        <li>Secure password hashing (bcrypt)</li>
+        <li>API token authentication with rate limiting</li>
+        <li>Regular security audits and updates</li>
+        <li>Access controls and monitoring</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>6. Data Retention</h2>
+      <p>We retain your data as follows:</p>
+      <ul>
+        <li>Account information: Until you delete your account</li>
+        <li>Connection credentials: Until you remove the connection</li>
+        <li>Activity logs: 90 days for operational purposes</li>
+        <li>Billing records: As required by law (typically 7 years)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>7. Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Access your personal data</li>
+        <li>Correct inaccurate data from your profile settings</li>
+        <li>Delete your account and associated data (self-service from your profile settings)</li>
+        <li>Export your data</li>
+        <li>Opt-out of marketing communications</li>
+      </ul>
+      <p>Most rights can be exercised directly from your account settings. For data export requests or other privacy inquiries, contact us at <a href="mailto:privacy@example.com">privacy@example.com</a></p>
+    </section>
+
+    <section>
+      <h2>8. Third-Party Services</h2>
+      <p>We use the following third-party services:</p>
+      <ul>
+        <li><strong>Stripe:</strong> Payment processing</li>
+        <li><strong>DigitalOcean:</strong> Hosting infrastructure</li>
+        <li><strong>Amazon S3:</strong> File storage (when you configure S3 connections)</li>
+      </ul>
+      <p>Each service has its own privacy policy governing their data practices.</p>
+    </section>
+
+    <section>
+      <h2>9. Cookies and Tracking</h2>
+      <p>We use essential cookies for:</p>
+      <ul>
+        <li>Session management and authentication</li>
+        <li>Security and fraud prevention</li>
+      </ul>
+      <p>We do not use third-party advertising cookies.</p>
+    </section>
+
+    <section>
+      <h2>10. Children's Privacy</h2>
+      <p>Our service is not intended for children under 13. We do not knowingly collect personal information from children.</p>
+    </section>
+
+    <section>
+      <h2>11. Changes to This Policy</h2>
+      <p>We may update this privacy policy periodically. We will notify you of significant changes via email or through our service.</p>
+    </section>
+
+    <section>
+      <h2>12. Contact Us</h2>
+      <p>For questions about this privacy policy or our data practices:</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:privacy@example.com">privacy@example.com</a></li>
+        <li><strong>Legal inquiries:</strong> <a href="mailto:legal@example.com">legal@example.com</a></li>
+        <li><strong>Website:</strong> <%= link_to support_path do %><%= request.base_url %><% end %></li>
+      </ul>
+      
+      <p style="margin-top: 24px;"><strong>Company Information:</strong></p>
+      <p>
+        RailsRocket is a product of <strong>Syntaxia</strong>, operating under <strong>Nomad Engineers LLC</strong>, a Delaware company.<br>
+        Operating offices: Atlanta, GA, USA
+      </p>
+    </section>
+  </div>
+</div>
+
+<%= render "shared/site_footer" %>

@@ -1,0 +1,536 @@
+<div class="setup-wizard">
+  <div class="setup-container">
+    <header class="setup-header">
+      <div class="setup-logo">
+        <h1>🚀 RailsRocket</h1>
+        <p class="setup-tagline">Let's configure your application</p>
+      </div>
+    </header>
+
+    <main class="setup-main">
+      <%= form_with(url: setup_path, method: :post, multipart: true, class: "setup-form") do |f| %>
+        <div class="setup-section">
+          <h2 class="setup-section-title">
+            <span class="setup-step">1</span>
+            Application Details
+          </h2>
+
+          <div class="setup-field">
+            <%= f.label :app_name, "Application Name", class: "setup-label" %>
+            <%= f.text_field "setup[app_name]",
+                placeholder: "My Awesome App",
+                required: true,
+                class: "setup-input",
+                value: "RailsRocket" %>
+            <p class="setup-help">This will update your landing page, README, and application configuration.</p>
+          </div>
+
+          <div class="setup-field">
+            <%= f.label :admin_email, "Primary Admin Email", class: "setup-label" %>
+            <%= f.email_field "setup[admin_email]",
+                placeholder: "admin@example.com",
+                required: true,
+                class: "setup-input" %>
+            <p class="setup-help">This account will have admin privileges and cannot be deleted.</p>
+          </div>
+        </div>
+
+        <div class="setup-section">
+          <h2 class="setup-section-title">
+            <span class="setup-step">2</span>
+            1Password Configuration
+          </h2>
+
+          <div class="setup-field">
+            <%= f.label :vault_name, "Vault Name", class: "setup-label" %>
+            <%= f.text_field "setup[vault_name]",
+                placeholder: "MyApp",
+                required: true,
+                class: "setup-input" %>
+            <p class="setup-help">The name of your 1Password vault for secrets management. This will update all <code>op://</code> references.</p>
+          </div>
+        </div>
+
+        <div class="setup-section">
+          <h2 class="setup-section-title">
+            <span class="setup-step">3</span>
+            Branding (Optional)
+          </h2>
+
+          <div class="setup-field">
+            <%= f.label :logo, "Logo Image", class: "setup-label" %>
+            <%= f.file_field "setup[logo]",
+                accept: "image/*",
+                class: "setup-file-input" %>
+            <p class="setup-help">Upload a logo for your application (PNG, JPG, or SVG recommended).</p>
+          </div>
+
+          <div class="setup-field">
+            <%= f.label :favicon, "Favicon", class: "setup-label" %>
+            <%= f.file_field "setup[favicon]",
+                accept: "image/x-icon,image/png",
+                class: "setup-file-input" %>
+            <p class="setup-help">Upload a favicon.ico or PNG file for browser tabs.</p>
+          </div>
+
+          <div class="setup-field">
+            <%= f.label :primary_color, "Primary Color", class: "setup-label" %>
+            <%= f.color_field "setup[primary_color]",
+                value: "#38bdf8",
+                class: "setup-color-input" %>
+            <p class="setup-help">Choose your brand's primary accent color.</p>
+          </div>
+        </div>
+
+        <div class="setup-section">
+          <h2 class="setup-section-title">
+            <span class="setup-step">4</span>
+            OAuth Providers (Optional)
+          </h2>
+
+          <div class="setup-field setup-checkbox-field">
+            <%= f.check_box "setup[github_oauth]", class: "setup-checkbox" %>
+            <%= f.label :github_oauth, "Enable GitHub OAuth", class: "setup-checkbox-label" %>
+            <p class="setup-help">Configure at: <a href="https://github.com/settings/developers" target="_blank">github.com/settings/developers</a></p>
+          </div>
+
+          <div class="setup-field setup-checkbox-field">
+            <%= f.check_box "setup[google_oauth]", class: "setup-checkbox" %>
+            <%= f.label :google_oauth, "Enable Google OAuth", class: "setup-checkbox-label" %>
+            <p class="setup-help">Configure at: <a href="https://console.cloud.google.com/apis/credentials" target="_blank">Google Cloud Console</a></p>
+          </div>
+
+          <div class="setup-field setup-checkbox-field">
+            <%= f.check_box "setup[apple_oauth]", class: "setup-checkbox" %>
+            <%= f.label :apple_oauth, "Enable Apple Sign In", class: "setup-checkbox-label" %>
+            <p class="setup-help">Configure at: <a href="https://developer.apple.com/account/resources/identifiers/list" target="_blank">Apple Developer</a></p>
+          </div>
+        </div>
+
+        <div class="setup-section">
+          <h2 class="setup-section-title">
+            <span class="setup-step">5</span>
+            Deployment Configuration (Optional)
+          </h2>
+
+          <div class="setup-field">
+            <%= f.label :server_hostname, "Server Hostname or IP", class: "setup-label" %>
+            <%= f.text_field "setup[server_hostname]",
+                placeholder: "192.168.1.100 or server.example.com",
+                class: "setup-input" %>
+            <p class="setup-help">The SSH hostname or IP address where Kamal will deploy your application.</p>
+          </div>
+
+          <div class="setup-field">
+            <%= f.label :domain_name, "Domain Name", class: "setup-label" %>
+            <%= f.text_field "setup[domain_name]",
+                placeholder: "myapp.com",
+                class: "setup-input" %>
+            <p class="setup-help">Your production domain name for SSL certificates and proxying.</p>
+          </div>
+
+          <div class="setup-field">
+            <%= f.label :registry_url, "Container Registry (Optional)", class: "setup-label" %>
+            <%= f.text_field "setup[registry_url]",
+                placeholder: "your-registry.com/your-username",
+                class: "setup-input" %>
+            <p class="setup-help">Leave blank to use local image building (recommended). Or specify a registry like Docker Hub or GitHub Container Registry.</p>
+          </div>
+        </div>
+
+        <div class="setup-section setup-info-section">
+          <h2 class="setup-section-title">
+            <span class="setup-step">ℹ️</span>
+            Required 1Password Vault Items
+          </h2>
+
+          <div class="setup-info-box">
+            <p class="setup-info-intro">Before deploying, create these items in your 1Password vault (<strong id="vault-name-display">YourApp</strong>):</p>
+
+            <div class="setup-vault-items">
+              <div class="setup-vault-item">
+                <h4>🔑 rails-master-key</h4>
+                <p><strong>Type:</strong> Password</p>
+                <p><strong>Field:</strong> password</p>
+                <p><strong>Value:</strong> Copy from <code>config/master.key</code></p>
+              </div>
+
+              <div class="setup-vault-item">
+                <h4>🔐 deploy-ssh-key</h4>
+                <p><strong>Type:</strong> SSH Key</p>
+                <p><strong>Field:</strong> private key</p>
+                <p><strong>Value:</strong> Your deployment SSH private key</p>
+              </div>
+
+              <div class="setup-vault-item">
+                <h4>📧 smtp-credentials</h4>
+                <p><strong>Type:</strong> Login</p>
+                <p><strong>Fields:</strong> username, password, server (as URL field), from_email (as text field)</p>
+                <p><strong>Value:</strong> Your email provider credentials (e.g., SendGrid, Postmark) and the "from" email address</p>
+              </div>
+
+              <div class="setup-vault-item">
+                <h4>🔗 OAuth Apps (if enabled)</h4>
+                <p>Create separate login items for each OAuth provider:</p>
+                <ul class="setup-vault-list">
+                  <li><strong>github-oauth</strong> - client ID and client secret</li>
+                  <li><strong>google-oauth</strong> - client ID and client secret</li>
+                  <li><strong>apple-oauth</strong> - client ID, team ID, key ID, and private key</li>
+                </ul>
+              </div>
+            </div>
+
+            <p class="setup-info-note">
+              📚 Learn more about 1Password CLI integration:
+              <a href="https://developer.1password.com/docs/cli/secrets-reference-syntax/" target="_blank">1Password Secret References</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="setup-actions">
+          <%= f.submit "Configure Application", class: "setup-submit" %>
+        </div>
+
+        <div class="setup-footer-note">
+          <p><strong>Note:</strong> This setup wizard will modify files in your repository. Make sure you've committed any changes before proceeding.</p>
+          <p>You can re-run this setup anytime in development by running: <code>rails runner "RailsRocket::Setup.reset!"</code></p>
+        </div>
+      <% end %>
+    </main>
+  </div>
+</div>
+
+<style>
+.setup-wizard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.setup-container {
+  max-width: 800px;
+  width: 100%;
+  background: rgba(30, 41, 59, 0.8);
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.setup-header {
+  padding: 3rem 3rem 2rem 3rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  text-align: center;
+}
+
+.setup-logo h1 {
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem 0;
+  color: #f8fafc;
+}
+
+.setup-tagline {
+  color: #cbd5e1;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.setup-main {
+  padding: 3rem;
+}
+
+.setup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.setup-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.setup-section-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  color: #f8fafc;
+  margin: 0;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+}
+
+.setup-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.setup-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.setup-label {
+  font-weight: 600;
+  color: #f8fafc;
+  font-size: 0.9375rem;
+}
+
+.setup-input,
+.setup-file-input {
+  padding: 0.75rem 1rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 8px;
+  color: #f8fafc;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.setup-input:focus,
+.setup-file-input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+}
+
+.setup-input::placeholder {
+  color: #64748b;
+}
+
+.setup-color-input {
+  width: 100px;
+  height: 50px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.setup-checkbox-field {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.setup-checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.setup-checkbox-label {
+  margin: 0;
+  cursor: pointer;
+}
+
+.setup-help {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.setup-help code {
+  background: rgba(56, 189, 248, 0.1);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #38bdf8;
+}
+
+.setup-help a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.setup-help a:hover {
+  text-decoration: underline;
+}
+
+.setup-actions {
+  padding-top: 1.5rem;
+}
+
+.setup-submit {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+  color: #0f172a;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.setup-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
+}
+
+.setup-submit:active {
+  transform: translateY(0);
+}
+
+.setup-footer-note {
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.setup-footer-note p {
+  margin: 0.5rem 0;
+}
+
+.setup-footer-note code {
+  background: rgba(56, 189, 248, 0.1);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #38bdf8;
+}
+
+.setup-info-section {
+  background: rgba(56, 189, 248, 0.05);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.setup-info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.setup-info-intro {
+  font-size: 1rem;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.setup-info-intro strong {
+  color: #38bdf8;
+}
+
+.setup-vault-items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.setup-vault-item {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.setup-vault-item h4 {
+  margin: 0 0 0.75rem 0;
+  color: #f8fafc;
+  font-size: 1rem;
+}
+
+.setup-vault-item p {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+  color: #cbd5e1;
+}
+
+.setup-vault-item strong {
+  color: #f8fafc;
+}
+
+.setup-vault-item code {
+  background: rgba(56, 189, 248, 0.1);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #38bdf8;
+  font-size: 0.8125rem;
+}
+
+.setup-vault-list {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.25rem;
+  color: #cbd5e1;
+  font-size: 0.875rem;
+}
+
+.setup-vault-list li {
+  margin: 0.25rem 0;
+}
+
+.setup-vault-list strong {
+  color: #38bdf8;
+  font-family: monospace;
+}
+
+.setup-info-note {
+  padding: 1rem;
+  background: rgba(56, 189, 248, 0.1);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.setup-info-note a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.setup-info-note a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .setup-wizard {
+    padding: 1rem;
+  }
+
+  .setup-header {
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+  }
+
+  .setup-main {
+    padding: 2rem 1.5rem;
+  }
+
+  .setup-logo h1 {
+    font-size: 2rem;
+  }
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const vaultNameInput = document.querySelector('input[name="setup[vault_name]"]');
+    const vaultNameDisplay = document.getElementById('vault-name-display');
+
+    if (vaultNameInput && vaultNameDisplay) {
+      vaultNameInput.addEventListener('input', function(e) {
+        const value = e.target.value.trim();
+        vaultNameDisplay.textContent = value || 'YourApp';
+      });
+    }
+  });
+</script>

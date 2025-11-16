@@ -1,0 +1,192 @@
+<% content_for :title, "Admin: #{@user.email_address} · RailsRocket" %>
+<% content_for :skip_navigation, true %>
+<% content_for :body_class, "" %>
+
+<div class="dashboard">
+  <%= render "shared/dashboard_nav" %>
+
+  <main class="dashboard-main">
+    <div class="dashboard-content">
+      <%= tag.div(flash[:notice], class: "alert alert--success") if flash[:notice] %>
+      <%= tag.div(flash[:alert], class: "alert alert--error") if flash[:alert] %>
+
+      <div class="admin-header">
+        <div>
+          <h1 class="admin-header__title">
+            <%= @user.email_address %>
+            <% if @user.admin? %>
+              <span class="badge badge--success">Admin</span>
+            <% end %>
+          </h1>
+          <%= link_to "← Back to Users", admin_users_path, class: "admin-header__back" %>
+        </div>
+      </div>
+
+      <!-- User Details -->
+      <div class="profile-card">
+        <h2 class="profile-card__title">Account Information</h2>
+        
+        <dl class="profile-info">
+          <div class="profile-info__row">
+            <dt class="profile-info__label">Email</dt>
+            <dd class="profile-info__value"><%= @user.email_address %></dd>
+          </div>
+          
+          <div class="profile-info__row">
+            <dt class="profile-info__label">Full Name</dt>
+            <dd class="profile-info__value"><%= @user.full_name %></dd>
+          </div>
+          
+          <div class="profile-info__row">
+            <dt class="profile-info__label">Authentication Method</dt>
+            <dd class="profile-info__value">
+              <span class="badge badge--<%= @user.oauth_user? ? 'info' : 'secondary' %>">
+                <%= @user.auth_method %>
+              </span>
+            </dd>
+          </div>
+          
+          <div class="profile-info__row">
+            <dt class="profile-info__label">Account Created</dt>
+            <dd class="profile-info__value">
+              <%= @user.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+              (<%= time_ago_in_words(@user.created_at) %> ago)
+            </dd>
+          </div>
+          
+          <div class="profile-info__row">
+            <dt class="profile-info__label">Last Login</dt>
+            <dd class="profile-info__value">
+              <% if @user.last_login_at %>
+                <%= @user.last_login_at.strftime("%B %d, %Y at %I:%M %p") %>
+                (<%= time_ago_in_words(@user.last_login_at) %> ago)
+              <% else %>
+                <span class="text-muted">Never logged in</span>
+              <% end %>
+            </dd>
+          </div>
+          
+          <div class="profile-info__row">
+            <dt class="profile-info__label">Total Activities</dt>
+            <dd class="profile-info__value"><%= @user.total_activities %></dd>
+          </div>
+          
+          <div class="profile-info__row">
+            <dt class="profile-info__label">Active Sessions</dt>
+            <dd class="profile-info__value"><%= @user.sessions.count %></dd>
+          </div>
+          
+          <div class="profile-info__row">
+            <dt class="profile-info__label">Connections</dt>
+            <dd class="profile-info__value"><%= @user.connections.count %></dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- Admin Actions -->
+      <div class="profile-card">
+        <h2 class="profile-card__title">Admin Actions</h2>
+        
+        <% if @user.primary_admin? %>
+          <div class="badge badge--success" style="margin-bottom: 1rem; display: inline-block;">
+            🛡️ Protected Primary Admin Account
+          </div>
+          <p class="text-muted">This is the primary admin account and cannot be deleted or demoted.</p>
+        <% else %>
+          <div class="admin-actions">
+            <% if @user.admin? %>
+              <% unless @user.id == Current.user.id %>
+                <%= button_to "Remove Admin Privileges", 
+                    remove_admin_admin_user_path(@user), 
+                    method: :delete,
+                    class: "button button--secondary",
+                    data: { turbo_confirm: "Remove admin privileges from #{@user.email_address}?" } %>
+              <% else %>
+                <p class="text-muted">You cannot modify your own admin status.</p>
+              <% end %>
+            <% else %>
+              <%= button_to "Make Admin", 
+                  make_admin_admin_user_path(@user), 
+                  method: :post,
+                  class: "button button--primary",
+                  data: { turbo_confirm: "Grant admin privileges to #{@user.email_address}?" } %>
+            <% end %>
+            
+            <% unless @user.id == Current.user.id %>
+              <%= button_to "Delete User Account", 
+                  admin_user_path(@user), 
+                  method: :delete,
+                  class: "button button--danger",
+                  data: { 
+                    turbo_confirm: "Are you sure you want to delete #{@user.email_address}? This will permanently delete their account and all associated data. This action cannot be undone.",
+                  turbo_method: :delete 
+                } %>
+            <% else %>
+              <p class="text-muted">You cannot delete your own account from the admin panel.</p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Recent Sessions -->
+      <% if @recent_sessions.any? %>
+        <div class="profile-card">
+          <h2 class="profile-card__title">Recent Sessions (Last 10)</h2>
+          
+          <div class="admin-table-wrapper">
+            <table class="admin-table admin-table--compact">
+              <thead>
+                <tr>
+                  <th>Created</th>
+                  <th>User Agent</th>
+                  <th>IP Address</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @recent_sessions.each do |session| %>
+                  <tr>
+                    <td><%= time_ago_in_words(session.created_at) %> ago</td>
+                    <td class="admin-table__truncate"><%= session.user_agent %></td>
+                    <td><%= session.ip_address %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Recent Activities -->
+      <% if @recent_activities.any? %>
+        <div class="profile-card">
+          <h2 class="profile-card__title">Recent File Transfer Activities (Last 20)</h2>
+          
+          <div class="admin-table-wrapper">
+            <table class="admin-table admin-table--compact">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Action</th>
+                  <th>File</th>
+                  <th>Connection</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @recent_activities.each do |activity| %>
+                  <tr>
+                    <td><%= time_ago_in_words(activity.created_at) %> ago</td>
+                    <td>
+                      <span class="badge badge--info"><%= activity.operation_type.titleize %></span>
+                    </td>
+                    <td class="admin-table__truncate"><%= activity.file_path || activity.remote_path || '-' %></td>
+                    <td><%= activity.connection.name %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </main>
+</div>

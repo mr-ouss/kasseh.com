@@ -1,0 +1,296 @@
+<div class="setup-complete">
+  <div class="setup-complete-container">
+    <div class="setup-complete-icon">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="4" fill="none" opacity="0.2"/>
+        <path d="M30 50 L45 65 L70 35" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1 class="setup-complete-title">Configuration Complete! 🎉</h1>
+    <p class="setup-complete-subtitle">Your application has been configured successfully.</p>
+
+    <div class="setup-complete-card">
+      <h2 class="setup-complete-card-title">What was updated:</h2>
+      <ul class="setup-complete-list">
+        <li>✓ Admin email configured in User model</li>
+        <li>✓ 1Password vault references updated</li>
+        <li>✓ Application name updated throughout the codebase</li>
+        <li>✓ Landing page and branding customized</li>
+        <li>✓ README updated with your app name</li>
+        <li>✓ Deployment configuration updated (config/deploy.yml)</li>
+      </ul>
+    </div>
+
+    <div class="setup-complete-card setup-complete-next-steps">
+      <h2 class="setup-complete-card-title">Next Steps:</h2>
+      <ol class="setup-complete-steps">
+        <li>
+          <strong>Set up 1Password Vault</strong>
+          <p>Create the required items in your 1Password vault as shown in the setup wizard. This includes rails-master-key, deploy-ssh-key, smtp-credentials, and any OAuth credentials you enabled.</p>
+        </li>
+        <li>
+          <strong>Configure OAuth Credentials (if enabled)</strong>
+          <p>Update your <code>.env</code> file with OAuth client IDs and secrets from the providers you enabled, and add them to your 1Password vault.</p>
+        </li>
+        <li>
+          <strong>Prepare Deployment Server (if configured)</strong>
+          <p>If you configured a deployment server, ensure Docker is installed and your SSH key is authorized on the server. You can test the connection with Kamal's setup command.</p>
+        </li>
+        <li>
+          <strong>Commit Your Changes</strong>
+          <pre>git add -A
+git commit -m "Configure RailsRocket for <%= Rails.application.config.application_name rescue 'my application' %>"</pre>
+        </li>
+        <li>
+          <strong>Start Building!</strong>
+          <p>You're all set! Begin adding your application's unique features.</p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="setup-complete-actions">
+      <%= link_to "Go to Application", root_path, class: "setup-complete-button" %>
+      <%= link_to "View Documentation", "https://github.com/Syntaxia/RailsRocket/blob/main/README.md",
+                  class: "setup-complete-button-secondary",
+                  target: "_blank",
+                  rel: "noopener noreferrer" %>
+    </div>
+
+    <div class="setup-complete-footer">
+      <p>Need to change something? Run <code>rails runner "RailsRocket::Setup.reset!"</code> to re-run the setup wizard.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.setup-complete {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.setup-complete-container {
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+}
+
+.setup-complete-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 2rem auto;
+  color: #38bdf8;
+  animation: checkmarkAppear 0.6s ease-out;
+}
+
+@keyframes checkmarkAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.setup-complete-title {
+  font-size: 2.5rem;
+  color: #f8fafc;
+  margin: 0 0 1rem 0;
+  animation: slideUp 0.6s ease-out 0.2s both;
+}
+
+.setup-complete-subtitle {
+  font-size: 1.25rem;
+  color: #cbd5e1;
+  margin: 0 0 3rem 0;
+  animation: slideUp 0.6s ease-out 0.3s both;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.setup-complete-card {
+  background: rgba(30, 41, 59, 0.8);
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  backdrop-filter: blur(20px);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: left;
+  animation: slideUp 0.6s ease-out 0.4s both;
+}
+
+.setup-complete-card-title {
+  font-size: 1.25rem;
+  color: #f8fafc;
+  margin: 0 0 1rem 0;
+}
+
+.setup-complete-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.setup-complete-list li {
+  color: #cbd5e1;
+  padding-left: 0.5rem;
+}
+
+.setup-complete-next-steps {
+  animation-delay: 0.5s;
+}
+
+.setup-complete-steps {
+  list-style: none;
+  counter-reset: step-counter;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.setup-complete-steps li {
+  counter-increment: step-counter;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.setup-complete-steps li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 0.875rem;
+}
+
+.setup-complete-steps strong {
+  color: #f8fafc;
+  font-size: 1.0625rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.setup-complete-steps p {
+  color: #94a3b8;
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+.setup-complete-steps code,
+.setup-complete-steps pre {
+  background: rgba(15, 23, 42, 0.6);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #38bdf8;
+  font-size: 0.875rem;
+}
+
+.setup-complete-steps pre {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.setup-complete-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 3rem;
+  animation: slideUp 0.6s ease-out 0.6s both;
+}
+
+.setup-complete-button {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+  color: #0f172a;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-block;
+}
+
+.setup-complete-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
+}
+
+.setup-complete-button-secondary {
+  padding: 1rem 2rem;
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  color: #f8fafc;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s, border-color 0.2s;
+  display: inline-block;
+}
+
+.setup-complete-button-secondary:hover {
+  transform: translateY(-2px);
+  border-color: #38bdf8;
+}
+
+.setup-complete-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  color: #94a3b8;
+  font-size: 0.875rem;
+  animation: slideUp 0.6s ease-out 0.7s both;
+}
+
+.setup-complete-footer code {
+  background: rgba(56, 189, 248, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #38bdf8;
+}
+
+@media (max-width: 768px) {
+  .setup-complete-actions {
+    flex-direction: column;
+  }
+
+  .setup-complete-title {
+    font-size: 2rem;
+  }
+
+  .setup-complete-subtitle {
+    font-size: 1.125rem;
+  }
+}
+</style>

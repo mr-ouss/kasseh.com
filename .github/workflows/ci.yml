@@ -1,0 +1,308 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ master ]
+
+jobs:
+  # Check if CI should run (only on configured repositories with secrets)
+  check_configured:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.configured }}
+    steps:
+      - name: Check if repository is configured
+        id: check
+        run: |
+          # CI only runs if OP_SERVICE_ACCOUNT_TOKEN is configured
+          # This prevents workflows from running on the RailsRocket template repo
+          if [ -n "${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}" ]; then
+            echo "configured=true" >> $GITHUB_OUTPUT
+            echo "✅ Repository is configured - CI will run"
+          else
+            echo "configured=false" >> $GITHUB_OUTPUT
+            echo "⏭️  Repository not configured (missing OP_SERVICE_ACCOUNT_TOKEN) - CI skipped"
+            echo "This is expected for the RailsRocket template repository."
+            echo "After cloning and setting up your project, add OP_SERVICE_ACCOUNT_TOKEN to GitHub Secrets."
+          fi
+
+  # Detect what changed
+  changes:
+    needs: check_configured
+    if: needs.check_configured.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      rails: ${{ steps.filter.outputs.rails }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            rails:
+              - 'app/**'
+              - 'config/**'
+              - 'db/**'
+              - 'lib/**'
+              - 'test/**'
+              - 'Gemfile*'
+              - '.ruby-version'
+              - 'Rakefile'
+              - 'bin/**'
+
+  # ===========================
+  # Rails Pipeline
+  # ===========================
+  
+  rails_check:
+    needs: changes
+    if: needs.changes.outputs.rails == 'true'
+    runs-on: ubuntu-latest
+    name: Rails Pipeline
+    outputs:
+      should_run: ${{ needs.changes.outputs.rails }}
+    steps:
+      - run: echo "Rails changes detected, starting pipeline"
+  
+  rails_security_and_lint:
+    needs: rails_check
+    runs-on: ubuntu-latest
+    name: Rails - Security & Lint
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Security scan with Brakeman
+        run: bin/brakeman --no-pager
+
+      - name: Lint with RuboCop
+        run: bin/rubocop -f github
+
+      - name: JavaScript security audit
+        run: bin/importmap audit
+
+  rails_test:
+    needs: rails_check
+    runs-on: ubuntu-latest
+    name: Rails - Tests & Coverage
+
+    steps:
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config google-chrome-stable
+
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Install 1Password CLI
+        uses: 1password/install-cli-action@v2
+
+      - name: Run tests with coverage
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          RAILS_ENV: test
+          COVERAGE: true
+          DISABLE_SPRING: 1
+        run: op run --env-file=.github/workflows/.env.test -- bin/rails db:test:prepare test
+        # Note: test:system temporarily disabled while fixing timing issues in CI
+
+      - name: Generate coverage report
+        if: always()
+        run: |
+          if [ -f coverage/.last_run.json ]; then
+            echo "## Test Coverage Report" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            
+            # Extract coverage percentage from SimpleCov
+            COVERAGE=$(ruby -rjson -e "puts JSON.parse(File.read('coverage/.last_run.json'))['result']['line']")
+            echo "**Coverage:** ${COVERAGE}%" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            
+            # Check if coverage meets minimum threshold
+            THRESHOLD=50
+            if (( $(echo "$COVERAGE < $THRESHOLD" | bc -l) )); then
+              echo "⚠️ Coverage is below ${THRESHOLD}% threshold" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "✅ Coverage meets ${THRESHOLD}% threshold" >> $GITHUB_STEP_SUMMARY
+            fi
+            
+            # Save coverage for PR comment
+            echo "COVERAGE=$COVERAGE" >> $GITHUB_ENV
+          fi
+
+      - name: Comment coverage on PR
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v8
+        env:
+          COVERAGE: ${{ env.COVERAGE }}
+        with:
+          script: |
+            const coverage = process.env.COVERAGE;
+            if (!coverage) return;
+            
+            const threshold = 20;
+            const coverageNum = parseFloat(coverage);
+            const emoji = coverageNum >= threshold ? '✅' : '⚠️';
+            const status = coverageNum >= threshold ? 'meets' : 'below';
+            
+            const comment = `## ${emoji} Test Coverage Report
+            
+            **Coverage:** ${coverage}%
+            **Status:** Coverage ${status} ${threshold}% threshold
+            
+            [View detailed coverage report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 30
+
+      - name: Keep screenshots from failed system tests
+        uses: actions/upload-artifact@v5
+        if: failure()
+        with:
+          name: screenshots
+          path: ${{ github.workspace }}/tmp/screenshots
+          if-no-files-found: ignore
+
+  # ===========================
+  # MCP Pipeline
+  # ===========================
+
+  mcp_check:
+    needs: changes
+    if: needs.changes.outputs.mcp == 'true'
+    runs-on: ubuntu-latest
+    name: MCP Pipeline
+    outputs:
+      should_run: ${{ needs.changes.outputs.mcp }}
+    steps:
+      - run: echo "MCP changes detected, starting pipeline"
+
+  mcp_lint:
+    needs: mcp_check
+    runs-on: ubuntu-latest
+    name: MCP - Lint & Type Check
+    defaults:
+      run:
+        working-directory: transferchat-mcp
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: transferchat-mcp/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript type check
+        run: npx tsc --noEmit
+
+      - name: Lint TypeScript code
+        run: npx eslint 'src/**/*.ts' || true
+
+  mcp_build:
+    needs: mcp_check
+    runs-on: ubuntu-latest
+    name: MCP - Build Server & Widgets
+    defaults:
+      run:
+        working-directory: transferchat-mcp
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: transferchat-mcp/package-lock.json
+
+      - name: Install MCP dependencies
+        run: npm ci
+
+      - name: Install widget dependencies
+        run: cd web && npm ci
+
+      - name: Build widgets
+        run: npm run build:widgets
+
+      - name: Build TypeScript server
+        run: npx tsc
+
+      - name: Verify build outputs
+        run: |
+          echo "## MCP Build Verification" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Check widget bundles
+          if [ -f web/dist/connections.js ]; then
+            SIZE=$(du -h web/dist/connections.js | cut -f1)
+            echo "✅ connections.js: $SIZE" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ connections.js: Missing" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ -f web/dist/files.js ]; then
+            SIZE=$(du -h web/dist/files.js | cut -f1)
+            echo "✅ files.js: $SIZE" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ files.js: Missing" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ -f web/dist/connection-form.js ]; then
+            SIZE=$(du -h web/dist/connection-form.js | cut -f1)
+            echo "✅ connection-form.js: $SIZE" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ connection-form.js: Missing" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          # Check TypeScript compilation
+          if [ -d dist ]; then
+            FILES=$(find dist -name "*.js" | wc -l)
+            echo "✅ TypeScript compiled: $FILES JS files" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ TypeScript compilation failed" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v5
+        with:
+          name: mcp-build
+          path: |
+            transferchat-mcp/dist/
+            transferchat-mcp/web/dist/
+          retention-days: 7

@@ -1,0 +1,60 @@
+<nav class="bg-white shadow-sm border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex">
+        <%= link_to root_path, class: "flex items-center" do %>
+          <span class="text-2xl font-bold text-blue-600">RailsRocket</span>
+        <% end %>
+
+        <% if Current.user %>
+          <div class="hidden sm:ml-8 sm:flex sm:space-x-6">
+            <%= link_to "Connections", connections_path, class: "inline-flex items-center px-1 pt-1 text-sm font-medium #{current_page?(connections_path) ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-700 hover:text-gray-900'}" %>
+            <%= link_to "Activity Log", activities_path, class: "inline-flex items-center px-1 pt-1 text-sm font-medium #{current_page?(activities_path) ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-700 hover:text-gray-900'}" %>
+            <% if Current.user.admin? %>
+              <%= link_to "Admin", admin_users_path, class: "inline-flex items-center px-1 pt-1 text-sm font-medium #{current_page?(admin_users_path) ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-700 hover:text-gray-900'}" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <% if Current.user %>
+          <% 
+            plan_class = if Current.user.subscription_plan == "professional"
+              "bg-purple-100 text-purple-700 border-purple-200"
+            elsif Current.user.subscription_plan == "individual"
+              "bg-blue-100 text-blue-700 border-blue-200"
+            else
+              "bg-gray-100 text-gray-700 border-gray-200"
+            end
+            
+            plan_name = Current.user.subscription_plan&.titleize || "Free"
+          %>
+          <%= link_to billing_path, class: "inline-flex items-center px-3 py-1 border rounded-full text-xs font-semibold transition hover:opacity-80 #{plan_class}" do %>
+            <%= plan_name %>
+            <% if Current.user.subscription_plan == "free" %>
+              <svg class="ml-1 w-3 h-3" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+            <% end %>
+          <% end %>
+          <%= link_to "Profile", profile_path, class: "text-sm text-gray-700 hover:text-gray-900 font-medium" %>
+          <%= button_to "Sign Out", session_path, method: :delete, class: "text-sm text-gray-700 hover:text-gray-900 font-medium" %>
+        <% else %>
+          <%= link_to "Sign In", new_session_path, class: "text-sm text-gray-700 hover:text-gray-900 font-medium" %>
+          <%= link_to "Sign Up", new_registration_path, class: "text-sm bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<% if flash.any? %>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <% flash.each do |type, message| %>
+      <div class="<%= type == 'notice' ? 'bg-blue-50 border-blue-200 text-blue-800' : 'bg-red-50 border-red-200 text-red-800' %> border rounded-lg p-4 mb-4">
+        <%= message %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
