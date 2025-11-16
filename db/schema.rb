@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_25_234319) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_16_230510) do
   create_table "api_tokens", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "expires_at"
@@ -22,6 +22,21 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_25_234319) do
     t.index ["token_digest"], name: "index_api_tokens_on_token_digest", unique: true
     t.index ["user_id", "name"], name: "index_api_tokens_on_user_id_and_name", unique: true
     t.index ["user_id"], name: "index_api_tokens_on_user_id"
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.string "author"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.text "excerpt"
+    t.boolean "featured"
+    t.string "meta_description"
+    t.datetime "published_at"
+    t.integer "reading_time"
+    t.string "slug"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_articles_on_slug", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|

@@ -1,0 +1,86 @@
+<% content_for :title, "Writing · Quentin Kasseh" %>
+<% content_for :description, "Essays, thoughts, and reflections on building, technology, and craft." %>
+
+<!-- Writing Index Page -->
+<div class="min-h-screen bg-charcoal-50">
+  <!-- Header -->
+  <div class="bg-white border-b border-charcoal-200">
+    <div class="container-custom py-20">
+      <h1 class="text-h1 font-serif font-bold text-charcoal-900 mb-4">Writing</h1>
+      <p class="text-body-lg text-charcoal-600 max-w-2xl">
+        Essays, thoughts, and reflections on building, technology, and craft.
+      </p>
+    </div>
+  </div>
+
+  <!-- Featured Articles -->
+  <% if @featured_articles.any? %>
+    <section class="bg-white border-b border-charcoal-200">
+      <div class="container-custom py-16">
+        <h2 class="text-h3 font-serif font-semibold text-charcoal-900 mb-8">Featured</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <% @featured_articles.each do |article| %>
+            <%= link_to article_path(article), class: "group card p-6 block" do %>
+              <div class="mb-4">
+                <span class="text-sm text-gold-600 font-medium"><%= article.formatted_date %></span>
+                <span class="text-sm text-charcoal-400 mx-2">·</span>
+                <span class="text-sm text-charcoal-600"><%= article.reading_time %> min read</span>
+              </div>
+              <h3 class="text-h4 font-serif font-semibold text-charcoal-900 mb-3 group-hover:text-gold-600 transition-colors">
+                <%= article.title %>
+              </h3>
+              <p class="text-body text-charcoal-600 line-clamp-3">
+                <%= article.excerpt %>
+              </p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+  <% end %>
+
+  <!-- All Articles -->
+  <section class="section-padding">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto">
+        <% if @articles.any? %>
+          <div class="space-y-12">
+            <% @articles.each do |article| %>
+              <article class="border-b border-charcoal-200 pb-12 last:border-b-0">
+                <%= link_to article_path(article), class: "group block" do %>
+                  <div class="mb-3">
+                    <span class="text-sm text-gold-600 font-medium"><%= article.formatted_date %></span>
+                    <span class="text-sm text-charcoal-400 mx-2">·</span>
+                    <span class="text-sm text-charcoal-600"><%= article.reading_time %> min read</span>
+                  </div>
+                  <h2 class="text-h2 font-serif font-bold text-charcoal-900 mb-4 group-hover:text-gold-600 transition-colors">
+                    <%= article.title %>
+                  </h2>
+                  <p class="text-body-lg text-charcoal-600 leading-relaxed">
+                    <%= article.excerpt %>
+                  </p>
+                <% end %>
+              </article>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="text-center py-20">
+            <p class="text-body-lg text-charcoal-600">No articles published yet. Check back soon!</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Back to Home Link -->
+<div class="bg-white border-t border-charcoal-200 py-8">
+  <div class="container-custom">
+    <%= link_to root_path, class: "inline-flex items-center text-charcoal-700 hover:text-gold-600 transition-colors font-medium" do %>
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+      </svg>
+      Back to Home
+    <% end %>
+  </div>
+</div>

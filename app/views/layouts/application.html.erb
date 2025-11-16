@@ -1,23 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title><%= content_for(:title) || "Transferchat" %></title>
+    <meta charset="utf-8">
+    <title><%= content_for(:title) || "Quentin Kasseh · Builder, Engineer, Founder" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="<%= content_for(:description) || "Quentin Kasseh is a builder, engineer, and founder focused on creating elegant solutions to complex problems." %>">
+
+    <%# Open Graph / Facebook %>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= request.original_url %>">
+    <meta property="og:title" content="<%= content_for(:title) || "Quentin Kasseh · Builder, Engineer, Founder" %>">
+    <meta property="og:description" content="<%= content_for(:description) || "Quentin Kasseh is a builder, engineer, and founder focused on creating elegant solutions to complex problems." %>">
+    <% if content_for?(:og_image) %>
+      <meta property="og:image" content="<%= content_for(:og_image) %>">
+    <% end %>
+
+    <%# Twitter %>
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="<%= request.original_url %>">
+    <meta property="twitter:title" content="<%= content_for(:title) || "Quentin Kasseh · Builder, Engineer, Founder" %>">
+    <meta property="twitter:description" content="<%= content_for(:description) || "Quentin Kasseh is a builder, engineer, and founder focused on creating elegant solutions to complex problems." %>">
+    <% if content_for?(:og_image) %>
+      <meta property="twitter:image" content="<%= content_for(:og_image) %>">
+    <% end %>
+
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%# Google Analytics %>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NX9S8Y10QG"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NFCW4B7LWG"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-NX9S8Y10QG');
+      gtag('config', 'G-NFCW4B7LWG');
     </script>
 
     <%= yield :head %>
+
+    <%# Font Awesome Kit %>
+    <script src="https://kit.fontawesome.com/21cd6127b9.js" crossorigin="anonymous"></script>
 
     <%# Favicon with cache busting %>
     <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
@@ -26,8 +50,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
     <link rel="manifest" href="/site.webmanifest">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%# Tailwind CSS %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%# Application styles %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 

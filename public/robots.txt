@@ -1,1 +1,12 @@
 # See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+
+User-agent: *
+Allow: /
+
+# Disallow admin and internal pages
+Disallow: /admin
+Disallow: /setup
+Disallow: /api_tokens
+
+# Sitemap
+Sitemap: https://kasseh.com/sitemap.xml

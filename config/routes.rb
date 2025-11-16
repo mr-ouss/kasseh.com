@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # Blog/Writing
+  resources :articles, only: [:index, :show]
+
   # Setup wizard (first-time configuration)
   get "/setup", to: "setup#index"
   post "/setup", to: "setup#create"
