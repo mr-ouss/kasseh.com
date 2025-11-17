@@ -69,6 +69,8 @@ jobs:
             echo "Host 137.184.89.51" >> ~/.ssh/config
             echo "  StrictHostKeyChecking no" >> ~/.ssh/config
             echo "  UserKnownHostsFile /dev/null" >> ~/.ssh/config
+            echo "  IdentitiesOnly yes" >> ~/.ssh/config
+            echo "  IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
             
             # Write secrets to .kamal/secrets file so Kamal can read them
             # This bypasses the environment variable inheritance issue in CI
@@ -81,27 +83,19 @@ jobs:
               echo "SMTP_USERNAME=$SMTP_USERNAME"
               echo "SMTP_PASSWORD=$SMTP_PASSWORD"
               echo "SMTP_SERVER=$SMTP_SERVER"
+              echo "SMTP_FROM_EMAIL=$SMTP_FROM_EMAIL"
               echo ""
               echo "# Version information"
               echo "APP_VERSION=${GITHUB_SHA:0:8}"
               echo "DEPLOYED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
               echo ""
-              echo "OAuth Clients"
+              echo "# OAuth Clients"
               echo "GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID"
               echo "GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET"
               echo "APPLE_CLIENT_ID=$APPLE_CLIENT_ID"
               echo "APPLE_TEAM_ID=$APPLE_TEAM_ID"  
               echo "APPLE_KEY_ID=$APPLE_KEY_ID"
               echo "APPLE_PRIVATE_KEY=$(echo "$APPLE_PRIVATE_KEY" | base64 -w 0)"
-              echo ""
-              echo "# Stripe payment processing"
-              echo "STRIPE_PUBLISHABLE_KEY=$STRIPE_PUBLISHABLE_KEY"
-              echo "STRIPE_SECRET_KEY=$STRIPE_SECRET_KEY"
-              echo "STRIPE_WEBHOOK_SECRET=$STRIPE_WEBHOOK_SECRET"
-              echo "STRIPE_INDIVIDUAL_MONTHLY_PRICE_ID=$STRIPE_INDIVIDUAL_MONTHLY_PRICE_ID"
-              echo "STRIPE_INDIVIDUAL_YEARLY_PRICE_ID=$STRIPE_INDIVIDUAL_YEARLY_PRICE_ID"
-              echo "STRIPE_PROFESSIONAL_MONTHLY_PRICE_ID=$STRIPE_PROFESSIONAL_MONTHLY_PRICE_ID"
-              echo "STRIPE_PROFESSIONAL_YEARLY_PRICE_ID=$STRIPE_PROFESSIONAL_YEARLY_PRICE_ID"
             } > .kamal/secrets
             
                         
