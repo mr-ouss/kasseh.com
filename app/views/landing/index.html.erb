@@ -128,8 +128,8 @@
               </li>
               <li class="text-gold-600/30">•</li>
               <li>
-                <%= link_to "#contact", class: "text-charcoal-300 hover:text-gold-500 transition-all duration-300 font-medium relative group", data: { turbo: false }, onclick: "scrollToContact(event)" do %>
-                  <span class="relative z-10">Contact</span>
+                <%= link_to new_session_path, class: "text-charcoal-300 hover:text-gold-500 transition-all duration-300 font-medium relative group" do %>
+                  <span class="relative z-10">Sign In</span>
                   <span class="absolute inset-x-0 -bottom-1 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 <% end %>
               </li>
