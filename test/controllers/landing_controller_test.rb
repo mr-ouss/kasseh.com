@@ -6,16 +6,11 @@ class LandingControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should show call to action" do
+  test "should show legal links" do
     get root_url
     assert_response :success
-    assert_select "a[href=?]", new_registration_path, text: /Get Started|Create Account/i
-  end
-
-  test "should show login link" do
-    get root_url
-    assert_response :success
-    assert_select "a[href=?]", new_session_path, text: /Login|Sign In/i
+    assert_select "a[href=?]", privacy_path
+    assert_select "a[href=?]", terms_path
   end
 
   test "should redirect authenticated users to connections" do
@@ -38,6 +33,6 @@ class LandingControllerTest < ActionDispatch::IntegrationTest
   test "should have app name in title" do
     get root_url
     assert_response :success
-    assert_select "title", text: /RailsRocket/i
+    assert_select "title", text: /Kasseh/i
   end
 end

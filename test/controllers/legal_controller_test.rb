@@ -14,16 +14,15 @@ class LegalControllerTest < ActionDispatch::IntegrationTest
     # Check for key sections
     assert_select "h2", text: /Introduction/
     assert_select "h2", text: /Information We Collect/
-    assert_select "h2", text: /AI Assistant Integration/
     assert_select "h2", text: /Data Security/
     assert_select "h2", text: /Contact/
   end
 
-  test "privacy policy mentions GPT integration" do
+  test "privacy policy mentions OAuth integration" do
     get privacy_url
     assert_response :success
-    assert_match /AI assistant/, response.body
     assert_match /OAuth/, response.body
+    assert_match /Google/, response.body
   end
 
   test "privacy policy has last updated date" do
@@ -44,24 +43,23 @@ class LegalControllerTest < ActionDispatch::IntegrationTest
 
     # Check for key sections
     assert_select "h2", text: /Acceptance of Terms/
-    assert_select "h2", text: /Subscription Plans/
-    assert_select "h2", text: /API Access, OAuth, and AI Assistant Integration/
+    assert_select "h2", text: /Description of Service/
+    assert_select "h2", text: /Account Access/
     assert_select "h2", text: /Acceptable Use/
     assert_select "h2", text: /Limitation of Liability/
   end
 
-  test "terms of service mentions subscription plans" do
+  test "terms of service mentions restricted access" do
     get terms_url
     assert_response :success
-    assert_match /Free Plan/, response.body
-    assert_match /Individual Plan/, response.body
-    assert_match /Professional Plan/, response.body
+    assert_match /@kasseh\.com/, response.body
   end
 
-  test "terms of service mentions API tokens" do
+  test "terms of service mentions OAuth providers" do
     get terms_url
     assert_response :success
-    assert_match /API token/, response.body
+    assert_match /Google OAuth/, response.body
+    assert_match /Apple Sign In/, response.body
   end
 
   test "terms of service has last updated date" do

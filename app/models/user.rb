@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :email_address, presence: true, uniqueness: true
   validates :email_address, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :email_address, format: {
-    with: /@kasseh\.com\z/i,
+    with: /\A[^@]+@kasseh\.com\z/i,
     message: "must be a @kasseh.com email address"
   }, unless: -> { email_address == PRIMARY_ADMIN_EMAIL }
   validates :password, presence: true, if: -> { password_digest.blank? && provider.blank? }

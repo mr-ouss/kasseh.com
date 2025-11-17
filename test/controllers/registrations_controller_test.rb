@@ -5,7 +5,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "should get new registration page" do
     get new_registration_url
     assert_response :success
-    assert_select "h1", text: /create your account/i
+    assert_select "h1", text: /Create account/i
   end
 
   test "new registration page should have email field" do
@@ -31,7 +31,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_difference("User.count") do
       post registration_url, params: {
         user: {
-          email_address: "newuser@example.com",
+          email_address: "newuser@kasseh.com",
           password: "password123",
           password_confirmation: "password123"
         }
@@ -42,7 +42,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_match /welcome/i, flash[:notice]
 
     # Verify user was created
-    user = User.find_by(email_address: "newuser@example.com")
+    user = User.find_by(email_address: "newuser@kasseh.com")
     assert user.present?
 
     # Verify user is signed in by accessing protected page
@@ -130,13 +130,13 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "should normalize email address" do
     post registration_url, params: {
       user: {
-        email_address: "  NewUser@Example.COM  ",
+        email_address: "  NewUser@KASSEH.COM  ",
         password: "password123",
         password_confirmation: "password123"
       }
     }
 
-    user = User.find_by(email_address: "newuser@example.com")
+    user = User.find_by(email_address: "newuser@kasseh.com")
     assert user.present?, "Email should be normalized to lowercase and trimmed"
   end
 
@@ -144,7 +144,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "should automatically sign in user after registration" do
     post registration_url, params: {
       user: {
-        email_address: "newuser@example.com",
+        email_address: "newuser@kasseh.com",
         password: "password123",
         password_confirmation: "password123"
       }
@@ -203,13 +203,13 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "should hash passwords" do
     post registration_url, params: {
       user: {
-        email_address: "newuser@example.com",
+        email_address: "newuser@kasseh.com",
         password: "password123",
         password_confirmation: "password123"
       }
     }
 
-    user = User.find_by(email_address: "newuser@example.com")
+    user = User.find_by(email_address: "newuser@kasseh.com")
     assert user.present?
     # Password should be hashed, not stored in plain text
     assert_not_equal "password123", user.password_digest

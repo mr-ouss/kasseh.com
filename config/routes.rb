@@ -1,14 +1,6 @@
 Rails.application.routes.draw do
   # Blog/Writing
-  resources :articles, only: [:index, :show]
-
-  # Setup wizard (first-time configuration)
-  get "/setup", to: "setup#index"
-  post "/setup", to: "setup#create"
-  get "/setup/validate", to: "setup#validate", as: :setup_validate
-  post "/setup/check_secrets", to: "setup#check_secrets", as: :setup_check_secrets
-  post "/setup/skip_validation", to: "setup#skip_validation", as: :setup_skip_validation
-  get "/setup/complete", to: "setup#complete", as: :setup_complete
+  resources :articles, only: [ :index, :show ]
 
   # OmniAuth callback routes (for user sign-in via GitHub/Google/Apple)
   get "/auth/:provider/callback", to: "sessions#oauth"

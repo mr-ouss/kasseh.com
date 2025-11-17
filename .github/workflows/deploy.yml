@@ -23,14 +23,13 @@ jobs:
         id: check
         run: |
           # Deployment only runs if OP_SERVICE_ACCOUNT_TOKEN is configured
-          # This prevents deployment from running on the RailsRocket template repo
           if [ -n "${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}" ]; then
             echo "configured=true" >> $GITHUB_OUTPUT
             echo "✅ Repository is configured - Deployment will proceed"
           else
             echo "configured=false" >> $GITHUB_OUTPUT
             echo "⏭️  Repository not configured (missing OP_SERVICE_ACCOUNT_TOKEN) - Deployment skipped"
-            echo "This is expected for the RailsRocket template repository."
+            echo "Configure OP_SERVICE_ACCOUNT_TOKEN in GitHub Secrets to enable deployment."
             echo "After cloning and setting up your project, add OP_SERVICE_ACCOUNT_TOKEN to GitHub Secrets."
           fi
 

@@ -18,7 +18,7 @@ class AuthenticationFlowTest < ActionDispatch::IntegrationTest
     assert_difference("User.count") do
       post registration_url, params: {
         user: {
-          email_address: "newuser@example.com",
+          email_address: "newuser@kasseh.com",
           password: "password123",
           password_confirmation: "password123",
           first_name: "New",
@@ -30,8 +30,9 @@ class AuthenticationFlowTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
 
     # User should be signed in after registration
-    user = User.find_by(email_address: "newuser@example.com")
+    user = User.find_by(email_address: "newuser@kasseh.com")
     assert user.present?
+    assert user.password_digest.present?, "Password should be hashed"
 
     # User should be signed in after registration
     follow_redirect!
@@ -252,10 +253,10 @@ class AuthenticationFlowTest < ActionDispatch::IntegrationTest
   # Email Validation Tests
   test "should accept valid email formats" do
     valid_emails = [
-      "user@example.com",
-      "first.last@example.com",
-      "user+tag@example.co.uk",
-      "user_name@example.org"
+      "user@kasseh.com",
+      "first.last@kasseh.com",
+      "user+tag@kasseh.com",
+      "user_name@kasseh.com"
     ]
 
     valid_emails.each do |email|
@@ -289,7 +290,7 @@ class AuthenticationFlowTest < ActionDispatch::IntegrationTest
   # Password Strength Tests
   test "should accept passwords" do
     user = User.new(
-      email_address: "test@example.com",
+      email_address: "test@kasseh.com",
       password: "password123",
       password_confirmation: "password123"
     )

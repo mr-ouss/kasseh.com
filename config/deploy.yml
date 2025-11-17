@@ -47,7 +47,7 @@ env:
     - APPLE_KEY_ID
     - APPLE_PRIVATE_KEY
   clear:
-    APP_NAME: RailsRocket
+    APP_NAME: Kasseh
     PRODUCTION_DATABASE_URL: sqlite3:///rails/storage/production.sqlite3
     SOLID_QUEUE_IN_PUMA: true
 

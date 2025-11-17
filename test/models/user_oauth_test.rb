@@ -5,14 +5,14 @@ require "ostruct"
 
 class UserOauthTest < ActiveSupport::TestCase
   test "creates new user from OAuth data" do
-    auth = mock_oauth_data("google", "12345", "test@example.com", "Test", "User")
+    auth = mock_oauth_data("google", "12345", "test@kasseh.com", "Test", "User")
 
     user = User.find_or_create_from_auth(auth)
 
     assert user.persisted?
     assert_equal "google", user.provider
     assert_equal "12345", user.uid
-    assert_equal "test@example.com", user.email_address
+    assert_equal "test@kasseh.com", user.email_address
     assert_equal "Test", user.first_name
     assert_equal "User", user.last_name
   end
@@ -21,7 +21,7 @@ class UserOauthTest < ActiveSupport::TestCase
     existing = users(:one)
     existing.update!(provider: "github", uid: "67890")
 
-    auth = mock_oauth_data("github", "67890", "new@example.com", "New", "Name")
+    auth = mock_oauth_data("github", "67890", "new@kasseh.com", "New", "Name")
 
     user = User.find_or_create_from_auth(auth)
 
@@ -32,10 +32,10 @@ class UserOauthTest < ActiveSupport::TestCase
 
   test "links OAuth account to existing OAuth user with same email" do
     existing = users(:one)
-    existing.update!(provider: "google", uid: "12345", email_address: "same@example.com")
+    existing.update!(provider: "google", uid: "12345", email_address: "same@kasseh.com")
 
     # Try to sign in with GitHub using the same email
-    auth = mock_oauth_data("github", "67890", "same@example.com", "Test", "User")
+    auth = mock_oauth_data("github", "67890", "same@kasseh.com", "Test", "User")
 
     user = User.find_or_create_from_auth(auth)
 
@@ -47,9 +47,9 @@ class UserOauthTest < ActiveSupport::TestCase
 
   test "does not link OAuth to password-based account" do
     existing = users(:one)
-    existing.update!(provider: nil, uid: nil, email_address: "password@example.com")
+    existing.update!(provider: nil, uid: nil, email_address: "password@kasseh.com")
 
-    auth = mock_oauth_data("google", "12345", "password@example.com", "Test", "User")
+    auth = mock_oauth_data("google", "12345", "password@kasseh.com", "Test", "User")
 
     user = User.find_or_create_from_auth(auth)
 

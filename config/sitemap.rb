@@ -15,12 +15,12 @@ SitemapGenerator::Sitemap.sitemaps_host = "https://www.kasseh.com/"
 
 SitemapGenerator::Sitemap.create do
   # Homepage
-  add root_path, priority: 1.0, changefreq: 'weekly'
+  add root_path, priority: 1.0, changefreq: "weekly"
 
-  # Static pages
-  add privacy_path, priority: 0.3, changefreq: 'monthly'
-  add terms_path, priority: 0.3, changefreq: 'monthly'
-  add support_path, priority: 0.3, changefreq: 'monthly'
+  # Legal pages
+  add privacy_path, priority: 0.3, changefreq: "monthly"
+  add terms_path, priority: 0.3, changefreq: "monthly"
+  add support_path, priority: 0.3, changefreq: "monthly"
 
   # Future: Add blog posts
   # Article.find_each do |article|

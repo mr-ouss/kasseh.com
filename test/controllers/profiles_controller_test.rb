@@ -38,7 +38,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
       user: {
         first_name: "Updated",
         last_name: "Name",
-        email_address: "updated@example.com"
+        email_address: "updated@kasseh.com"
       }
     }
     assert_redirected_to profile_url
@@ -47,7 +47,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     @user.reload
     assert_equal "Updated", @user.first_name
     assert_equal "Name", @user.last_name
-    assert_equal "updated@example.com", @user.email_address
+    assert_equal "updated@kasseh.com", @user.email_address
   end
 
   test "should update password with correct current password" do

@@ -44,8 +44,8 @@
 # Ignore test coverage reports
 /coverage/
 
-# Ignore RailsRocket setup flag (local development only)
-.railsrocket-configured
+# Ignore local setup flags
+.setup-configured
 
 /app/assets/builds/*
 !/app/assets/builds/.keep

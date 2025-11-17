@@ -147,7 +147,7 @@ class UserAuthenticationSystemTest < ApplicationSystemTestCase
   test "landing page shows product information" do
     visit root_path
 
-    assert_text "RailsRocket"
+    assert_text "Kasseh"
     assert_selector ".landing"
   end
 

@@ -1,8 +1,9 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show]
+  allow_unauthenticated_access
+  before_action :set_article, only: [ :show ]
 
   def index
-    @articles = Article.published.page(params[:page]).per(10)
+    @articles = Article.published.order(published_at: :desc)
     @featured_articles = Article.published.featured.limit(3)
   end
 
