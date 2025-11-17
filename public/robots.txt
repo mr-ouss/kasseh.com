@@ -8,5 +8,6 @@ Disallow: /admin
 Disallow: /setup
 Disallow: /api_tokens
 
-# Sitemap
-Sitemap: https://kasseh.com/sitemap.xml
+# Learn more: https://en.wikipedia.org/wiki/Robots_exclusion_standard
+
+Sitemap: https://www.kasseh.com/sitemap.xml

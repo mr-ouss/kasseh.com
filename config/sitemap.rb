@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "https://kasseh.com"
+SitemapGenerator::Sitemap.default_host = "https://www.kasseh.com"
 
 # Pick a place safe to write the files
 SitemapGenerator::Sitemap.public_path = "tmp/"
@@ -8,7 +8,7 @@ SitemapGenerator::Sitemap.public_path = "tmp/"
 # SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new
 
 # Inform the map cross-linking where to find the other maps
-SitemapGenerator::Sitemap.sitemaps_host = "https://kasseh.com/"
+SitemapGenerator::Sitemap.sitemaps_host = "https://www.kasseh.com/"
 
 # Pick a namespace within your bucket to organize your maps
 # SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/"

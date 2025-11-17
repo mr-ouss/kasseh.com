@@ -59,14 +59,14 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "transferchat.ai", protocol: "https" }
+  config.action_mailer.default_url_options = { host: "www.kasseh.com", protocol: "https" }
 
   # SMTP configuration using credentials from 1Password
   if ENV["SMTP_SERVER"].present?
     config.action_mailer.smtp_settings = {
       address: ENV["SMTP_SERVER"],
       port: 2587,
-      domain: "transferchat.ai",
+      domain: "kasseh.com",
       user_name: ENV["SMTP_USERNAME"],
       password: ENV["SMTP_PASSWORD"],
       authentication: :plain,

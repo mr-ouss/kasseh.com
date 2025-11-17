@@ -20,7 +20,7 @@ servers:
 # Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.
 proxy:
   ssl: true
-  host: kasseh.com
+  host: www.kasseh.com
 
 # No external registry - using local image building (Kamal 2.8+)
 # Images are built on the deployment machine and transferred directly to servers via SSH
