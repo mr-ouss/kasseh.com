@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 # Configure OmniAuth for Rails 8
-# IMPORTANT: Only allow GET requests to bypass CSRF protection
-# Apple Sign In uses form_post which doesn't include CSRF tokens
-# Using GET is secure because OAuth has built-in state parameter protection
-OmniAuth.config.allowed_request_methods = [ :get ]
-OmniAuth.config.silence_get_warning = true
+# Using omniauth-rails_csrf_protection for security
+OmniAuth.config.allowed_request_methods = [ :post ]
 
 # Custom Apple strategy to skip nonce validation
 class OmniAuth::Strategies::Apple
