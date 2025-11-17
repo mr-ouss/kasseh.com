@@ -187,13 +187,12 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-center text-charcoal-400 text-sm space-y-2 pb-8">
-      <div class="inline-flex items-center justify-center space-x-2">
+    <footer class="text-center text-charcoal-400 text-sm pb-8">
+      <div class="flex items-center justify-center space-x-2">
         <span>&copy; <%= Time.current.year %></span>
-        <%= image_tag "kasseh-logo-small.png", alt: "", class: "w-4 h-4 opacity-60 inline-block mx-1" %>
+        <%= image_tag "kasseh-logo-small.png", alt: "", class: "w-4 h-4 opacity-60 inline-block" %>
         <span>Kasseh</span>
-      </div>
-      <div class="flex items-center justify-center space-x-4">
+        <span class="text-charcoal-600">·</span>
         <%= link_to "Privacy", privacy_path, class: "hover:text-gold-500 transition-colors duration-300" %>
         <span class="text-charcoal-600">·</span>
         <%= link_to "Terms", terms_path, class: "hover:text-gold-500 transition-colors duration-300" %>

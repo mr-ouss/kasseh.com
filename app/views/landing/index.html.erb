@@ -36,14 +36,13 @@
 
       <!-- Header -->
       <header id="header" class="opacity-0 animate-header-rise">
-        <!-- Logo with premium ambient glow and magnetic effect -->
-        <div class="mb-12 flex justify-center relative" id="logo-container">
+        <!-- Animated SVG Logo -->
+        <div class="mb-12 flex justify-center relative" 
+             id="logo-container" 
+             data-controller="svg-logo"
+             data-svg-logo-url-value="/kasseh-logo-white.svg">
           <div class="logo-glow absolute inset-0 blur-3xl opacity-0 animate-logo-glow"></div>
-          <%= image_tag "kasseh-logo.png", 
-              id: "kasseh-logo",
-              class: "w-32 h-32 md:w-40 md:h-40 relative z-10 opacity-90 transition-all duration-700 animate-float-subtle logo-magnetic",
-              alt: "Kasseh",
-              style: "filter: drop-shadow(0 0 30px rgba(212, 169, 98, 0.15));" %>
+          <div data-svg-logo-target="container" class="w-32 h-32 md:w-48 md:h-48 relative z-10"></div>
         </div>
 
         <!-- Name with refined typography and gradient -->
@@ -144,17 +143,14 @@
 
   <!-- Footer -->
   <footer id="footer" class="fixed bottom-0 left-0 right-0 z-10 pb-8 text-center opacity-0 animate-footer-fade">
-    <div class="text-charcoal-400 text-sm space-y-2">
-      <div class="inline-flex items-center justify-center space-x-2">
-        <span>&copy; <%= Time.current.year %></span>
-        <%= image_tag "kasseh-logo-small.png", alt: "", class: "w-4 h-4 opacity-60 inline-block mx-1" %>
-        <a href="/" class="hover:text-gold-500 transition-colors duration-300">Quentin O. Kasseh</a>
-      </div>
-      <div class="flex items-center justify-center space-x-4">
-        <%= link_to "Privacy", privacy_path, class: "hover:text-gold-500 transition-colors duration-300" %>
-        <span class="text-charcoal-600">·</span>
-        <%= link_to "Terms", terms_path, class: "hover:text-gold-500 transition-colors duration-300" %>
-      </div>
+    <div class="text-charcoal-400 text-sm flex items-center justify-center space-x-2">
+      <span>&copy; <%= Time.current.year %></span>
+      <%= image_tag "kasseh-logo-small.png", alt: "", class: "w-4 h-4 opacity-60 inline-block" %>
+      <a href="/" class="hover:text-gold-500 transition-colors duration-300">Quentin O. Kasseh</a>
+      <span class="text-charcoal-600">·</span>
+      <%= link_to "Privacy", privacy_path, class: "hover:text-gold-500 transition-colors duration-300" %>
+      <span class="text-charcoal-600">·</span>
+      <%= link_to "Terms", terms_path, class: "hover:text-gold-500 transition-colors duration-300" %>
     </div>
   </footer>
 </div>
