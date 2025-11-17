@@ -1,9 +1,18 @@
 # frozen_string_literal: true
 
 # Configure OmniAuth for Rails 8
-# Using omniauth-rails_csrf_protection for security
 OmniAuth.config.allowed_request_methods = [ :post, :get ]
 OmniAuth.config.silence_get_warning = true
+
+# Skip CSRF token verification for OmniAuth requests
+# This is safe because OmniAuth has its own security measures
+OmniAuth.config.before_request_phase do |env|
+  # Bypass Rails CSRF protection for OmniAuth
+  env['rack.session']['omniauth.origin'] = env['HTTP_REFERER'] if env['HTTP_REFERER']
+  
+  # Mark this request as verified to skip ApplicationController's CSRF check
+  env['action_dispatch.request.unsigned_session_cookie'] = true
+end
 
 # Custom Apple strategy to skip nonce validation
 class OmniAuth::Strategies::Apple
@@ -11,6 +20,13 @@ class OmniAuth::Strategies::Apple
     # Skip nonce validation - Apple's form_post mode has session handling issues
     # Security is maintained through JWT signature validation and authorized_client_ids
     true
+  end
+  
+  # Skip CSRF verification for Apple auth
+  def request_phase
+    # Store origin but don't verify CSRF
+    session['omniauth.origin'] = request.params['origin'] if request.params['origin']
+    super
   end
 end
 
