@@ -1,266 +1,324 @@
-# RailsRocket - AI Agent Instructions
+# GitHub Copilot Instructions for Kasseh.com
 
 ## Project Overview
-RailsRocket is a production-ready Rails 8 template with authentication, OAuth, deployment, and an interactive setup wizard. It's designed to be cloned and customized for new projects.
 
-**Key Features:**
-- Interactive first-run setup wizard that configures the entire app
-- Email/password + OAuth authentication (GitHub, Google, Apple)
-- Kamal 2 deployment with 1Password secrets management
-- SQLite multi-database (primary, cache, queue, cable)
-- Solid Stack (Queue, Cache, Cable) - no Redis needed
-- GitHub Actions CI/CD pipeline
-- API token management
-- Admin panel
-- Modern UI with Hotwire/Turbo/Stimulus
+This is the personal website for Quentin O. Kasseh - a Rails 8.1 application with restricted authentication, blog functionality, and elegant dark-themed design.
 
-## Architecture & Key Patterns
+**Primary Purpose**: Personal portfolio and writing platform with secure, invite-only access.
 
-### Interactive Setup Wizard (Critical Feature)
-- **First run**: Users see `/setup` wizard on first launch (development only)
-- **Configuration collected**: App name, admin email, vault name, logos, theme colors, OAuth providers, deployment settings
-- **Auto-updates files**: User model, vault references, landing page, README, deploy.yml, CSS variables
-- **Flag file**: `.railsrocket-configured` marks setup complete (gitignored)
-- **Reset command**: `rails runner "RailsRocket::Setup.reset!"` to re-run wizard
+**Tech Stack**:
+- Rails 8.1
+- Tailwind CSS v4 with custom theme
+- SQLite (development & production)
+- Hotwire (Turbo + Stimulus)
+- OAuth (Google & Apple)
 
-**Setup Flow:**
-1. User visits http://localhost:3000
-2. ApplicationController redirects to `/setup` if `.railsrocket-configured` doesn't exist
-3. SetupController shows wizard form (unauthenticated access allowed)
-4. On submit, ConfigUpdater modifies files in place using regex
-5. Flag file created, user redirected to `/setup/complete`
-6. Subsequent visits go to normal landing page
+---
 
-**Files involved:**
-- `app/controllers/setup_controller.rb` - Wizard controller
-- `app/views/setup/index.html.erb` - Wizard form
-- `lib/rails_rocket/setup.rb` - Setup state management
-- `lib/rails_rocket/setup/config_updater.rb` - File modification logic
-- `.railsrocket-configured` - Flag file (gitignored)
-
-### Deployment (Kamal 2)
-- **Target**: Single VPS with Docker (DigitalOcean, AWS, etc.)
-- **Registry**: Local image building (`localhost:5555`) - no external registry needed
-- **Secrets**: 1Password CLI (`op run`) injects all secrets
-- **SSH**: Uses `deploy` user (not root), configured in `config/deploy.yml`
-- **Volumes**: `app_storage:/rails/storage` persists SQLite databases
-- **Environment**: APP_VERSION and DEPLOYED_AT tracked in deployment
-
-**Deploy command:**
-```bash
-# With 1Password vault access
-op run --env-file .github/workflows/.env.deploy -- bundle exec kamal deploy
-
-# Access production console
-kamal app exec --interactive --reuse "bin/rails console"
-
-# View logs
-kamal app logs -f
-```
-
-### 1Password Integration (Secrets Management)
-- **Never commit secrets** - Use `op://VaultName/ItemName/field` references
-- **Setup wizard updates vault name** - Replaces "YourApp" with user's vault name
-- **Required vault items**:
-  - `rails-master-key` (Password)
-  - `deploy-ssh-key` (SSH Key)
-  - `smtp-credentials` (Login with username, password, server, from_email fields)
-  - OAuth apps (if enabled): `github-oauth`, `google-oauth`, `apple-oauth`
-
-**Pattern:**
-- `.github/workflows/.env.deploy` contains `op://` references
-- CI/GitHub Actions uses `OP_SERVICE_ACCOUNT_TOKEN` secret
-- Local development: `eval $(op signin)` then use `op run --env-file` wrapper
-- Kamal sources `.kamal/secrets` which is generated from `.env.deploy`
-
-### Rails 8-Specific Behaviors
-- **SQLite in production**: `storage/production.sqlite3` persisted via Docker volume
-- **Solid Queue**: In-process job processing (`SOLID_QUEUE_IN_PUMA: true`)
-- **Solid Cache**: SQLite-backed cache (no Redis)
-- **Solid Cable**: SQLite-backed WebSocket connections
-- **Modern browser enforcement**: `allow_browser versions: :modern` in ApplicationController
-- **Import maps**: Zero-config JavaScript via `config/importmap.rb`
-- **Propshaft**: Asset pipeline (not Sprockets)
-
-### File Structure Conventions
-- **Lib autoloading**: `config.autoload_lib(ignore: %w[assets tasks])` enables `lib/rails_rocket/`
-- **CSS**: Single file `app/assets/stylesheets/application.css` with CSS variables
-- **JS**: Stimulus controllers in `app/javascript/controllers/`
-- **Setup modules**: `lib/rails_rocket/setup.rb` and `lib/rails_rocket/setup/config_updater.rb`
-- **Favicon**: Direct links in layout to `/favicon-*.png` (not asset pipeline)
+## Architecture Patterns
 
 ### Authentication & Authorization
-- **Email/password**: bcrypt with secure session cookies
-- **OAuth**: OmniAuth with GitHub, Google, Apple providers
-- **Sessions**: Cookie-based (not session[:user_id])
-- **API tokens**: SHA256 hashed, expiration support, usage tracking
-- **Admin**: PRIMARY_ADMIN_EMAIL in User model gets auto-promoted
-- **Concerns**: `Authentication` and `AdminAuthorization` in ApplicationController
 
-## Local Development Commands
+**Domain-Restricted Signups**:
+- Only @kasseh.com email addresses can create accounts
+- Primary admin email defined in `User::PRIMARY_ADMIN_EMAIL`
+- Email validation enforced at model level with regex: `/@kasseh\.com\z/i`
+- Family members directed to support@kasseh.com for assistance
 
-```bash
-# Start server
-bin/dev
+**OAuth Integration**:
+- Providers: Google OAuth2, Apple Sign In
+- Configured in `config/initializers/omniauth.rb`
+- Credentials stored in Rails encrypted credentials
+- User model handles OAuth callback with `find_or_create_from_auth` method
 
-# Reset setup wizard (development only)
-rails runner "RailsRocket::Setup.reset!"
+**Session Management**:
+- `Current.user` pattern for request-scoped user access
+- `Authentication` concern in ApplicationController
+- Sessions stored in database with `has_many :sessions`
 
-# Run tests
-bin/rails test
+### Styling & Design
 
-# Run tests with coverage
-COVERAGE=true bin/rails test
+**Tailwind CSS v4**:
+- Configuration in `app/assets/tailwind/application.css` using `@theme` directive
+- Custom color palette: charcoal (dark grays) + gold (accent)
+- CSS variables defined in `@theme` block, not traditional config file
+- Glass-effect cards: `bg-white/10 backdrop-blur-md border border-charcoal-700/50`
 
-# Run full CI suite locally
-bin/ci
-
-# Run specific test
-bin/rails test test/models/user_test.rb
-
-# Database operations
-bin/rails db:migrate
-bin/rails db:seed
-bin/rails db:reset
-
-# Console
-bin/rails console
-
-# Security scan
-bin/brakeman
-
-# Linting
-bin/rubocop
-bin/rubocop -a  # auto-fix
+**Color Palette**:
+```css
+--color-charcoal-900: #1a1a1f  /* Dark background */
+--color-charcoal-800: #2a2a31  /* Slightly lighter */
+--color-charcoal-200: #d9d9de  /* Light text */
+--color-gold-600: #c58d47      /* Primary accent */
+--color-gold-500: #d4a962      /* Hover state */
 ```
 
-## Testing Strategy
+**Design Principles**:
+- Dark gradient backgrounds: `bg-gradient-to-br from-charcoal-900 via-charcoal-800 to-charcoal-900`
+- Sans-serif fonts for UI (KASSEH branding), serif for content
+- Smooth transitions: `transition-colors duration-300`
+- Consistent spacing with Tailwind utilities
 
-### Test Organization
-- **Controllers**: Authentication (sessions, registrations, passwords), profiles, API tokens, admin
-- **Models**: User, Session, ApiToken
-- **System**: Full integration tests with Capybara
-- **Fixtures**: `test/fixtures/` with realistic data
-- **Coverage**: Target 70%+, configured in `.simplecov`
+### Content Management
 
-### Test Helpers
-- **Authentication**: `sign_in_as(user)` helper in test_helper.rb
-- **Fixtures**: Use `users(:one)` for test data
-- **Password**: Fixture password is "password"
+**Articles (Blog Posts)**:
+- Auto-generated slugs from titles (parameterized)
+- Reading time calculation based on word count
+- Auto-generated excerpts from content
+- Published/draft state with `published_at` timestamp
+- Scopes: `published`, `featured`, `recent`
 
-### Running Tests
-- **Basic**: `bin/rails test` (54 tests)
-- **With coverage**: `COVERAGE=true bin/rails test`
-- **System tests**: `bin/rails test:system` (requires browser)
-- **Single file**: `bin/rails test test/models/user_test.rb`
+**SEO Optimization**:
+- Open Graph meta tags in layout
+- Twitter Card meta tags
+- Dynamic titles with `content_for :title`
+- Google Analytics integration (G-NFCW4B7LWG)
 
-## Common Patterns & Gotchas
+---
 
-### Setup Wizard Patterns
-- **File updates are regex-based**: ConfigUpdater uses `.gsub` to modify files
-- **App name becomes slug**: `config[:app_name].parameterize` for deploy.yml service name
-- **Logo/favicon uploads**: Saved to `app/assets/images/` and `public/`
-- **CSS color updates**: Replaces `--color-accent: #[hex]` in application.css
-- **Vault references**: Replaces "YourApp" in all `op://` references
+## Key Files & Their Purposes
 
-### Deployment Gotchas
-- **Local image building**: Kamal 2.8+ builds on deployment machine, no registry push
-- **SSH key must match**: Server's `~/.ssh/authorized_keys` must have deploy user's key
-- **Environment variables**: Use `env.secret` for sensitive, `env.clear` for public
-- **APP_NAME**: Set as clear env var so mailers can use it
-- **Volume naming**: Use `app_storage:/rails/storage` not app-specific names
+### Models
 
-### Development Gotchas
-- **Setup wizard only in development**: `RailsRocket::Setup.required?` checks Rails.env.development?
-- **Flag file is gitignored**: `.railsrocket-configured` won't be in repo
-- **Mailer from address**: Uses `ENV.fetch("SMTP_FROM_EMAIL")` and `ENV.fetch("APP_NAME")`
-- **OAuth redirect URIs**: Must match exactly in provider settings
-- **Modern browser enforcement**: Old browsers get blocked by `allow_browser` filter
+**`app/models/user.rb`**:
+- Central authentication model
+- PRIMARY_ADMIN_EMAIL constant - update this for admin access
+- OAuth methods: `find_or_create_from_auth`, `oauth_user?`, `email_to_name`
+- Email domain validation (must be @kasseh.com)
+- Admin flag management with `set_primary_admin_flag` callback
 
-### Testing Gotchas
-- **System tests can be flaky**: Some tests skip due to timing issues
-- **Fixture password**: Always "password" for test users
-- **Admin user**: `users(:admin)` fixture matches PRIMARY_ADMIN_EMAIL
-- **No connections/activities**: Business models removed, tests updated to use profile/api_tokens
+**`app/models/article.rb`**:
+- Blog post model with slug, reading time, excerpt auto-generation
+- Validations ensure required fields
+- Callbacks populate computed fields before validation
 
-## Configuration Files Reference
+**`app/models/current.rb`**:
+- Request-scoped user storage (thread-safe)
+- Used throughout app for current user access
 
-### Key Config Files
-- `config/deploy.yml` - Kamal deployment configuration
-- `config/routes.rb` - Application routes (includes setup wizard)
-- `config/database.yml` - SQLite multi-database configuration
-- `config/initializers/omniauth.rb` - OAuth provider setup
-- `config/initializers/rails_rocket.rb` - Loads setup modules
-- `.env.example` - Environment variable template
-- `.github/workflows/.env.deploy` - 1Password secret references
-- `.kamal/secrets` - Kamal secrets template (uses variable substitution)
+### Controllers
 
-### Environment Variables
-**Required for production:**
-- `RAILS_MASTER_KEY` - Rails encryption key
-- `SMTP_USERNAME`, `SMTP_PASSWORD`, `SMTP_SERVER`, `SMTP_FROM_EMAIL` - Email config
-- `APP_NAME` - Application name (optional, defaults to "RailsRocket")
+**`app/controllers/concerns/authentication.rb`**:
+- Session helpers: `authenticated?`, `require_authentication`
+- Login/logout methods
+- Current user access
 
-**Optional (OAuth):**
-- `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`
-- `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`
-- `APPLE_CLIENT_ID`, `APPLE_TEAM_ID`, `APPLE_KEY_ID`, `APPLE_PRIVATE_KEY`
+**`app/controllers/sessions_controller.rb`**:
+- Handles email/password login
+- OAuth callback handling via `oauth` action
+- Session creation/destruction
 
-**Deployment:**
-- `KAMAL_SSH_KEY` - SSH private key for deployment
-- `APP_VERSION` - Git SHA (injected by CI)
-- `DEPLOYED_AT` - Deploy timestamp (injected by CI)
+**`app/controllers/legal_controller.rb`**:
+- Privacy, Terms, Contact (Support) pages
+- All use same dark aesthetic as auth pages
 
-## When Modifying Core Features
+### Views
 
-### Adding New OAuth Provider
-1. Add gem to Gemfile: `gem 'omniauth-provider'`
-2. Update `config/initializers/omniauth.rb`
-3. Add provider checkbox to setup wizard
-4. Add credentials to `.env.example` and `.github/workflows/.env.deploy`
-5. Add to User model's OAuth handling
-6. Update SessionsController#oauth callback
+**Authentication Pages**:
+- Consistent branding: KASSEH logo + "KASSEH" text
+- Dark gradient background with glass-effect cards
+- Gold accents for links and buttons
+- Family member support message on signup
 
-### Adding New Setup Wizard Fields
-1. Add field to `app/views/setup/index.html.erb`
-2. Add to `setup_params` in SetupController
-3. Add update method in ConfigUpdater
-4. Call update method in `update_all!`
-5. Update setup complete page with what was changed
+**Legal Pages** (`app/views/legal/*`):
+- Terms, Privacy, Support all use same dark template
+- Self-contained with logo, content card, footer
+- No separate header/footer partials needed
+- "Back to home" navigation at bottom
 
-### Modifying Deployment
-1. Test locally first: `op run --env-file .github/workflows/.env.deploy -- bundle exec kamal deploy`
-2. Update `config/deploy.yml` with new configuration
-3. Add new secrets to `.github/workflows/.env.deploy` and 1Password vault
-4. Update GitHub workflow if CI/CD changes needed
-5. Document in README deployment section
+**Landing Page** (`app/views/landing/index.html.erb`):
+- Animated gradient background with CSS keyframes
+- Grid pattern overlay for subtle texture
+- Centered layout with social links
+- Footer with Privacy/Terms links
 
-### Adding New Models/Features
-1. Generate with Rails: `bin/rails generate model Post title:string`
-2. Add associations to User model if needed
-3. Create controller and views
-4. Add routes
-5. Write tests (controller + model minimum)
-6. Update README with new feature
-7. Consider if setup wizard should configure it
+### Styling
 
-## References
-- Setup wizard: `app/controllers/setup_controller.rb`, `lib/rails_rocket/setup/`
-- Deployment docs: `README.md` lines 271-330
-- 1Password pattern: `.github/workflows/.env.deploy` and `.kamal/secrets`
-- Authentication: `app/controllers/concerns/authentication.rb`
-- Test helpers: `test/test_helper.rb`
+**`app/assets/tailwind/application.css`**:
+- Google Fonts import (Playfair Display, Inter)
+- `@theme` configuration with color/font variables
+- Custom component classes in `@layer components`
+- Prose styles for content
+
+---
+
+## Common Development Tasks
+
+### Adding New Legal/Content Pages
+
+**Pattern to follow**:
+```erb
+<% content_for :title, "Page Title · Kasseh" %>
+<% content_for :skip_navigation, true %>
+<% content_for :body_class, "auth-page-body" %>
+
+<div class="min-h-screen bg-gradient-to-br from-charcoal-900 via-charcoal-800 to-charcoal-900 px-4 py-12">
+  <div class="max-w-4xl mx-auto">
+    <!-- Logo -->
+    <div class="text-center mb-12">
+      <%= link_to root_path, class: "inline-block" do %>
+        <%= image_tag "kasseh-logo.png", alt: "Kasseh", class: "w-16 h-16 mx-auto opacity-90 hover:opacity-100 transition-opacity duration-300 mb-4" %>
+        <h2 class="text-xl font-sans font-bold text-white tracking-wide">KASSEH</h2>
+      <% end %>
+    </div>
+
+    <!-- Content Card -->
+    <div class="bg-white/10 backdrop-blur-md border border-charcoal-700/50 rounded-lg shadow-2xl p-8 md:p-12 mb-8">
+      <!-- Your content here -->
+    </div>
+
+    <!-- Back to home & Footer -->
+  </div>
+</div>
+```
+
+### Adding New Article/Blog Post
+
+```ruby
+# In rails console or seed file
+Article.create!(
+  title: "My Article Title",
+  content: "Article content here...",
+  author: "Quentin Kasseh",
+  published_at: Time.current,  # or nil for draft
+  featured: false
+)
+```
+
+### Updating Branding
+
+**Logo**: Replace `app/assets/images/kasseh-logo.png` (main) and `kasseh-logo-small.png` (footer)
+
+**Site Name**: Update "KASSEH" text in:
+- Auth pages (login, signup, password reset)
+- Legal pages (terms, privacy, support)
+- Any new pages
+
+**Colors**: Modify `@theme` variables in `app/assets/tailwind/application.css`
+
+### OAuth Configuration
+
+**Google OAuth**:
+1. Get credentials from Google Cloud Console
+2. Add to Rails credentials: `EDITOR="code --wait" bin/rails credentials:edit`
+```yaml
+google:
+  client_id: YOUR_CLIENT_ID
+  client_secret: YOUR_CLIENT_SECRET
+```
+3. Update callback URL in Google Console: `http://localhost:3000/auth/google_oauth2/callback`
+
+**Apple Sign In**:
+- Similar process with Apple Developer portal
+- Requires additional setup (team ID, key ID, private key)
+
+---
+
+## Important Conventions
+
+### Email Validation
+- **ALWAYS** enforce @kasseh.com domain restriction
+- Exception: PRIMARY_ADMIN_EMAIL can be any email
+- Validation in User model, not controller
+
+### Typography
+- **Branding**: `font-sans font-bold tracking-wide` for "KASSEH"
+- **Headings**: `font-sans font-bold` for page titles
+- **Body**: `text-charcoal-200 leading-relaxed` for readable text
+- **Links**: `text-gold-500 hover:text-gold-400 transition-colors underline`
+
+### Forms
+- Glass-effect background: `bg-white/10`
+- Gold focus rings: `focus:ring-2 focus:ring-gold-500`
+- Error states: `bg-red-500/20 border-red-500/50 text-red-200`
+- Success states: `bg-green-500/20 border-green-500/50 text-green-200`
+
+### Navigation
+- Skip navigation on auth/legal pages: `content_for :skip_navigation, true`
+- Body class for consistent styling: `content_for :body_class, "auth-page-body"`
+- Always include "Back to home" on standalone pages
+
+---
+
+## Things to Avoid
+
+❌ **Don't** allow signups without @kasseh.com validation
+❌ **Don't** use serif fonts for UI elements (only content uses serif)
+❌ **Don't** add GitHub OAuth (removed intentionally)
+❌ **Don't** use old Tailwind config patterns (use `@theme` directive)
+❌ **Don't** hardcode colors (use Tailwind utility classes)
+❌ **Don't** create public signup flows (registration is restricted)
+❌ **Don't** skip the family support message on signup page
+❌ **Don't** use RailsRocket or template branding anywhere
+
+---
+
+## Testing
+
+**Key test files**:
+- `test/models/user_test.rb` - User model, OAuth, admin logic
+- `test/models/article_test.rb` - Article validation, slug generation
+- `test/controllers/sessions_controller_test.rb` - Auth flows
+- `test/system/authentication_test.rb` - End-to-end login/signup
+
+**Run tests**:
+```bash
+bin/rails test                    # All tests
+bin/rails test:system             # System tests only
+COVERAGE=true bin/rails test      # With coverage report
+```
+
+---
+
+## Deployment
+
+- Configured for Kamal 2 deployment
+- SQLite in production (via Solid Stack)
+- Solid Queue for background jobs
+- Environment variables in `.env` (development) or Rails credentials (production)
+
+---
+
+## Support & Contact
+
+- Email: support@kasseh.com (for family member account requests)
+- Privacy: privacy@kasseh.com
+- General: quentin@kasseh.com
+
+---
+
+## Quick Reference
+
+**Admin User**: First user with PRIMARY_ADMIN_EMAIL gets admin flag automatically
+
+**Color Classes**:
+- `charcoal-900/800/200` - Backgrounds and text
+- `gold-600/500/400` - Accents and links
+
+**Glass Effect**: `bg-white/10 backdrop-blur-md border border-charcoal-700/50`
+
+**Gradient BG**: `bg-gradient-to-br from-charcoal-900 via-charcoal-800 to-charcoal-900`
+
+**Typography Scale**:
+- Logo: `text-xl font-sans font-bold tracking-wide`
+- H1: `text-3xl md:text-4xl font-sans font-bold`
+- H2: `text-2xl font-sans font-bold`
+- H3: `text-xl font-sans font-semibold`
+- Body: `text-charcoal-200 leading-relaxed`
+
+---
 
 ## AI Coding Assistant Guidelines
 
-When modifying this codebase:
-1. **Preserve the setup wizard** - It's a core feature, don't break file update patterns
-2. **Use environment variables** - Never hardcode app-specific values
+When working on this codebase:
+
+1. **Preserve domain restrictions** - @kasseh.com email validation is critical
+2. **Maintain consistent styling** - Follow the dark theme patterns
 3. **Test your changes** - Run `bin/rails test` before committing
-4. **Follow Rails conventions** - This is a Rails 8 app, use modern patterns
-5. **Keep it generic** - This is a template, not a specific application
-6. **Update documentation** - README and this file when adding features
-7. **Consider the user** - They'll clone this repo and customize it
-8. **Don't remove OAuth** - It's a key feature, even if not all providers used
-9. **Respect the .gitignore** - Don't commit secrets, databases, or flag files
-10. **Maintain test coverage** - Add tests for new features
+4. **Follow Rails 8 conventions** - Use modern Rails patterns
+5. **Keep branding consistent** - "KASSEH" in sans-serif, gold accents
+6. **Update documentation** - Keep README current with changes
+7. **Respect privacy** - This is a personal site, not a template
+8. **Don't commit secrets** - Use Rails credentials for sensitive data
+9. **Maintain test coverage** - Add tests for new features
+10. **Consider mobile** - Ensure responsive design for all new pages
