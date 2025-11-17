@@ -39,9 +39,11 @@
         <!-- Logo with premium ambient glow and magnetic effect -->
         <div class="mb-12 flex justify-center relative" id="logo-container">
           <div class="logo-glow absolute inset-0 blur-3xl opacity-0 animate-logo-glow"></div>
-          <%= image_tag "kasseh-logo.png", alt: "Kasseh", 
-              class: "w-32 h-32 md:w-40 md:h-40 relative z-10 opacity-90 transition-all duration-700 animate-float-subtle logo-magnetic", 
-              id: "kasseh-logo" %>
+          <%= image_tag "kasseh-logo.png", 
+              id: "kasseh-logo",
+              class: "w-32 h-32 md:w-40 md:h-40 relative z-10 opacity-90 transition-all duration-700 animate-float-subtle logo-magnetic",
+              alt: "Kasseh",
+              style: "filter: drop-shadow(0 0 30px rgba(212, 169, 98, 0.15));" %>
         </div>
 
         <!-- Name with refined typography and gradient -->
@@ -436,12 +438,42 @@
   .logo-magnetic {
     cursor: pointer;
     will-change: transform;
+    transform-style: preserve-3d;
+    perspective: 1000px;
   }
 
   .logo-magnetic:hover {
     opacity: 1 !important;
-    transform: scale(1.08) rotate(5deg);
-    filter: drop-shadow(0 0 30px rgba(212, 169, 98, 0.6));
+    filter: drop-shadow(0 0 40px rgba(212, 169, 98, 0.6)) drop-shadow(0 0 80px rgba(212, 169, 98, 0.3));
+  }
+
+  /* Logo image animations */
+  #kasseh-logo {
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: logo-reveal 1.5s ease-out 0.5s both;
+  }
+
+  #kasseh-logo:hover {
+    filter: drop-shadow(0 0 40px rgba(212, 169, 98, 0.7)) 
+            drop-shadow(0 0 20px rgba(212, 169, 98, 0.5)) 
+            brightness(1.15) !important;
+  }
+
+  /* Reveal animation for logo */
+  @keyframes logo-reveal {
+    from {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+    to {
+      opacity: 0.9;
+      transform: scale(1);
+    }
+  }
+
+  /* 3D rotation effect on mouse move */
+  .logo-3d-active {
+    transition: transform 0.1s ease-out !important;
   }
 
   /* Name gradient effect */
@@ -649,7 +681,7 @@
   }
 
   /* ===================================
-     MAGNETIC LOGO EFFECT
+     MAGNETIC LOGO EFFECT WITH 3D ROTATION
      =================================== */
   
   function initMagneticLogo() {
@@ -658,19 +690,42 @@
     
     if (!logo || !logoContainer) return;
     
+    let isHovering = false;
+    
+    logoContainer.addEventListener('mouseenter', () => {
+      isHovering = true;
+      logo.classList.add('logo-3d-active');
+    });
+    
     logoContainer.addEventListener('mousemove', (e) => {
       const rect = logoContainer.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
       
-      const deltaX = (e.clientX - centerX) / 8;
-      const deltaY = (e.clientY - centerY) / 8;
+      // Calculate mouse position relative to center (-1 to 1)
+      const relativeX = (e.clientX - centerX) / (rect.width / 2);
+      const relativeY = (e.clientY - centerY) / (rect.height / 2);
       
-      logo.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.05)`;
+      // Magnetic pull effect
+      const deltaX = relativeX * 12;
+      const deltaY = relativeY * 12;
+      
+      // 3D rotation effect (opposite to mouse movement for depth)
+      const rotateY = relativeX * 15; // Rotate around Y axis
+      const rotateX = -relativeY * 15; // Rotate around X axis (inverted)
+      
+      logo.style.transform = `
+        translate(${deltaX}px, ${deltaY}px) 
+        rotateX(${rotateX}deg) 
+        rotateY(${rotateY}deg) 
+        scale(1.08)
+      `;
     });
     
     logoContainer.addEventListener('mouseleave', () => {
-      logo.style.transform = 'translate(0, 0) scale(1)';
+      isHovering = false;
+      logo.classList.remove('logo-3d-active');
+      logo.style.transform = 'translate(0, 0) rotateX(0deg) rotateY(0deg) scale(1)';
     });
   }
 
