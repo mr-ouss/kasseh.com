@@ -14,13 +14,6 @@ class OmniAuth::Strategies::Apple
 end
 
 Rails.application.config.middleware.use OmniAuth::Builder do
-  # Sign in with GitHub
-  # Get credentials from: https://github.com/settings/developers
-  provider :github,
-    ENV.fetch("GITHUB_CLIENT_ID", nil),
-    ENV.fetch("GITHUB_CLIENT_SECRET", nil),
-    scope: "user:email"
-
   # Sign in with Google
   # Get credentials from: https://console.cloud.google.com/apis/credentials
   provider :google_oauth2,
