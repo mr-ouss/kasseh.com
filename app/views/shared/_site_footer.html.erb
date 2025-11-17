@@ -1,12 +1,11 @@
 <footer class="site-footer">
   <div class="site-footer__inner">
     <p class="site-footer__legal">
-      © <%= Time.current.year %> <%= ENV.fetch("APP_NAME", "RailsRocket") %>.
+      © <%= Time.current.year %> Kasseh.
     </p>
     <nav class="site-footer__links" aria-label="Footer">
-      <%= link_to "Support", support_path %>
-      <%= link_to "Privacy Policy", privacy_path %>
-      <%= link_to "Terms of Service", terms_path %>
+      <%= link_to "Privacy", privacy_path %>
+      <%= link_to "Terms", terms_path %>
     </nav>
   </div>
 </footer>
