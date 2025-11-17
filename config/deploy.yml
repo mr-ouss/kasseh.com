@@ -37,9 +37,7 @@ env:
     - SMTP_PASSWORD
     - SMTP_SERVER
     - SMTP_FROM_EMAIL
-    # OAuth credentials (if enabled)
-    - GITHUB_CLIENT_ID
-    - GITHUB_CLIENT_SECRET
+    # OAuth credentials
     - GOOGLE_CLIENT_ID
     - GOOGLE_CLIENT_SECRET
     - APPLE_CLIENT_ID
