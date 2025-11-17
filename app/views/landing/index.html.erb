@@ -36,25 +36,33 @@
 
       <!-- Header -->
       <header id="header" class="opacity-0 animate-header-rise">
-        <!-- Logo with ambient glow -->
-        <div class="mb-12 flex justify-center relative">
+        <!-- Logo with premium ambient glow and magnetic effect -->
+        <div class="mb-12 flex justify-center relative" id="logo-container">
           <div class="logo-glow absolute inset-0 blur-3xl opacity-0 animate-logo-glow"></div>
           <%= image_tag "kasseh-logo.png", alt: "Kasseh", 
-              class: "w-32 h-32 md:w-40 md:h-40 relative z-10 opacity-90 hover:opacity-100 transition-all duration-500 hover:scale-105 animate-float-subtle", 
+              class: "w-32 h-32 md:w-40 md:h-40 relative z-10 opacity-90 transition-all duration-700 animate-float-subtle logo-magnetic", 
               id: "kasseh-logo" %>
         </div>
 
-        <!-- Name with refined typography -->
-        <h1 class="font-serif text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-none">
-          <span class="inline-block animate-name-reveal" style="animation-delay: 0.1s">Q</span><span class="inline-block animate-name-reveal" style="animation-delay: 0.15s">u</span><span class="inline-block animate-name-reveal" style="animation-delay: 0.2s">e</span><span class="inline-block animate-name-reveal" style="animation-delay: 0.25s">n</span><span class="inline-block animate-name-reveal" style="animation-delay: 0.3s">t</span><span class="inline-block animate-name-reveal" style="animation-delay: 0.35s">i</span><span class="inline-block animate-name-reveal" style="animation-delay: 0.4s">n</span>
-          <span class="inline-block animate-name-reveal mx-3" style="animation-delay: 0.45s">O.</span>
-          <span class="inline-block animate-name-reveal" style="animation-delay: 0.5s">K</span><span class="inline-block animate-name-reveal" style="animation-delay: 0.55s">a</span><span class="inline-block animate-name-reveal" style="animation-delay: 0.6s">s</span><span class="inline-block animate-name-reveal" style="animation-delay: 0.65s">s</span><span class="inline-block animate-name-reveal" style="animation-delay: 0.7s">e</span><span class="inline-block animate-name-reveal" style="animation-delay: 0.75s">h</span>
+        <!-- Name with refined typography and gradient -->
+        <h1 class="font-serif text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-none name-gradient">
+          <span class="inline-block animate-name-reveal" style="animation-delay: 2.1s">Q</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.15s">u</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.2s">e</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.25s">n</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.3s">t</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.35s">i</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.4s">n</span>
+          <span class="inline-block animate-name-reveal mx-3" style="animation-delay: 2.45s">O.</span>
+          <span class="inline-block animate-name-reveal" style="animation-delay: 2.5s">K</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.55s">a</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.6s">s</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.65s">s</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.7s">e</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.75s">h</span>
         </h1>
 
-        <!-- Tagline with elegant spacing -->
-        <p class="text-lg md:text-xl text-charcoal-300 font-light mb-16 tracking-wide max-w-2xl mx-auto">
-          Technology Entrepreneur <span class="text-gold-600/40 mx-3">•</span> Founder <span class="text-gold-600/40 mx-3">•</span> Computer Scientist
-        </p>
+        <!-- Tagline with elegant spacing and reveal animation -->
+        <div class="overflow-hidden">
+          <p class="text-lg md:text-xl text-charcoal-300 font-light mb-16 tracking-wide max-w-2xl mx-auto opacity-0 animate-tagline-reveal">
+            <span class="tagline-word" style="animation-delay: 1.2s">Technology</span>
+            <span class="tagline-word" style="animation-delay: 1.3s">Entrepreneur</span>
+            <span class="text-gold-600/40 mx-3">•</span>
+            <span class="tagline-word" style="animation-delay: 1.4s">Founder</span>
+            <span class="text-gold-600/40 mx-3">•</span>
+            <span class="tagline-word" style="animation-delay: 1.5s">Computer</span>
+            <span class="tagline-word" style="animation-delay: 1.6s">Scientist</span>
+          </p>
+        </div>
 
         <!-- Social Navigation with elegant hover effects -->
         <nav class="mb-12">
@@ -186,12 +194,12 @@
   }
 
   @keyframes name-reveal {
-    from {
+    0% {
       opacity: 0;
-      transform: translateY(20px) rotateX(-90deg);
+      transform: translateY(30px) rotateX(-90deg);
       filter: blur(10px);
     }
-    to {
+    100% {
       opacity: 1;
       transform: translateY(0) rotateX(0);
       filter: blur(0);
@@ -208,14 +216,48 @@
     to { opacity: 0.3; }
   }
 
+  @keyframes logo-ring {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 0.6;
+      transform: scale(1.5);
+    }
+  }
+
+  @keyframes tagline-reveal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(212, 169, 98, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(212, 169, 98, 0.6);
+    }
+  }
+
   @keyframes nav-item {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(10px) scale(0.9);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
   }
 
@@ -303,8 +345,16 @@
     animation: logo-glow 2s 2.5s forwards;
   }
 
+  .animate-logo-ring {
+    animation: logo-ring 3s 2.5s ease-out infinite;
+  }
+
+  .animate-tagline-reveal {
+    animation: tagline-reveal 1.2s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
   .animate-nav-item {
-    animation: nav-item 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: nav-item 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   .animate-nav-bar {
@@ -363,9 +413,9 @@
     animation: orb-drift-3 35s ease-in-out infinite;
   }
 
-  /* Logo glow effect */
+  /* Logo effects */
   .logo-glow {
-    background: radial-gradient(circle, rgba(212, 169, 98, 0.4) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(212, 169, 98, 0.5) 0%, transparent 70%);
     width: 200px;
     height: 200px;
     top: 50%;
@@ -373,9 +423,49 @@
     transform: translate(-50%, -50%);
   }
 
-  /* Social link effects */
+  .logo-ring {
+    width: 160px;
+    height: 160px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(212, 169, 98, 0.3);
+    border-radius: 50%;
+  }
+
+  .logo-magnetic {
+    cursor: pointer;
+    will-change: transform;
+  }
+
+  .logo-magnetic:hover {
+    opacity: 1 !important;
+    transform: scale(1.08) rotate(5deg);
+    filter: drop-shadow(0 0 30px rgba(212, 169, 98, 0.6));
+  }
+
+  /* Name gradient effect */
+  .name-gradient {
+    background: linear-gradient(120deg, #ffffff 0%, #d4a962 40%, #ffffff 60%, #d4a962 100%);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 6s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  /* Tagline word animations */
+  .tagline-word {
+    display: inline-block;
+    opacity: 0;
+    animation: nav-item 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Social link effects with magnetic pull */
   .social-link {
     color: rgba(217, 217, 222, 0.7);
+    will-change: transform;
   }
 
   .social-link:hover {
@@ -385,27 +475,28 @@
   .social-link svg,
   .social-link i {
     filter: drop-shadow(0 0 0 transparent);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .social-link:hover svg,
   .social-link:hover i {
-    filter: drop-shadow(0 0 8px rgba(212, 169, 98, 0.5));
-    transform: translateY(-2px) scale(1.1);
+    filter: drop-shadow(0 0 12px rgba(212, 169, 98, 0.7));
+    transform: translateY(-3px) scale(1.15) rotate(-5deg);
   }
 
   .social-glow {
     position: absolute;
-    inset: -10px;
-    background: radial-gradient(circle, rgba(212, 169, 98, 0.2) 0%, transparent 70%);
+    inset: -15px;
+    background: radial-gradient(circle, rgba(212, 169, 98, 0.3) 0%, transparent 70%);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     border-radius: 50%;
-    filter: blur(15px);
+    filter: blur(20px);
   }
 
   .social-link:hover .social-glow {
     opacity: 1;
+    transform: scale(1.2);
   }
 
   /* Spotlight effect */
@@ -558,6 +649,57 @@
   }
 
   /* ===================================
+     MAGNETIC LOGO EFFECT
+     =================================== */
+  
+  function initMagneticLogo() {
+    const logo = document.getElementById('kasseh-logo');
+    const logoContainer = document.getElementById('logo-container');
+    
+    if (!logo || !logoContainer) return;
+    
+    logoContainer.addEventListener('mousemove', (e) => {
+      const rect = logoContainer.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      const deltaX = (e.clientX - centerX) / 8;
+      const deltaY = (e.clientY - centerY) / 8;
+      
+      logo.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.05)`;
+    });
+    
+    logoContainer.addEventListener('mouseleave', () => {
+      logo.style.transform = 'translate(0, 0) scale(1)';
+    });
+  }
+
+  /* ===================================
+     MAGNETIC SOCIAL ICONS
+     =================================== */
+  
+  function initMagneticIcons() {
+    const socialLinks = document.querySelectorAll('.social-link');
+    
+    socialLinks.forEach(link => {
+      link.addEventListener('mousemove', (e) => {
+        const rect = link.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const deltaX = (e.clientX - centerX) / 4;
+        const deltaY = (e.clientY - centerY) / 4;
+        
+        link.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+      });
+      
+      link.addEventListener('mouseleave', () => {
+        link.style.transform = 'translate(0, 0)';
+      });
+    });
+  }
+
+  /* ===================================
      INITIALIZATION
      =================================== */
   
@@ -571,17 +713,9 @@
     // Initialize spotlight effect
     initSpotlight();
     
-    // Enhanced logo interaction
-    const logo = document.getElementById('kasseh-logo');
-    if (logo) {
-      logo.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.1) rotate(5deg)';
-      });
-      
-      logo.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1) rotate(0deg)';
-      });
-    }
+    // Initialize magnetic effects
+    initMagneticLogo();
+    initMagneticIcons();
   });
 
   // Prevent page loading class
