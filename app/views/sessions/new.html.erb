@@ -40,6 +40,7 @@
       <!-- OAuth Sign-in Options -->
       <div class="space-y-3 mb-6">
         <form action="/auth/google_oauth2" method="post" data-turbo="false" class="w-full">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
           <button type="submit" class="group relative w-full overflow-hidden bg-charcoal-900/50 hover:bg-charcoal-900/70 border border-gold-600/30 text-white font-medium py-3.5 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5">
             <div class="flex items-center justify-center gap-3">
               <svg class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24">
@@ -56,6 +57,7 @@
 
         <% if ENV["APPLE_CLIENT_ID"].present? %>
           <form action="/auth/apple" method="post" data-turbo="false" class="w-full">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
             <button type="submit" class="group relative w-full overflow-hidden bg-charcoal-950 hover:bg-black border border-charcoal-700/50 text-white font-medium py-3.5 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5">
               <div class="flex items-center justify-center gap-3">
                 <svg class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
