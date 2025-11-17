@@ -34,9 +34,11 @@ export default class extends Controller {
   initializePathAnimation(svg) {
     const paths = svg.querySelectorAll('path')
     
-    // Add hover effect to the container
-    this.containerTarget.addEventListener('mouseenter', () => this.addHoverGlow())
-    this.containerTarget.addEventListener('mouseleave', () => this.removeHoverGlow())
+    this.animationComplete = false
+    
+    // Add hover effect to container for logo and background glow
+    this.containerTarget.addEventListener('mouseenter', () => this.addHoverEffect())
+    this.containerTarget.addEventListener('mouseleave', () => this.removeHoverEffect())
     
     // Get total path lengths for animation
     const pathData = Array.from(paths).map(path => {
@@ -49,7 +51,7 @@ export default class extends Controller {
       path.style.strokeWidth = '2'
       path.style.fill = 'none'
       path.style.filter = 'drop-shadow(0 0 8px rgba(212, 169, 98, 0.6))'
-      path.style.transition = 'filter 0.3s ease'
+      path.style.transition = 'fill 0.15s ease, filter 0.15s ease'
       
       return { path, length }
     })
@@ -128,36 +130,74 @@ export default class extends Controller {
       if (progress < 1) {
         requestAnimationFrame(animate)
       } else {
-        // Final state - clean white logo with no glow
+        // Final state - clean white logo with no glow, ready for spotlight
         paths.forEach(path => {
           path.style.fill = 'white'
           path.style.stroke = 'none'
           path.style.filter = 'none'
+          path.style.pointerEvents = 'all' // Ensure paths receive mouse events
         })
+        
+        // Mark animation as complete
+        this.animationComplete = true
       }
     }
     
     requestAnimationFrame(animate)
   }
   
-  addHoverGlow() {
-    const svg = this.containerTarget.querySelector('svg')
-    if (!svg) return
+  addHoverEffect() {
+    if (!this.animationComplete) return
     
-    const paths = svg.querySelectorAll('path')
-    paths.forEach(path => {
-      path.style.filter = 'drop-shadow(0 0 12px rgba(212, 169, 98, 0.4))'
-    })
+    const svg = this.containerTarget.querySelector('svg')
+    if (svg) {
+      // Add subtle gold tint to paths
+      const paths = svg.querySelectorAll('path')
+      paths.forEach(path => {
+        path.style.fill = '#f5f0e8' // Slightly warm/golden tinted white
+        path.style.filter = 'drop-shadow(0 0 2px rgba(212, 169, 98, 0.3))'
+      })
+    }
+    
+    // Add pressed/stamped effect to container
+    this.containerTarget.style.transform = 'scale(0.95) translateY(2px)'
+    this.containerTarget.style.transition = 'transform 0.15s ease-out'
+    
+    // Find and enhance the background glow element
+    const glowElement = this.containerTarget.parentElement.querySelector('.logo-glow')
+    if (glowElement) {
+      glowElement.style.background = 'radial-gradient(circle, rgba(212, 169, 98, 0.9) 0%, rgba(212, 169, 98, 0.7) 20%, rgba(212, 169, 98, 0.5) 40%, rgba(212, 169, 98, 0.3) 60%, transparent 80%)'
+      glowElement.style.opacity = '1'
+      glowElement.style.transform = 'scale(1.5)'
+      glowElement.style.filter = 'blur(60px)'
+      glowElement.style.transition = 'all 0.3s ease'
+    }
   }
   
-  removeHoverGlow() {
-    const svg = this.containerTarget.querySelector('svg')
-    if (!svg) return
+  removeHoverEffect() {
+    if (!this.animationComplete) return
     
-    const paths = svg.querySelectorAll('path')
-    paths.forEach(path => {
-      path.style.filter = 'none'
-    })
+    const svg = this.containerTarget.querySelector('svg')
+    if (svg) {
+      // Reset paths to pure white
+      const paths = svg.querySelectorAll('path')
+      paths.forEach(path => {
+        path.style.fill = 'white'
+        path.style.filter = 'none'
+      })
+    }
+    
+    // Remove pressed effect
+    this.containerTarget.style.transform = 'scale(1) translateY(0)'
+    
+    // Reset background glow
+    const glowElement = this.containerTarget.parentElement.querySelector('.logo-glow')
+    if (glowElement) {
+      glowElement.style.background = ''
+      glowElement.style.opacity = '0'
+      glowElement.style.transform = 'scale(1)'
+      glowElement.style.filter = ''
+    }
   }
   
   easeInOutCubic(t) {
