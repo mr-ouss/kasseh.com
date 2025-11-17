@@ -66,7 +66,7 @@ jobs:
             chmod 600 ~/.ssh/id_rsa
             
             # SSH config to skip host key checking for the deploy server
-            echo "Host 134.199.203.230" >> ~/.ssh/config
+            echo "Host 137.184.89.51" >> ~/.ssh/config
             echo "  StrictHostKeyChecking no" >> ~/.ssh/config
             echo "  UserKnownHostsFile /dev/null" >> ~/.ssh/config
             
