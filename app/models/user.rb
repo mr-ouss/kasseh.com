@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates :email_address, format: {
     with: /\A[^@]+@kasseh\.com\z/i,
     message: "must be a @kasseh.com email address"
-  }, unless: -> { email_address == PRIMARY_ADMIN_EMAIL }
+  }, unless: -> { email_address == PRIMARY_ADMIN_EMAIL || oauth_user? }
   validates :password, presence: true, if: -> { password_digest.blank? && provider.blank? }
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
