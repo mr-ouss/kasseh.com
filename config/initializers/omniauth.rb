@@ -2,7 +2,8 @@
 
 # Configure OmniAuth for Rails 8
 # Using omniauth-rails_csrf_protection for security
-OmniAuth.config.allowed_request_methods = [ :post ]
+OmniAuth.config.allowed_request_methods = [ :post, :get ]
+OmniAuth.config.silence_get_warning = true
 
 # Custom Apple strategy to skip nonce validation
 class OmniAuth::Strategies::Apple
