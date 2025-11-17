@@ -8,10 +8,10 @@ OmniAuth.config.silence_get_warning = true
 # This is safe because OmniAuth has its own security measures
 OmniAuth.config.before_request_phase do |env|
   # Bypass Rails CSRF protection for OmniAuth
-  env['rack.session']['omniauth.origin'] = env['HTTP_REFERER'] if env['HTTP_REFERER']
-  
+  env["rack.session"]["omniauth.origin"] = env["HTTP_REFERER"] if env["HTTP_REFERER"]
+
   # Mark this request as verified to skip ApplicationController's CSRF check
-  env['action_dispatch.request.unsigned_session_cookie'] = true
+  env["action_dispatch.request.unsigned_session_cookie"] = true
 end
 
 # Custom Apple strategy to skip nonce validation
@@ -21,11 +21,11 @@ class OmniAuth::Strategies::Apple
     # Security is maintained through JWT signature validation and authorized_client_ids
     true
   end
-  
+
   # Skip CSRF verification for Apple auth
   def request_phase
     # Store origin but don't verify CSRF
-    session['omniauth.origin'] = request.params['origin'] if request.params['origin']
+    session["omniauth.origin"] = request.params["origin"] if request.params["origin"]
     super
   end
 end
