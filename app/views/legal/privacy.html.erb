@@ -2,7 +2,19 @@
 <% content_for :skip_navigation, true %>
 <% content_for :body_class, "auth-page-body" %>
 
-<div class="min-h-screen bg-gradient-to-br from-charcoal-900 via-charcoal-800 to-charcoal-900 px-4 py-12">
+<div class="min-h-screen relative overflow-hidden">
+  <div class="fixed inset-0">
+    <div class="absolute inset-0 bg-gradient-to-br from-charcoal-950 via-charcoal-900 to-charcoal-950"></div>
+    <div class="absolute inset-0 opacity-30">
+      <div class="gradient-orb gradient-orb-1"></div>
+      <div class="gradient-orb gradient-orb-2"></div>
+      <div class="gradient-orb gradient-orb-3"></div>
+    </div>
+    <canvas id="particles" class="absolute inset-0"></canvas>
+  </div>
+  <div id="spotlight" class="fixed inset-0 pointer-events-none opacity-0 transition-opacity duration-1000"></div>
+  <div class="fixed inset-0 bg-gradient-radial-custom opacity-60 pointer-events-none"></div>
+  <div class="relative z-10 min-h-screen px-4 py-12">
   <div class="max-w-4xl mx-auto">
     <!-- Logo -->
     <div class="text-center mb-12">
@@ -166,8 +178,8 @@
 
     <!-- Back to home link -->
     <div class="text-center mb-8">
-      <%= link_to root_path, class: "inline-flex items-center text-charcoal-400 hover:text-white transition-colors duration-300" do %>
-        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <%= link_to root_path, class: "inline-flex items-center text-charcoal-400 hover:text-gold-500 transition-all duration-300 group" do %>
+        <svg class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
         </svg>
         Back to home
@@ -188,4 +200,6 @@
       </div>
     </footer>
   </div>
+  </div>
 </div>
+<%= render 'shared/auth_scripts' %>
