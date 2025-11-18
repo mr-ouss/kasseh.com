@@ -49,11 +49,11 @@
 			import * as THREE from 'three';
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 			import { Water } from 'three/addons/objects/Water.js';
-			import { Sky } from 'three/addons/objects/Sky.js';
 
 			let container;
 			let camera, scene, renderer;
-			let controls, water, sun;
+			let controls, water, sunLight;
+			let skyboxTexture, underwaterColor;
 
 			init();
 
@@ -74,13 +74,17 @@
 				//
 
 				scene = new THREE.Scene();
+				scene.fog = new THREE.FogExp2( 0xccaa88, 0.0005 );
 
 				camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 1, 20000 );
 				camera.position.set( 30, 30, 100 );
 
 				//
 
-				sun = new THREE.Vector3();
+				// Sun Light
+				sunLight = new THREE.DirectionalLight( 0xffff55, 1 );
+				sunLight.position.set( -600, 300, 600 );
+				scene.add( sunLight );
 
 				// Water
 
@@ -91,12 +95,13 @@
 					{
 						textureWidth: 512,
 						textureHeight: 512,
-						waterNormals: new THREE.TextureLoader().load( 'https://threejs.org/examples/textures/waternormals.jpg', function ( texture ) {
+						waterNormals: new THREE.TextureLoader().load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/waternormals.jpg', function ( texture ) {
 
 							texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+							texture.repeat.set( 10, 10 );
 
 						} ),
-						sunDirection: new THREE.Vector3(),
+						sunDirection: sunLight.position.clone().normalize(),
 						sunColor: 0xffffff,
 						waterColor: 0x001e0f,
 						distortionScale: 3.7,
@@ -105,58 +110,27 @@
 				);
 
 				water.rotation.x = - Math.PI / 2;
+				water.material.side = THREE.DoubleSide;
 
 				scene.add( water );
 
 				// Skybox
-
-				const sky = new Sky();
-				sky.scale.setScalar( 10000 );
-				scene.add( sky );
-
-				const skyUniforms = sky.material.uniforms;
-
-				skyUniforms[ 'turbidity' ].value = 10;
-				skyUniforms[ 'rayleigh' ].value = 2;
-				skyUniforms[ 'mieCoefficient' ].value = 0.005;
-				skyUniforms[ 'mieDirectionalG' ].value = 0.8;
-
-				const parameters = {
-					elevation: 2,
-					azimuth: 180
-				};
-
-				const pmremGenerator = new THREE.PMREMGenerator( renderer );
-				const sceneEnv = new THREE.Scene();
-
-				let renderTarget;
-
-				function updateSun() {
-
-					const phi = THREE.MathUtils.degToRad( 90 - parameters.elevation );
-					const theta = THREE.MathUtils.degToRad( parameters.azimuth );
-
-					sun.setFromSphericalCoords( 1, phi, theta );
-
-					sky.material.uniforms[ 'sunPosition' ].value.copy( sun );
-					water.material.uniforms[ 'sunDirection' ].value.copy( sun ).normalize();
-
-					if ( renderTarget !== undefined ) renderTarget.dispose();
-
-					sceneEnv.add( sky );
-					renderTarget = pmremGenerator.fromScene( sceneEnv );
-					scene.add( sky );
-
-					scene.environment = renderTarget.texture;
-
-				}
-
-				updateSun();
+				const cubeTextureLoader = new THREE.CubeTextureLoader();
+				skyboxTexture = cubeTextureLoader.load([
+					'https://jbouny.github.io/ocean/demo/assets/img/px.jpg',
+					'https://jbouny.github.io/ocean/demo/assets/img/nx.jpg',
+					'https://jbouny.github.io/ocean/demo/assets/img/py.jpg',
+					'https://jbouny.github.io/ocean/demo/assets/img/ny.jpg',
+					'https://jbouny.github.io/ocean/demo/assets/img/pz.jpg',
+					'https://jbouny.github.io/ocean/demo/assets/img/nz.jpg',
+				]);
+				scene.background = skyboxTexture;
+				
+				underwaterColor = new THREE.Color( 0x001e0f );
 
 				//
 
 				controls = new OrbitControls( camera, renderer.domElement );
-				controls.maxPolarAngle = Math.PI * 0.495;
 				controls.target.set( 0, 10, 0 );
 				controls.minDistance = 40.0;
 				controls.maxDistance = 200.0;
@@ -187,28 +161,47 @@
 				const scrollPercent = newScroll / maxScroll;
 
 				// Update camera position - dive down into the ocean
-				camera.position.y = 30 - (scrollPercent * 80); // Goes from 30 to -50
-				camera.lookAt( 0, camera.position.y - 10, 0 );
+				camera.position.y = 30 - (scrollPercent * 100); // Goes from 30 to -70
+				camera.lookAt( 0, camera.position.y, 0 );
+				
+				if ( controls ) {
+					controls.target.set( 0, camera.position.y, 0 );
+				}
 
-				// Update overlay color - transition from transparent to dark blue to black
+				// Update fog and overlay
 				const overlay = document.getElementById('overlay');
 				
-				if (scrollPercent < 0.3) {
-					// Early stage: transparent to dark blue
-					const alpha = scrollPercent / 0.3;
-					overlay.style.backgroundColor = `rgba(0, 30, 60, ${alpha * 0.7})`;
-				} else if (scrollPercent < 0.7) {
-					// Middle stage: dark blue getting darker
-					const midPercent = (scrollPercent - 0.3) / 0.4;
-					const blue = Math.floor(60 - (midPercent * 40));
-					const green = Math.floor(30 - (midPercent * 20));
-					overlay.style.backgroundColor = `rgba(0, ${green}, ${blue}, ${0.7 + (midPercent * 0.2)})`;
+				if ( camera.position.y < 0 ) {
+					// Underwater
+					const depth = Math.abs(camera.position.y);
+					// Increase density as we go deeper
+					scene.fog.density = 0.005 + depth * 0.002;
+					
+					// Transition color from dark blue to black
+					// We want it to get black fairly quickly
+					const t = Math.min(1, depth / 40);
+					
+					// Start with a dark blue-ish color (0x001e30) fading to black
+					const r = 0;
+					const g = Math.floor(30 * (1 - t));
+					const b = Math.floor(48 * (1 - t)); // More blue
+					
+					scene.fog.color.setRGB( r/255, g/255, b/255 );
+					
+					// Darker overlay as we go deeper
+					overlay.style.backgroundColor = `rgba(0, ${Math.floor(10 * (1-t))}, ${Math.floor(20 * (1-t))}, ${0.5 + t * 0.5})`;
+					
+					scene.background = underwaterColor;
 				} else {
-					// Final stage: dark blue to black
-					const endPercent = (scrollPercent - 0.7) / 0.3;
-					const blue = Math.floor(20 - (endPercent * 20));
-					const green = Math.floor(10 - (endPercent * 10));
-					overlay.style.backgroundColor = `rgba(0, ${green}, ${blue}, ${0.9 + (endPercent * 0.1)})`;
+					// Above water
+					scene.background = skyboxTexture;
+					
+					scene.fog.density = 0.0005;
+					scene.fog.color.setHex( 0xccaa88 );
+					
+					// Lighter overlay near surface
+					const approachFactor = 1 - (camera.position.y / 30);
+					overlay.style.backgroundColor = `rgba(0, 30, 60, ${approachFactor * 0.3})`;
 				}
 
 			}
