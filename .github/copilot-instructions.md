@@ -282,7 +282,7 @@ COVERAGE=true bin/rails test      # With coverage report
 ## Support & Contact
 
 - Email: support@kasseh.com (for family member account requests)
-- Privacy: privacy@kasseh.com
+- Privacy: legal@kasseh.com
 - General: quentin@kasseh.com
 
 ---
