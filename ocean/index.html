@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Ocean Shader</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				margin: 0;
+				overflow-x: hidden;
+				overflow-y: scroll;
+				height: 500vh; /* Allow scrolling */
+			}
+			#container {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100vh;
+				z-index: 1;
+			}
+			#overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100vh;
+				pointer-events: none;
+				z-index: 2;
+				transition: background-color 0.1s ease;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="container"></div>
+		<div id="overlay"></div>
+
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+					"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+				}
+			}
+		</script>
+
+		<script type="module">
+			import * as THREE from 'three';
+			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+			import { Water } from 'three/addons/objects/Water.js';
+			import { Sky } from 'three/addons/objects/Sky.js';
+
+			let container;
+			let camera, scene, renderer;
+			let controls, water, sun;
+
+			init();
+
+			function init() {
+
+				container = document.getElementById( 'container' );
+
+				//
+
+				renderer = new THREE.WebGLRenderer();
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.setAnimationLoop( animate );
+				renderer.toneMapping = THREE.ACESFilmicToneMapping;
+				renderer.toneMappingExposure = 0.5;
+				container.appendChild( renderer.domElement );
+
+				//
+
+				scene = new THREE.Scene();
+
+				camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 1, 20000 );
+				camera.position.set( 30, 30, 100 );
+
+				//
+
+				sun = new THREE.Vector3();
+
+				// Water
+
+				const waterGeometry = new THREE.PlaneGeometry( 10000, 10000 );
+
+				water = new Water(
+					waterGeometry,
+					{
+						textureWidth: 512,
+						textureHeight: 512,
+						waterNormals: new THREE.TextureLoader().load( 'https://threejs.org/examples/textures/waternormals.jpg', function ( texture ) {
+
+							texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+
+						} ),
+						sunDirection: new THREE.Vector3(),
+						sunColor: 0xffffff,
+						waterColor: 0x001e0f,
+						distortionScale: 3.7,
+						fog: scene.fog !== undefined
+					}
+				);
+
+				water.rotation.x = - Math.PI / 2;
+
+				scene.add( water );
+
+				// Skybox
+
+				const sky = new Sky();
+				sky.scale.setScalar( 10000 );
+				scene.add( sky );
+
+				const skyUniforms = sky.material.uniforms;
+
+				skyUniforms[ 'turbidity' ].value = 10;
+				skyUniforms[ 'rayleigh' ].value = 2;
+				skyUniforms[ 'mieCoefficient' ].value = 0.005;
+				skyUniforms[ 'mieDirectionalG' ].value = 0.8;
+
+				const parameters = {
+					elevation: 2,
+					azimuth: 180
+				};
+
+				const pmremGenerator = new THREE.PMREMGenerator( renderer );
+				const sceneEnv = new THREE.Scene();
+
+				let renderTarget;
+
+				function updateSun() {
+
+					const phi = THREE.MathUtils.degToRad( 90 - parameters.elevation );
+					const theta = THREE.MathUtils.degToRad( parameters.azimuth );
+
+					sun.setFromSphericalCoords( 1, phi, theta );
+
+					sky.material.uniforms[ 'sunPosition' ].value.copy( sun );
+					water.material.uniforms[ 'sunDirection' ].value.copy( sun ).normalize();
+
+					if ( renderTarget !== undefined ) renderTarget.dispose();
+
+					sceneEnv.add( sky );
+					renderTarget = pmremGenerator.fromScene( sceneEnv );
+					scene.add( sky );
+
+					scene.environment = renderTarget.texture;
+
+				}
+
+				updateSun();
+
+				//
+
+				controls = new OrbitControls( camera, renderer.domElement );
+				controls.maxPolarAngle = Math.PI * 0.495;
+				controls.target.set( 0, 10, 0 );
+				controls.minDistance = 40.0;
+				controls.maxDistance = 200.0;
+				controls.enableZoom = false; // Disable mouse wheel zoom
+				controls.update();
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize );
+				window.addEventListener( 'wheel', onWheel, { passive: false } );
+
+			}
+
+			function onWheel( event ) {
+
+				event.preventDefault();
+
+				// Get current scroll position
+				const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+				const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+				
+				// Update scroll position
+				const scrollAmount = event.deltaY;
+				const newScroll = Math.max(0, Math.min(maxScroll, currentScroll + scrollAmount));
+				window.scrollTo(0, newScroll);
+
+				// Apply diving effect
+				const scrollPercent = newScroll / maxScroll;
+
+				// Update camera position - dive down into the ocean
+				camera.position.y = 30 - (scrollPercent * 80); // Goes from 30 to -50
+				camera.lookAt( 0, camera.position.y - 10, 0 );
+
+				// Update overlay color - transition from transparent to dark blue to black
+				const overlay = document.getElementById('overlay');
+				
+				if (scrollPercent < 0.3) {
+					// Early stage: transparent to dark blue
+					const alpha = scrollPercent / 0.3;
+					overlay.style.backgroundColor = `rgba(0, 30, 60, ${alpha * 0.7})`;
+				} else if (scrollPercent < 0.7) {
+					// Middle stage: dark blue getting darker
+					const midPercent = (scrollPercent - 0.3) / 0.4;
+					const blue = Math.floor(60 - (midPercent * 40));
+					const green = Math.floor(30 - (midPercent * 20));
+					overlay.style.backgroundColor = `rgba(0, ${green}, ${blue}, ${0.7 + (midPercent * 0.2)})`;
+				} else {
+					// Final stage: dark blue to black
+					const endPercent = (scrollPercent - 0.7) / 0.3;
+					const blue = Math.floor(20 - (endPercent * 20));
+					const green = Math.floor(10 - (endPercent * 10));
+					overlay.style.backgroundColor = `rgba(0, ${green}, ${blue}, ${0.9 + (endPercent * 0.1)})`;
+				}
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function animate() {
+
+				render();
+
+			}
+
+			function render() {
+
+				water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+	</body>
+</html>
