@@ -141,7 +141,54 @@
 
 				window.addEventListener( 'resize', onWindowResize );
 				window.addEventListener( 'wheel', onWheel, { passive: false } );
+				
+				// Drag to scroll
+				document.addEventListener('mousedown', onMouseDown);
+				document.addEventListener('mousemove', onMouseMove);
+				document.addEventListener('mouseup', onMouseUp);
 
+			}
+
+			let isDragging = false;
+			let startY = 0;
+			let startScrollTop = 0;
+
+			function onMouseDown(event) {
+				isDragging = true;
+				startY = event.clientY;
+				startScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+			}
+
+			function onMouseMove(event) {
+				if (!isDragging) return;
+				
+				const currentY = event.clientY;
+				const deltaY = currentY - startY;
+				const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+				const newScroll = Math.max(0, Math.min(maxScroll, startScrollTop - deltaY));
+				
+				window.scrollTo(0, newScroll);
+				updateTransition(newScroll, maxScroll);
+			}
+
+			function onMouseUp() {
+				isDragging = false;
+			}
+
+			function updateTransition(scrollPos, maxScroll) {
+				const scrollPercent = scrollPos / maxScroll;
+
+				// Update camera position - move closer to water but stay above
+				camera.position.y = 30 - (scrollPercent * 25); 
+				camera.lookAt( 0, camera.position.y, 0 );
+				
+				if ( controls ) {
+					controls.target.set( 0, camera.position.y, 0 );
+				}
+
+				// Update overlay - rising black curtain
+				const overlay = document.getElementById('overlay');
+				overlay.style.height = `${scrollPercent * 100}%`;
 			}
 
 			function onWheel( event ) {
@@ -157,20 +204,7 @@
 				const newScroll = Math.max(0, Math.min(maxScroll, currentScroll + scrollAmount));
 				window.scrollTo(0, newScroll);
 
-				// Apply diving effect
-				const scrollPercent = newScroll / maxScroll;
-
-				// Update camera position - move closer to water but stay above
-				camera.position.y = 30 - (scrollPercent * 25); 
-				camera.lookAt( 0, camera.position.y, 0 );
-				
-				if ( controls ) {
-					controls.target.set( 0, camera.position.y, 0 );
-				}
-
-				// Update overlay - rising black curtain
-				const overlay = document.getElementById('overlay');
-				overlay.style.height = `${scrollPercent * 100}%`;
+				updateTransition(newScroll, maxScroll);
 
 			}
 
