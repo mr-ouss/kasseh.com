@@ -21,13 +21,13 @@
 			}
 			#overlay {
 				position: fixed;
-				top: 0;
+				bottom: 0;
 				left: 0;
 				width: 100%;
-				height: 100vh;
+				height: 0;
 				pointer-events: none;
 				z-index: 2;
-				transition: background-color 0.1s ease;
+				background-color: #000;
 			}
 		</style>
 	</head>
@@ -160,49 +160,17 @@
 				// Apply diving effect
 				const scrollPercent = newScroll / maxScroll;
 
-				// Update camera position - dive down into the ocean
-				camera.position.y = 30 - (scrollPercent * 100); // Goes from 30 to -70
+				// Update camera position - move closer to water but stay above
+				camera.position.y = 30 - (scrollPercent * 25); 
 				camera.lookAt( 0, camera.position.y, 0 );
 				
 				if ( controls ) {
 					controls.target.set( 0, camera.position.y, 0 );
 				}
 
-				// Update fog and overlay
+				// Update overlay - rising black curtain
 				const overlay = document.getElementById('overlay');
-				
-				if ( camera.position.y < 0 ) {
-					// Underwater
-					const depth = Math.abs(camera.position.y);
-					// Increase density as we go deeper
-					scene.fog.density = 0.005 + depth * 0.002;
-					
-					// Transition color from dark blue to black
-					// We want it to get black fairly quickly
-					const t = Math.min(1, depth / 40);
-					
-					// Start with a dark blue-ish color (0x001e30) fading to black
-					const r = 0;
-					const g = Math.floor(30 * (1 - t));
-					const b = Math.floor(48 * (1 - t)); // More blue
-					
-					scene.fog.color.setRGB( r/255, g/255, b/255 );
-					
-					// Darker overlay as we go deeper
-					overlay.style.backgroundColor = `rgba(0, ${Math.floor(10 * (1-t))}, ${Math.floor(20 * (1-t))}, ${0.5 + t * 0.5})`;
-					
-					scene.background = underwaterColor;
-				} else {
-					// Above water
-					scene.background = skyboxTexture;
-					
-					scene.fog.density = 0.0005;
-					scene.fog.color.setHex( 0xccaa88 );
-					
-					// Lighter overlay near surface
-					const approachFactor = 1 - (camera.position.y / 30);
-					overlay.style.backgroundColor = `rgba(0, 30, 60, ${approachFactor * 0.3})`;
-				}
+				overlay.style.height = `${scrollPercent * 100}%`;
 
 			}
 
