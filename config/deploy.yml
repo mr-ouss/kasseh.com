@@ -9,10 +9,10 @@ servers:
   web:
     hosts:
       - 137.184.89.51
-  # job:
-  #   hosts:
-  #     - 192.168.0.1
-  #   cmd: bin/jobs
+  job:
+    hosts:
+      - 137.184.89.51
+    cmd: bin/jobs
 
 # Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
 # Remove this section when using multiple web servers and ensure you terminate SSL at your load balancer.
@@ -47,7 +47,6 @@ env:
   clear:
     APP_NAME: Kasseh
     PRODUCTION_DATABASE_URL: sqlite3:///rails/storage/production.sqlite3
-    SOLID_QUEUE_IN_PUMA: true
 
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
 # "bin/kamal logs -r job" will tail logs from the first server in the job section.
