@@ -6,11 +6,12 @@ class LandingControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should show legal links" do
+  test "should show landing page content" do
     get root_url
     assert_response :success
-    assert_select "a[href=?]", privacy_path
-    assert_select "a[href=?]", terms_path
+    assert_select "h1", text: /Quentin O. Kasseh/
+    assert_select "a[href=?]", "https://twitter.com/quentinkasseh"
+    assert_select "a[href=?]", "https://www.linkedin.com/in/quentink"
   end
 
   test "should redirect authenticated users to connections" do
