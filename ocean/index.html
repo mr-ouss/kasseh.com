@@ -109,13 +109,14 @@
 				text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 				font-weight: 300;
 			}
+
 		</style>
 	</head>
 	<body>
 
 		<div id="hero-wrapper">
 			<div id="logo-container">
-				<img src="../kasseh-logo-white.svg" id="hero-logo" alt="Kasseh Logo">
+				<img src="kasseh-logo-white.svg" id="hero-logo" alt="Kasseh Logo">
 			</div>
 		</div>
 		
@@ -146,7 +147,6 @@
 			let camera, scene, renderer;
 			let controls, water, sunLight;
 			let underwaterColor;
-			let cloudParticles = [];
 
 			// Smooth scroll variables
 			let targetScroll = 0;
@@ -198,8 +198,6 @@
 				const sun = new THREE.Vector3();
 				sun.copy( sunLight.position ).normalize();
 				sky.material.uniforms[ 'sunPosition' ].value.copy( sun );
-
-				initClouds();
 
 				// Water
 
@@ -257,59 +255,6 @@
 				targetScroll = window.pageYOffset || document.documentElement.scrollTop;
 				currentScroll = targetScroll;
 
-			}
-
-			function initClouds() {
-				// Create highly realistic cumulus clouds using metaballs/sphere clusters
-				const cloudGeo = new THREE.SphereGeometry(1, 32, 32); // Smooth, high-poly spheres
-				
-				for (let i = 0; i < 20; i++) {
-					const cloudGroup = new THREE.Group();
-					
-					// Create a realistic cumulus cloud with 20-40 overlapping spheres
-					const numPuffs = 20 + Math.floor(Math.random() * 20);
-					
-					for(let j = 0; j < numPuffs; j++) {
-						const cloudMaterial = new THREE.MeshStandardMaterial({
-							color: 0xffffff,
-							roughness: 1.0,
-							metalness: 0.0,
-							transparent: true,
-							opacity: 0.9,
-							depthWrite: false,
-							side: THREE.FrontSide
-						});
-						
-						const puff = new THREE.Mesh(cloudGeo, cloudMaterial);
-						
-						// Cluster spheres in a natural cumulus shape (wider at base, billowy on top)
-						const angle = Math.random() * Math.PI * 2;
-						const radius = Math.random() * 250;
-						const height = Math.random() * 150 - 50; // Some variation in height
-						
-						puff.position.set(
-							Math.cos(angle) * radius,
-							height,
-							Math.sin(angle) * radius
-						);
-						
-						// Vary the size of each puff for organic look
-						const scale = 80 + Math.random() * 120;
-						puff.scale.set(scale, scale * (0.8 + Math.random() * 0.4), scale);
-						
-						cloudGroup.add(puff);
-					}
-					
-					// Position the entire cloud formation
-					cloudGroup.position.set(
-						Math.random() * 8000 - 4000,
-						600 + Math.random() * 200,
-						Math.random() * 8000 - 4000
-					);
-					
-					scene.add(cloudGroup);
-					cloudParticles.push(cloudGroup);
-				}
 			}
 
 			function onLogoMouseMove(event) {
@@ -447,12 +392,6 @@
 			function render() {
 
 				water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
-
-				// Move clouds
-				cloudParticles.forEach(group => {
-					group.position.x -= 0.3; // Slower, more majestic movement
-					if (group.position.x < -3000) group.position.x = 3000;
-				});
 
 				renderer.render( scene, camera );
 
