@@ -4,12 +4,19 @@
 		<title>Ocean Shader</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
 		<style>
 			body {
 				margin: 0;
 				overflow-x: hidden;
 				overflow-y: scroll;
 				height: 500vh; /* Allow scrolling */
+				font-family: 'Inter', sans-serif;
 			}
 			#container {
 				position: fixed;
@@ -29,9 +36,88 @@
 				z-index: 2;
 				background-color: #000;
 			}
+
+			/* Hero Styles */
+			#hero-wrapper {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				pointer-events: none;
+				z-index: 3; /* Above overlay for logo */
+			}
+
+			#logo-container {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 150px;
+				height: 150px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				/* Transition for the movement to top-left */
+				/* We will handle top/left via JS or CSS var, but let's use JS for sync with scroll */
+			}
+
+			#hero-logo {
+				width: 100%;
+				height: auto;
+				filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+				/* Rotation will be applied here via JS */
+				transition: transform 0.1s ease-out;
+				will-change: transform;
+			}
+
+			#hero-text {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				text-align: center;
+				color: white;
+				margin-top: 120px; /* Offset from center to be below logo */
+				z-index: 2; /* Above container */
+				pointer-events: none;
+				transition: opacity 0.2s ease-out;
+				width: 100%;
+			}
+
+			#hero-text h1 {
+				font-family: 'Inter', sans-serif;
+				font-size: 3rem;
+				margin: 0;
+				font-weight: 700;
+				text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+				letter-spacing: -0.02em;
+			}
+
+			#hero-text p {
+				font-family: 'Inter', sans-serif;
+				font-size: 1rem;
+				margin: 12px 0 0;
+				opacity: 0.9;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+				font-weight: 300;
+			}
 		</style>
 	</head>
 	<body>
+
+		<div id="hero-wrapper">
+			<div id="logo-container">
+				<img src="../kasseh-logo-white.svg" id="hero-logo" alt="Kasseh Logo">
+			</div>
+		</div>
+		
+		<div id="hero-text">
+			<h1>Quentin Kasseh</h1>
+			<p>Technology Entrepreneur • Founder • Computer Scientist</p>
+		</div>
 
 		<div id="container"></div>
 		<div id="overlay"></div>
@@ -151,11 +237,29 @@
 				document.addEventListener('mousedown', onMouseDown);
 				document.addEventListener('mousemove', onMouseMove);
 				document.addEventListener('mouseup', onMouseUp);
+				
+				// Logo rotation
+				document.addEventListener('mousemove', onLogoMouseMove);
 
 				// Initialize scroll position
 				targetScroll = window.pageYOffset || document.documentElement.scrollTop;
 				currentScroll = targetScroll;
 
+			}
+
+			function onLogoMouseMove(event) {
+				const logo = document.getElementById('hero-logo');
+				if (!logo) return;
+
+				// Calculate mouse position relative to center (from -1 to 1)
+				const x = (event.clientX / window.innerWidth) * 2 - 1;
+				const y = (event.clientY / window.innerHeight) * 2 - 1;
+
+				// Rotate logo based on mouse position
+				// Max rotation: 20 degrees
+				// Perspective is set in CSS or here? Let's set it here.
+				// rotateY follows x (left/right), rotateX follows -y (up/down)
+				logo.style.transform = `perspective(1000px) rotateY(${x * 20}deg) rotateX(${-y * 20}deg)`;
 			}
 
 			let isDragging = false;
@@ -184,19 +288,43 @@
 			}
 
 			function updateTransition(scrollPos, maxScroll) {
-				let scrollPercent = scrollPos / maxScroll;
+				const rawScrollPercent = scrollPos / maxScroll;
+				let modifiedScrollPercent = rawScrollPercent;
 
 				// Speed up the dive after 50%
 				// Map 0.0-0.5 -> 0.0-0.25 (slower)
 				// Map 0.5-1.0 -> 0.25-1.0 (faster)
-				if (scrollPercent < 0.5) {
-					scrollPercent = scrollPercent * 0.5;
+				if (modifiedScrollPercent < 0.5) {
+					modifiedScrollPercent = modifiedScrollPercent * 0.5;
 				} else {
-					scrollPercent = 0.25 + (scrollPercent - 0.5) * 1.5;
+					modifiedScrollPercent = 0.25 + (modifiedScrollPercent - 0.5) * 1.5;
+				}
+
+				// Hero Animation
+				const heroText = document.getElementById('hero-text');
+				const logoContainer = document.getElementById('logo-container');
+				
+				if (heroText && logoContainer) {
+					// Text follows linear scroll speed
+					// Fade out linearly as user scrolls, fully gone just before the end
+					const textOpacity = Math.max(0, 1 - rawScrollPercent * 1.1);
+					heroText.style.opacity = textOpacity;
+					
+					// Logo follows linear scroll speed
+					const logoProgress = Math.min(1, rawScrollPercent);
+					
+					// Interpolate position
+					// Start: 50%, End: 60px
+					logoContainer.style.top = `calc(50% - (50% - 60px) * ${logoProgress})`;
+					logoContainer.style.left = `calc(50% - (50% - 60px) * ${logoProgress})`;
+					
+					// Scale down slightly (1 -> 0.6)
+					const scale = 1 - (logoProgress * 0.4);
+					logoContainer.style.transform = `translate(-50%, -50%) scale(${scale})`;
 				}
 
 				// Update camera position - move closer to water but stay above
-				camera.position.y = 30 - (scrollPercent * 25); 
+				camera.position.y = 30 - (modifiedScrollPercent * 25); 
 				camera.lookAt( 0, camera.position.y, 0 );
 				
 				if ( controls ) {
@@ -205,7 +333,7 @@
 
 				// Update overlay - rising black curtain
 				const overlay = document.getElementById('overlay');
-				overlay.style.height = `${scrollPercent * 100}%`;
+				overlay.style.height = `${modifiedScrollPercent * 100}%`;
 			}
 
 			function onWheel( event ) {
