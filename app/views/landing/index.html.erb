@@ -1,752 +1,461 @@
-<% content_for :title, "Quentin Kasseh · Builder, Engineer, Founder" %>
+<% content_for :title, "Quentin O. Kasseh | Technology Leader, Strategist, and Innovator" %>
 <% content_for :skip_navigation, true %>
 <% content_for :body_class, "landing-aerial" %>
 
-<div id="wrapper" class="opacity-0 animate-fade-in-slow">
-  <!-- Multi-layer Animated Background -->
-  <div id="bg" class="fixed inset-0 overflow-hidden">
-    <!-- Base gradient -->
-    <div class="absolute inset-0 bg-gradient-to-br from-charcoal-950 via-charcoal-900 to-charcoal-950"></div>
-    
-    <!-- Animated gradient mesh -->
-    <div class="absolute inset-0 opacity-30">
-      <div class="gradient-orb gradient-orb-1"></div>
-      <div class="gradient-orb gradient-orb-2"></div>
-      <div class="gradient-orb gradient-orb-3"></div>
-    </div>
-    
-    <!-- Subtle grid pattern -->
-    <div class="absolute inset-0 opacity-[0.03]">
-      <div class="absolute inset-0 bg-grid-pattern animate-grid-flow"></div>
-    </div>
-    
-    <!-- Particle system -->
-    <canvas id="particles" class="absolute inset-0"></canvas>
-  </div>
+<div id="wrapper">
+  <!-- Animated Background -->
+  <div id="bg"></div>
 
-  <!-- Interactive spotlight effect -->
-  <div id="spotlight" class="fixed inset-0 pointer-events-none opacity-0 transition-opacity duration-1000"></div>
-
-  <!-- Vignette overlay -->
-  <div id="overlay" class="fixed inset-0 bg-gradient-radial-custom opacity-0 animate-overlay-fade pointer-events-none"></div>
+  <!-- Overlay with pattern -->
+  <div id="overlay"></div>
 
   <!-- Main Content -->
-  <div id="main" class="fixed inset-0 flex items-center justify-center text-center z-10">
-    <div class="max-w-4xl px-6 relative">
-
+  <div id="main">
+    <div class="content-wrapper">
       <!-- Header -->
-      <header id="header" class="opacity-0 animate-header-rise">
-        <!-- Animated SVG Logo -->
-        <div class="mb-12 flex justify-center relative" 
+      <header id="header">
+        <!-- SVG Logo with glow effect -->
+        <div class="logo-container" 
              id="logo-container" 
              data-controller="svg-logo"
              data-svg-logo-url-value="/kasseh-logo-white.svg">
-          <div class="logo-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-48 md:h-48 blur-3xl opacity-0 animate-logo-glow"></div>
-          <div data-svg-logo-target="container" class="w-32 h-32 md:w-48 md:h-48 relative z-10"></div>
+          <div class="logo-glow"></div>
+          <div data-svg-logo-target="container" class="logo-svg"></div>
         </div>
 
-        <!-- Name with refined typography and gradient -->
-        <h1 class="font-serif text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-none name-gradient">
-          <span class="inline-block animate-name-reveal" style="animation-delay: 2.1s">Q</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.15s">u</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.2s">e</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.25s">n</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.3s">t</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.35s">i</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.4s">n</span>
-          <span class="inline-block animate-name-reveal mx-3" style="animation-delay: 2.45s">O.</span>
-          <span class="inline-block animate-name-reveal" style="animation-delay: 2.5s">K</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.55s">a</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.6s">s</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.65s">s</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.7s">e</span><span class="inline-block animate-name-reveal" style="animation-delay: 2.75s">h</span>
-        </h1>
-
-        <!-- Tagline with elegant spacing and reveal animation -->
-        <div class="overflow-hidden">
-          <p class="text-lg md:text-xl text-charcoal-300 font-light mb-16 tracking-wide max-w-2xl mx-auto opacity-0 animate-tagline-reveal">
-            <span class="tagline-word" style="animation-delay: 1.2s">Technology</span>
-            <span class="tagline-word" style="animation-delay: 1.3s">Entrepreneur</span>
-            <span class="text-gold-600/40 mx-3">•</span>
-            <span class="tagline-word" style="animation-delay: 1.4s">Founder</span>
-            <span class="text-gold-600/40 mx-3">•</span>
-            <span class="tagline-word" style="animation-delay: 1.5s">Computer</span>
-            <span class="tagline-word" style="animation-delay: 1.6s">Scientist</span>
-          </p>
-        </div>
-
-        <!-- Social Navigation with elegant hover effects -->
-        <nav class="mb-12">
-          <ul class="flex justify-center items-center space-x-8 md:space-x-10">
-            <li class="opacity-0 animate-nav-item" style="animation-delay: 2.8s">
-              <a href="https://twitter.com/quentinkasseh" target="_blank" rel="noopener noreferrer"
-                 class="social-link group relative block"
-                 title="X (Twitter)">
-                <div class="social-glow"></div>
-                <svg class="w-7 h-7 md:w-8 md:h-8 relative z-10 transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
+        <!-- Name -->
+        <h1>Quentin O. Kasseh</h1>
+        
+        <!-- Tagline -->
+        <p>Technology Entrepreneur &nbsp;&bull;&nbsp; Founder &nbsp;&bull;&nbsp; Computer Scientist</p>
+        
+        <!-- Social Navigation -->
+        <nav>
+          <ul>
+            <li>
+              <a href="https://twitter.com/quentinkasseh" target="_blank" rel="noopener noreferrer" title="Check my X">
+                <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </a>
             </li>
-            <li class="opacity-0 animate-nav-item" style="animation-delay: 2.9s">
-              <a href="https://www.linkedin.com/in/quentink" target="_blank" rel="noopener noreferrer"
-                 class="social-link group relative block"
-                 title="LinkedIn">
-                <div class="social-glow"></div>
-                <svg class="w-7 h-7 md:w-8 md:h-8 relative z-10 transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
+            <li>
+              <a href="https://www.linkedin.com/in/quentink" target="_blank" rel="noopener noreferrer" title="Check my LinkedIn profile">
+                <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
               </a>
             </li>
-            <li class="opacity-0 animate-nav-item" style="animation-delay: 3.0s">
-              <a href="mailto:quentin@kasseh.com"
-                 class="social-link group relative block"
-                 title="Email">
-                <div class="social-glow"></div>
-                <svg class="w-7 h-7 md:w-8 md:h-8 relative z-10 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <li>
+              <a href="mailto:quentin@kasseh.com" title="Send me an e-mail">
+                <svg class="social-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                 </svg>
               </a>
             </li>
-            <li class="opacity-0 animate-nav-item" style="animation-delay: 3.1s">
-              <a href="https://www.syntaxia.com" target="_blank" rel="noopener noreferrer"
-                 class="social-link group relative block"
-                 title="Syntaxia">
-                <div class="social-glow"></div>
-                <i class="fa-kit fa-syntaxia-icon-logo-light fa-2xl relative z-10 transition-all duration-300"></i>
+            <li>
+              <a href="https://www.syntaxia.com" target="_blank" rel="noopener noreferrer" title="Syntaxia">
+                <i class="fa-kit fa-syntaxia-icon-logo-light fa-fade fa-2xl social-icon"></i>
               </a>
             </li>
           </ul>
         </nav>
-
-        <!-- Secondary Navigation with glass effect -->
-        <div class="mt-16 pt-10 border-t border-gold-600/10 opacity-0 animate-nav-bar" style="animation-delay: 3.2s">
-          <nav>
-            <ul class="flex justify-center items-center space-x-8 text-sm md:text-base">
-              <li>
-                <%= link_to articles_path, class: "text-charcoal-300 hover:text-gold-500 transition-all duration-300 font-medium relative group" do %>
-                  <span class="relative z-10">Writing</span>
-                  <span class="absolute inset-x-0 -bottom-1 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <% end %>
-              </li>
-              <li class="text-gold-600/30">•</li>
-              <li>
-                <%= link_to "#about", class: "text-charcoal-300 hover:text-gold-500 transition-all duration-300 font-medium relative group", data: { turbo: false }, onclick: "scrollToAbout(event)" do %>
-                  <span class="relative z-10">About</span>
-                  <span class="absolute inset-x-0 -bottom-1 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <% end %>
-              </li>
-              <li class="text-gold-600/30">•</li>
-              <li>
-                <%= link_to new_session_path, class: "text-charcoal-300 hover:text-gold-500 transition-all duration-300 font-medium relative group" do %>
-                  <span class="relative z-10">Sign In</span>
-                  <span class="absolute inset-x-0 -bottom-1 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <% end %>
-              </li>
-            </ul>
-          </nav>
-        </div>
       </header>
-
     </div>
   </div>
-
-  <!-- Footer -->
-  <footer id="footer" class="fixed bottom-0 left-0 right-0 z-10 pb-8 text-center opacity-0 animate-footer-fade">
-    <div class="text-charcoal-400 text-sm flex items-center justify-center space-x-2">
-      <span>&copy; <%= Time.current.year %></span>
-      <%= image_tag "kasseh-logo-small.png", alt: "", class: "w-4 h-4 opacity-60 inline-block" %>
-      <a href="/" class="hover:text-gold-500 transition-colors duration-300">Quentin O. Kasseh</a>
-      <span class="text-charcoal-600">·</span>
-      <%= link_to "Privacy", privacy_path, class: "hover:text-gold-500 transition-colors duration-300" %>
-      <span class="text-charcoal-600">·</span>
-      <%= link_to "Terms", terms_path, class: "hover:text-gold-500 transition-colors duration-300" %>
-    </div>
-  </footer>
 </div>
 
 <style>
   /* ===================================
-     KEYFRAME ANIMATIONS
+     WRAPPER & ANIMATIONS (inspired by old site)
      =================================== */
   
-  @keyframes fade-in-slow {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  @keyframes wrapper {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
   }
 
-  @keyframes grid-flow {
-    0% { transform: translateX(0) translateY(0); }
-    100% { transform: translateX(30px) translateY(30px); }
-  }
-
-  @keyframes overlay-fade {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes header-rise {
-    from {
-      opacity: 0;
-      transform: translate3d(0, 3rem, 0);
-    }
-    to {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-  }
-
-  @keyframes footer-fade {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes name-reveal {
+  @keyframes bg {
     0% {
-      opacity: 0;
-      transform: translateY(30px) rotateX(-90deg);
-      filter: blur(10px);
+      transform: translate3d(0,0,0);
     }
     100% {
-      opacity: 1;
-      transform: translateY(0) rotateX(0);
-      filter: blur(0);
+      transform: translate3d(-2250px,0,0);
     }
   }
 
-  @keyframes float-subtle {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+  @keyframes overlay {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes header {
+    0% {
+      transform: translate3d(0,1em,0);
+      opacity: 0;
+    }
+    100% {
+      transform: translate3d(0,0,0);
+      opacity: 1;
+    }
   }
 
   @keyframes logo-glow {
     from { opacity: 0; }
-    to { opacity: 0.3; }
-  }
-
-  @keyframes logo-ring {
-    from {
-      opacity: 0;
-      transform: scale(0.8);
-    }
-    to {
-      opacity: 0.6;
-      transform: scale(1.5);
-    }
-  }
-
-  @keyframes tagline-reveal {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes shimmer {
-    0% {
-      background-position: -200% center;
-    }
-    100% {
-      background-position: 200% center;
-    }
-  }
-
-  @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 0 20px rgba(212, 169, 98, 0.3);
-    }
-    50% {
-      box-shadow: 0 0 40px rgba(212, 169, 98, 0.6);
-    }
-  }
-
-  @keyframes nav-item {
-    from {
-      opacity: 0;
-      transform: translateY(10px) scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  @keyframes nav-bar {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes orb-drift-1 {
-    0%, 100% {
-      transform: translate(0, 0) scale(1);
-    }
-    33% {
-      transform: translate(100px, -50px) scale(1.1);
-    }
-    66% {
-      transform: translate(-50px, 100px) scale(0.9);
-    }
-  }
-
-  @keyframes orb-drift-2 {
-    0%, 100% {
-      transform: translate(0, 0) scale(1);
-    }
-    33% {
-      transform: translate(-120px, 80px) scale(0.9);
-    }
-    66% {
-      transform: translate(80px, -100px) scale(1.1);
-    }
-  }
-
-  @keyframes orb-drift-3 {
-    0%, 100% {
-      transform: translate(0, 0) scale(1);
-    }
-    33% {
-      transform: translate(50px, 120px) scale(1.1);
-    }
-    66% {
-      transform: translate(-100px, -50px) scale(0.9);
-    }
+    to { opacity: 0.4; }
   }
 
   /* ===================================
-     ANIMATION CLASSES
+     BASE LAYOUT
      =================================== */
-  
-  .animate-fade-in-slow {
-    animation: fade-in-slow 3s forwards;
-  }
-
-  .animate-grid-flow {
-    animation: grid-flow 60s linear infinite;
-  }
-
-  .animate-overlay-fade {
-    animation: overlay-fade 2s 1.5s forwards;
-  }
-
-  .animate-header-rise {
-    animation: header-rise 1.2s 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .animate-footer-fade {
-    animation: footer-fade 1s 3.5s forwards;
-  }
-
-  .animate-name-reveal {
-    opacity: 0;
-    animation: name-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .animate-float-subtle {
-    animation: float-subtle 6s ease-in-out infinite;
-  }
-
-  .animate-logo-glow {
-    animation: logo-glow 2s 2.5s forwards;
-  }
-
-  .animate-logo-ring {
-    animation: logo-ring 3s 2.5s ease-out infinite;
-  }
-
-  .animate-tagline-reveal {
-    animation: tagline-reveal 1.2s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .animate-nav-item {
-    animation: nav-item 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .animate-nav-bar {
-    animation: nav-bar 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  /* ===================================
-     BACKGROUND & EFFECTS
-     =================================== */
-
-  .bg-grid-pattern {
-    background-image:
-      linear-gradient(rgba(212, 169, 98, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(212, 169, 98, 0.02) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-
-  .bg-gradient-radial-custom {
-    background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(10, 10, 12, 0.4) 50%, rgba(10, 10, 12, 0.8) 100%);
-  }
-
-  /* Gradient orbs for dynamic background */
-  .gradient-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    mix-blend-mode: screen;
-    pointer-events: none;
-  }
-
-  .gradient-orb-1 {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(197, 141, 71, 0.15) 0%, transparent 70%);
-    top: 10%;
-    left: 15%;
-    animation: orb-drift-1 25s ease-in-out infinite;
-  }
-
-  .gradient-orb-2 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(212, 169, 98, 0.1) 0%, transparent 70%);
-    bottom: 15%;
-    right: 20%;
-    animation: orb-drift-2 30s ease-in-out infinite;
-  }
-
-  .gradient-orb-3 {
-    width: 450px;
-    height: 450px;
-    background: radial-gradient(circle, rgba(165, 114, 58, 0.12) 0%, transparent 70%);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: orb-drift-3 35s ease-in-out infinite;
-  }
-
-  /* Logo effects */
-  .logo-glow {
-    background: radial-gradient(circle, rgba(212, 169, 98, 0.5) 0%, transparent 70%);
-    width: 200px;
-    height: 200px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .logo-ring {
-    width: 160px;
-    height: 160px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 2px solid rgba(212, 169, 98, 0.3);
-    border-radius: 50%;
-  }
-
-  .logo-magnetic {
-    cursor: pointer;
-    will-change: transform;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-  }
-
-  .logo-magnetic:hover {
-    opacity: 1 !important;
-    filter: drop-shadow(0 0 40px rgba(212, 169, 98, 0.6)) drop-shadow(0 0 80px rgba(212, 169, 98, 0.3));
-  }
-
-  /* Logo image animations */
-  #kasseh-logo {
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    animation: logo-reveal 1.5s ease-out 0.5s both;
-  }
-
-  #kasseh-logo:hover {
-    filter: drop-shadow(0 0 40px rgba(212, 169, 98, 0.7)) 
-            drop-shadow(0 0 20px rgba(212, 169, 98, 0.5)) 
-            brightness(1.15) !important;
-  }
-
-  /* Reveal animation for logo */
-  @keyframes logo-reveal {
-    from {
-      opacity: 0;
-      transform: scale(0.85);
-    }
-    to {
-      opacity: 0.9;
-      transform: scale(1);
-    }
-  }
-
-  /* 3D rotation effect on mouse move */
-  .logo-3d-active {
-    transition: transform 0.1s ease-out !important;
-  }
-
-  /* Name gradient effect */
-  .name-gradient {
-    background: linear-gradient(120deg, #ffffff 0%, #d4a962 40%, #ffffff 60%, #d4a962 100%);
-    background-size: 300% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shimmer 6s ease-in-out infinite;
-    display: inline-block;
-  }
-
-  /* Tagline word animations */
-  .tagline-word {
-    display: inline-block;
-    opacity: 0;
-    animation: nav-item 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  /* Social link effects with magnetic pull */
-  .social-link {
-    color: rgba(217, 217, 222, 0.7);
-    will-change: transform;
-  }
-
-  .social-link:hover {
-    color: #d4a962;
-  }
-
-  .social-link svg,
-  .social-link i {
-    filter: drop-shadow(0 0 0 transparent);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .social-link:hover svg,
-  .social-link:hover i {
-    filter: drop-shadow(0 0 12px rgba(212, 169, 98, 0.7));
-    transform: translateY(-3px) scale(1.15) rotate(-5deg);
-  }
-
-  .social-glow {
-    position: absolute;
-    inset: -15px;
-    background: radial-gradient(circle, rgba(212, 169, 98, 0.3) 0%, transparent 70%);
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    border-radius: 50%;
-    filter: blur(20px);
-  }
-
-  .social-link:hover .social-glow {
-    opacity: 1;
-    transform: scale(1.2);
-  }
-
-  /* Spotlight effect */
-  #spotlight {
-    background: radial-gradient(
-      600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(212, 169, 98, 0.06),
-      transparent 40%
-    );
-  }
-
-  #spotlight.active {
-    opacity: 1;
-  }
-
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
 
   body.landing-aerial {
     overflow: hidden;
+    background: #fff;
+  }
+
+  body.loading * {
+    animation: none !important;
+  }
+
+  #wrapper {
+    animation: wrapper 3s forwards;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  /* ===================================
+     ANIMATED BACKGROUND
+     =================================== */
+
+  #bg {
+    animation: bg 60s linear infinite;
+    backface-visibility: hidden;
+    transform: translate3d(0,0,0);
+    
+    /* Background image from old site */
+    background: #348cb2 url(<%= asset_path('bg.jpg') %>) bottom left;
+    background-repeat: repeat-x;
+    background-size: 2250px auto;
+    width: 6750px;
+    height: 100%;
+    left: 0;
+    opacity: 1;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
+
+  /* ===================================
+     OVERLAY WITH PATTERN
+     =================================== */
+
+  #overlay {
+    animation: overlay 1.5s 1.5s forwards;
+    background-attachment: fixed, fixed;
+    background-image: url(<%= asset_path('overlay-pattern.png') %>), url(<%= asset_path('overlay.svg') %>);
+    background-position: top left, center center;
+    background-repeat: repeat, no-repeat;
+    background-size: auto, cover;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+  }
+
+  /* ===================================
+     MAIN CONTENT
+     =================================== */
+
+  #main {
+    height: 100%;
+    left: 0;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content-wrapper {
+    display: block !important;
+    max-width: 100% !important;
+    padding: 3em 2em !important;
+    position: relative !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  /* ===================================
+     HEADER
+     =================================== */
+
+  #header {
+    animation: header 1s 2.25s forwards;
+    backface-visibility: hidden;
+    cursor: default;
+    display: inline-block;
+    opacity: 0;
+    position: relative;
+    text-align: center;
+    top: -1em;
+    vertical-align: middle;
+    width: 90%;
+  }
+
+  /* Logo container with SVG */
+  .logo-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2em;
+  }
+
+  .logo-svg {
+    width: 8em;
+    height: 8em;
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12em;
+    height: 12em;
+    background: radial-gradient(circle, rgba(212, 169, 98, 0.4) 0%, transparent 70%);
+    filter: blur(40px);
+    opacity: 0;
+    animation: logo-glow 2s 2.5s forwards;
+    z-index: 1;
+  }
+
+  /* Name and tagline */
+  #header h1 {
+    color: #fff !important;
+    font-size: 3.25em !important;
+    font-weight: 900 !important;
+    letter-spacing: -0.035em !important;
+    line-height: 1em !important;
+    margin: 0 0 0.5em 0 !important;
+    font-family: 'Source Sans Pro', 'Inter', sans-serif !important;
+  }
+
+  #header p {
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-size: 1.25em !important;
+    font-weight: 300 !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1.75em !important;
+    margin: 0 0 2.5em 0 !important;
+    font-family: 'Source Sans Pro', 'Inter', sans-serif !important;
+  }
+
+  /* Logo images */
+  #kasseh-logo {
+    height: 0.65em;
+    vertical-align: middle;
+    position: relative;
+    top: -0.075em;
+    margin-right: 0.25em;
+    opacity: 0.9;
+    transition: all 0.2s ease-in-out;
+  }
+
+  #kasseh-logo:hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px rgba(212, 169, 98, 0.8));
+  }
+
+  /* ===================================
+     NAVIGATION
+     =================================== */
+
+  #header nav {
+    margin: 0;
+  }
+
+  #header nav ul {
+    border: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  #header nav li {
+    border: 0;
+    display: inline-block;
+    margin: 0 1em 0 0;
+    padding: 0;
+  }
+
+  #header nav li:last-child {
+    margin-right: 0;
+  }
+
+  #header nav a {
+    border: 0;
+    color: rgba(255, 255, 255, 0.75);
+    display: inline-block;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  }
+
+  #header nav a:hover {
+    color: #d4a962;
+  }
+
+  .social-icon {
+    width: 2em;
+    height: 2em;
+    transition: all 0.3s ease-in-out;
+  }
+
+  #header nav a:hover .social-icon {
+    filter: drop-shadow(0 0 12px rgba(212, 169, 98, 0.7));
+    transform: translateY(-3px) scale(1.1);
+  }
+
+  /* ===================================
+     FOOTER
+     =================================== */
+
+  #footer {
+    backface-visibility: hidden;
+    bottom: 3em;
+    cursor: default;
+    height: 3em;
+    left: 3em;
+    line-height: 3em;
+    position: fixed;
+    text-align: left;
+    width: calc(100% - 6em);
+    z-index: 10000;
+  }
+
+  .copyright {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8em;
+    letter-spacing: 0.075em;
+    list-style: none;
+    padding: 0;
+    text-transform: uppercase;
+  }
+
+  .copyright a {
+    border: 0;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .copyright a:hover {
+    color: #d4a962;
+  }
+
+  #kasseh-logo-footer {
+    height: 0.9em;
+    opacity: 0.6;
+    vertical-align: middle;
+    position: relative;
+    top: -0.075em;
+    margin: 0 0.25em;
+  }
+
+  /* ===================================
+     RESPONSIVE
+     =================================== */
+
+  @media screen and (max-width: 1680px) {
+    #header h1 {
+      font-size: 2.75em;
+    }
+  }
+
+  @media screen and (max-width: 736px) {
+    #header h1 {
+      font-size: 2em;
+    }
+
+    #header p {
+      font-size: 1em;
+    }
+
+    .logo-svg {
+      width: 6em;
+      height: 6em;
+    }
+
+    #footer {
+      bottom: 1.5em;
+      left: 1.5em;
+      width: calc(100% - 3em);
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    #header nav li {
+      margin: 0 0.5em 0 0;
+    }
+
+    .social-icon {
+      width: 1.5em;
+      height: 1.5em;
+    }
   }
 </style>
 
 <script>
   /* ===================================
-     NAVIGATION FUNCTIONS
-     =================================== */
-  
-  function scrollToAbout(event) {
-    event.preventDefault();
-    alert('About section coming soon! Check back later.');
-  }
-
-  function scrollToContact(event) {
-    event.preventDefault();
-    window.location.href = 'mailto:quentin@kasseh.com';
-  }
-
-  /* ===================================
-     PARTICLE SYSTEM
-     =================================== */
-  
-  class ParticleSystem {
-    constructor(canvas) {
-      this.canvas = canvas;
-      this.ctx = canvas.getContext('2d');
-      this.particles = [];
-      this.particleCount = 60;
-      this.mouse = { x: 0, y: 0 };
-      
-      this.resize();
-      this.init();
-      this.animate();
-      
-      window.addEventListener('resize', () => this.resize());
-    }
-    
-    resize() {
-      this.canvas.width = window.innerWidth;
-      this.canvas.height = window.innerHeight;
-    }
-    
-    init() {
-      this.particles = [];
-      for (let i = 0; i < this.particleCount; i++) {
-        this.particles.push({
-          x: Math.random() * this.canvas.width,
-          y: Math.random() * this.canvas.height,
-          size: Math.random() * 2 + 0.5,
-          speedX: (Math.random() - 0.5) * 0.3,
-          speedY: (Math.random() - 0.5) * 0.3,
-          opacity: Math.random() * 0.5 + 0.2
-        });
-      }
-    }
-    
-    update() {
-      this.particles.forEach(particle => {
-        particle.x += particle.speedX;
-        particle.y += particle.speedY;
-        
-        // Wrap around screen
-        if (particle.x < 0) particle.x = this.canvas.width;
-        if (particle.x > this.canvas.width) particle.x = 0;
-        if (particle.y < 0) particle.y = this.canvas.height;
-        if (particle.y > this.canvas.height) particle.y = 0;
-        
-        // Subtle pulsing
-        particle.opacity = 0.2 + Math.sin(Date.now() * 0.001 + particle.x) * 0.2;
-      });
-    }
-    
-    draw() {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      
-      // Draw particles
-      this.particles.forEach(particle => {
-        this.ctx.beginPath();
-        this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        this.ctx.fillStyle = `rgba(212, 169, 98, ${particle.opacity})`;
-        this.ctx.fill();
-      });
-      
-      // Draw connections
-      this.particles.forEach((p1, i) => {
-        this.particles.slice(i + 1).forEach(p2 => {
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance < 150) {
-            this.ctx.beginPath();
-            this.ctx.moveTo(p1.x, p1.y);
-            this.ctx.lineTo(p2.x, p2.y);
-            const opacity = (1 - distance / 150) * 0.1;
-            this.ctx.strokeStyle = `rgba(212, 169, 98, ${opacity})`;
-            this.ctx.lineWidth = 0.5;
-            this.ctx.stroke();
-          }
-        });
-      });
-    }
-    
-    animate() {
-      this.update();
-      this.draw();
-      requestAnimationFrame(() => this.animate());
-    }
-  }
-
-  /* ===================================
-     INTERACTIVE SPOTLIGHT
-     =================================== */
-  
-  function initSpotlight() {
-    const spotlight = document.getElementById('spotlight');
-    let isActive = false;
-    
-    document.addEventListener('mousemove', (e) => {
-      if (!isActive) {
-        spotlight.classList.add('active');
-        isActive = true;
-      }
-      
-      spotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
-      spotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
-    });
-  }
-
-  /* ===================================
-     MAGNETIC LOGO EFFECT WITH 3D ROTATION
+     MAGNETIC LOGO EFFECT WITH SVG
      =================================== */
   
   function initMagneticLogo() {
-    const logo = document.getElementById('kasseh-logo');
-    const logoContainer = document.getElementById('logo-container');
+    const logoContainer = document.querySelector('.logo-svg');
+    const svgLogo = logoContainer ? logoContainer.querySelector('svg') : null;
     
-    if (!logo || !logoContainer) return;
-    
-    let isHovering = false;
-    
-    logoContainer.addEventListener('mouseenter', () => {
-      isHovering = true;
-      logo.classList.add('logo-3d-active');
-    });
+    if (!logoContainer || !svgLogo) return;
     
     logoContainer.addEventListener('mousemove', (e) => {
       const rect = logoContainer.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
       
-      // Calculate mouse position relative to center (-1 to 1)
+      // Calculate mouse position relative to center
       const relativeX = (e.clientX - centerX) / (rect.width / 2);
       const relativeY = (e.clientY - centerY) / (rect.height / 2);
       
-      // Magnetic pull effect
+      // Magnetic pull and rotation
       const deltaX = relativeX * 12;
       const deltaY = relativeY * 12;
+      const rotateY = relativeX * 15;
+      const rotateX = -relativeY * 15;
       
-      // 3D rotation effect (opposite to mouse movement for depth)
-      const rotateY = relativeX * 15; // Rotate around Y axis
-      const rotateX = -relativeY * 15; // Rotate around X axis (inverted)
-      
-      logo.style.transform = `
+      svgLogo.style.transform = `
         translate(${deltaX}px, ${deltaY}px) 
         rotateX(${rotateX}deg) 
         rotateY(${rotateY}deg) 
         scale(1.08)
       `;
+      svgLogo.style.transition = 'transform 0.1s ease-out';
     });
     
     logoContainer.addEventListener('mouseleave', () => {
-      isHovering = false;
-      logo.classList.remove('logo-3d-active');
-      logo.style.transform = 'translate(0, 0) rotateX(0deg) rotateY(0deg) scale(1)';
-    });
-  }
-
-  /* ===================================
-     MAGNETIC SOCIAL ICONS
-     =================================== */
-  
-  function initMagneticIcons() {
-    const socialLinks = document.querySelectorAll('.social-link');
-    
-    socialLinks.forEach(link => {
-      link.addEventListener('mousemove', (e) => {
-        const rect = link.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        const deltaX = (e.clientX - centerX) / 4;
-        const deltaY = (e.clientY - centerY) / 4;
-        
-        link.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-      });
-      
-      link.addEventListener('mouseleave', () => {
-        link.style.transform = 'translate(0, 0)';
-      });
+      if (svgLogo) {
+        svgLogo.style.transform = 'translate(0, 0) rotateX(0deg) rotateY(0deg) scale(1)';
+        svgLogo.style.transition = 'transform 0.3s ease-out';
+      }
     });
   }
 
@@ -755,32 +464,26 @@
      =================================== */
   
   document.addEventListener('DOMContentLoaded', function() {
-    // Initialize particle system
-    const canvas = document.getElementById('particles');
-    if (canvas) {
-      new ParticleSystem(canvas);
-    }
-    
-    // Initialize spotlight effect
-    initSpotlight();
-    
-    // Initialize magnetic effects
-    initMagneticLogo();
-    initMagneticIcons();
+    // Initialize magnetic logo effect
+    // Wait a bit for the SVG to load via Stimulus controller
+    setTimeout(() => {
+      initMagneticLogo();
+    }, 500);
   });
 
-  // Prevent page loading class
-  window.addEventListener('load', function() {
-    document.body.className = document.body.className.replace('loading', '');
-  });
+  // Remove loading class (copied from old site)
+  window.onload = function() { 
+    document.body.className = document.body.className.replace('loading', '').trim();
+  }
 
-  // Prevent touch scrolling on mobile
+  // Prevent touch scrolling on mobile for this page
   window.addEventListener('touchmove', function(e) {
     if (document.body.classList.contains('landing-aerial')) {
       e.preventDefault();
     }
   }, { passive: false });
 
+  // Handle orientation changes
   window.addEventListener('orientationchange', function() {
     document.body.scrollTop = 0;
   });

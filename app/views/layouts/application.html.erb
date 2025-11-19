@@ -40,7 +40,7 @@
 
     <%= yield :head %>
 
-    <%# Font Awesome Kit %>
+    <%# Font Awesome Kit - needed for custom Syntaxia icon %>
     <script src="https://kit.fontawesome.com/21cd6127b9.js" crossorigin="anonymous"></script>
 
     <%# Favicon with cache busting %>
@@ -57,7 +57,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body<%= content_for?(:body_class) ? " class=\"#{yield(:body_class)}\"".html_safe : '' %>>
+  <body class="<%= content_for?(:body_class) ? yield(:body_class) : '' %> loading">
     <%= render "shared/dashboard_nav" if Current.user && !content_for?(:skip_navigation) %>
     <%= yield %>
   </body>
