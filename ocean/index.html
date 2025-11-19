@@ -58,6 +58,7 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				pointer-events: auto; /* Enable pointer events for hover */
 				/* Transition for the movement to top-left */
 				/* We will handle top/left via JS or CSS var, but let's use JS for sync with scroll */
 			}
@@ -67,8 +68,12 @@
 				height: auto;
 				filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
 				/* Rotation will be applied here via JS */
-				transition: transform 0.1s ease-out;
+				transition: transform 0.1s ease-out, filter 0.3s ease;
 				will-change: transform;
+			}
+
+			#hero-logo:hover {
+				filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
 			}
 
 			#hero-text {
