@@ -140,11 +140,12 @@
 			import * as THREE from 'three';
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 			import { Water } from 'three/addons/objects/Water.js';
+			import { Sky } from 'three/addons/objects/Sky.js';
 
 			let container;
 			let camera, scene, renderer;
 			let controls, water, sunLight;
-			let skyboxTexture, underwaterColor;
+			let underwaterColor;
 
 			// Smooth scroll variables
 			let targetScroll = 0;
@@ -182,6 +183,21 @@
 				sunLight.position.set( -600, 300, 600 );
 				scene.add( sunLight );
 
+				// Sky
+				const sky = new Sky();
+				sky.scale.setScalar( 10000 );
+				scene.add( sky );
+
+				const skyUniforms = sky.material.uniforms;
+				skyUniforms[ 'turbidity' ].value = 10;
+				skyUniforms[ 'rayleigh' ].value = 2;
+				skyUniforms[ 'mieCoefficient' ].value = 0.005;
+				skyUniforms[ 'mieDirectionalG' ].value = 0.8;
+
+				const sun = new THREE.Vector3();
+				sun.copy( sunLight.position ).normalize();
+				sky.material.uniforms[ 'sunPosition' ].value.copy( sun );
+
 				// Water
 
 				const waterGeometry = new THREE.PlaneGeometry( 10000, 10000 );
@@ -209,18 +225,6 @@
 				water.material.side = THREE.DoubleSide;
 
 				scene.add( water );
-
-				// Skybox
-				const cubeTextureLoader = new THREE.CubeTextureLoader();
-				skyboxTexture = cubeTextureLoader.load([
-					'https://jbouny.github.io/ocean/demo/assets/img/px.jpg',
-					'https://jbouny.github.io/ocean/demo/assets/img/nx.jpg',
-					'https://jbouny.github.io/ocean/demo/assets/img/py.jpg',
-					'https://jbouny.github.io/ocean/demo/assets/img/ny.jpg',
-					'https://jbouny.github.io/ocean/demo/assets/img/pz.jpg',
-					'https://jbouny.github.io/ocean/demo/assets/img/nz.jpg',
-				]);
-				scene.background = skyboxTexture;
 				
 				underwaterColor = new THREE.Color( 0x001e0f );
 
