@@ -14,6 +14,59 @@
     @media (max-width:767px) and (min-width:480px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="4b124b77-5ac6-e8c2-9bb1-169a9ff79b2d"] {opacity:0;}}
     @media (max-width:479px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="4b124b77-5ac6-e8c2-9bb1-169a9ff79b2d"] {opacity:0;}}
     
+    /* Animated background from old-site */
+    @keyframes bg {
+      0% {
+        transform: translate3d(0,0,0);
+      }
+      100% {
+        transform: translate3d(-2250px,0,0);
+      }
+    }
+    
+    .hero-wrapper {
+      position: relative;
+      overflow: hidden;
+      background-image: none !important;
+      background-color: #348cb2 !important;
+      margin-top: 20px;
+      margin-bottom: 5px;
+    }
+    
+    .hero-wrapper::before {
+      content: '';
+      animation: bg 60s linear infinite;
+      backface-visibility: hidden;
+      transform: translate3d(0,0,0);
+      background: #348cb2 url('/images/bg.jpg') bottom left;
+      background-repeat: repeat-x;
+      background-size: auto 100%;
+      background-position: bottom left;
+      height: 100%;
+      left: 0;
+      opacity: 1;
+      position: absolute;
+      top: 30%;
+      width: 300%;
+      z-index: 1;
+    }
+    
+    .hero-wrapper::after {
+      content: '';
+      background: url('/images/overlay-pattern.png'), linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15));
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 2;
+    }
+    
+    .hero-wrapper .hero-wrap {
+      position: relative;
+      z-index: 3;
+    }
+    
     /* Fix hero author image size - match card height */
     .hero-author-wrapper {
       align-items: stretch !important;
@@ -88,6 +141,24 @@
       display: inline-block;
       margin-bottom: 16px;
     }
+    
+    /* Fixed footer at bottom */
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .pages-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .section.hero {
+      flex: 1;
+    }
+    .section.footer {
+      margin-top: auto;
+    }
   </style>
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
@@ -127,7 +198,7 @@
                 </div>
               </a>
             <% else %>
-              <a href="/sign_in" class="primary-button desktop-on w-inline-block">
+              <a href="/session/new" class="primary-button desktop-on w-inline-block">
                 <div class="primary-button-wrap">
                   <div class="primary-button-texts">
                     <div class="primary-button-text">Sign In</div>
@@ -172,7 +243,7 @@
                 <p class="hero-details"><span class="white-text">American technologist.</span> North African roots. </p>
                 <p class="hero-details">I <span class="white-text">build</span> production-grade systems</p>
                 <p class="hero-details">and <span class="white-text">write</span> about what I learn.</p>
-                </div>
+              </div>
               <div data-w-id="a3d4df8f-4328-da9f-0ecd-e1c80cdfd3a8" style="opacity:0" class="hero-author-wrapper">
                 <div class="hero-author-image-wrap"><img src="/images/Quentin-Kasseh-Headshot.jpg" loading="lazy" alt="Quentin Kasseh" class="hero-author-image"></div>
                 <div class="hero-author-wrap">
@@ -180,7 +251,11 @@
                     <div class="hero-author-name">Founder & CEO</div>
                     <div class="hero-author-position">Syntaxia</div>
                   </div>
-                  <a href="https://www.syntaxia.com" target="_blank" rel="noopener noreferrer" class="hero-author-link">Visit Syntaxia</a>
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <a href="https://www.syntaxia.com" target="_blank" rel="noopener noreferrer" class="hero-author-link">Visit Syntaxia</a>
+                    <a href="https://twitter.com/quentinkasseh" target="_blank" rel="noopener noreferrer" class="social-link-wrap w-inline-block"><img src="/images/Twitter-W.svg" loading="lazy" alt="X / Twitter" class="social-icon white"><img src="/images/Twitter-B.svg" loading="lazy" alt="X / Twitter" class="social-icon black"></a>
+                    <a href="https://www.linkedin.com/in/quentink" target="_blank" rel="noopener noreferrer" class="social-link-wrap w-inline-block"><img src="/images/Linkedin-W.svg" loading="lazy" alt="LinkedIn" class="social-icon white"><img src="/images/Linkedin-B.svg" loading="lazy" alt="LinkedIn" class="social-icon black"></a>
+                  </div>
                 </div>
               </div>
             </div>
