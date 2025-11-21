@@ -52,3 +52,4 @@
 
 # Ingore the template files
 template-webflow-kenzo/documents/*
+template-webflow-kenzo/documents

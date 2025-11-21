@@ -46,4 +46,7 @@ Rails.application.routes.draw do
 
   # Landing page
   root "landing#index"
+
+  # Catch-all route for 404 errors (must be last)
+  match "*path", to: "application#render_not_found", via: :all
 end
