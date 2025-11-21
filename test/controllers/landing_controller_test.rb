@@ -9,7 +9,7 @@ class LandingControllerTest < ActionDispatch::IntegrationTest
   test "should show landing page content" do
     get root_url
     assert_response :success
-    assert_select "h1", text: /Quentin O. Kasseh/
+    assert_select "h1", text: /Quentin Kasseh/
     assert_select "a[href=?]", "https://twitter.com/quentinkasseh"
     assert_select "a[href=?]", "https://www.linkedin.com/in/quentink"
   end
@@ -34,6 +34,6 @@ class LandingControllerTest < ActionDispatch::IntegrationTest
   test "should have app name in title" do
     get root_url
     assert_response :success
-    assert_select "title", text: /Kasseh/i
+    assert_select "title", text: /Quentin O. Kasseh | Technology Leader, Strategist, and Innovator/i
   end
 end
