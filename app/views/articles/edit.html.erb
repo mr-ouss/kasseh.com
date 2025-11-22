@@ -1,0 +1,14 @@
+<% content_for :title, "Edit Article · Kasseh" %>
+
+<div class="min-h-screen bg-gradient-to-br from-charcoal-900 via-charcoal-800 to-charcoal-900 px-4 py-12">
+  <div class="max-w-4xl mx-auto">
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-sans font-bold text-white mb-2">Edit Article</h1>
+      <p class="text-charcoal-200"><%= @article.title %></p>
+    </div>
+
+    <div class="bg-white/10 backdrop-blur-md border border-charcoal-700/50 rounded-lg shadow-2xl p-8">
+      <%= render "form", article: @article %>
+    </div>
+  </div>
+</div>

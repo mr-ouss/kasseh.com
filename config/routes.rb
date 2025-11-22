@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # Blog/Writing
-  resources :articles, only: [ :index, :show ]
+  resources :articles
 
   # OmniAuth callback routes (for user sign-in via GitHub/Google/Apple)
   get "/auth/:provider/callback", to: "sessions#oauth"

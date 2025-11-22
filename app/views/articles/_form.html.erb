@@ -1,0 +1,52 @@
+<%= form_with(model: article, local: true, class: "space-y-6") do |form| %>
+  <% if article.errors.any? %>
+    <div class="bg-red-500/20 border border-red-500/50 text-red-200 p-4 rounded-lg">
+      <h2 class="font-bold text-lg mb-2"><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+      <ul class="list-disc list-inside">
+        <% article.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, class: "block text-sm font-medium mb-2" %>
+    <%= form.text_field :title, class: "w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-500 transition-colors", placeholder: "Enter article title" %>
+  </div>
+
+  <div>
+    <%= form.label :content, class: "block text-sm font-medium mb-2" %>
+    <%= form.text_area :content, rows: 15, class: "w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-500 transition-colors font-serif", placeholder: "Write your article content here..." %>
+  </div>
+
+  <div>
+    <%= form.label :excerpt, class: "block text-sm font-medium mb-2" %>
+    <%= form.text_area :excerpt, rows: 3, class: "w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-500 transition-colors", placeholder: "Brief excerpt (optional - will be auto-generated if left blank)" %>
+    <p class="text-sm text-gray-500 mt-1">Leave blank to auto-generate from content</p>
+  </div>
+
+  <div>
+    <%= form.label :author, class: "block text-sm font-medium mb-2" %>
+    <%= form.text_field :author, class: "w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-500 transition-colors", placeholder: "Author name" %>
+  </div>
+
+  <div class="flex items-center gap-4">
+    <div>
+      <%= form.label :featured, class: "flex items-center cursor-pointer" %>
+      <%= form.check_box :featured, class: "mr-2 h-5 w-5 text-gold-500 rounded border-gray-300 focus:ring-gold-500" %>
+      <span class="text-sm font-medium">Feature this article</span>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :published_at, "Publish Date", class: "block text-sm font-medium mb-2" %>
+    <%= form.datetime_local_field :published_at, class: "w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-500 transition-colors" %>
+    <p class="text-sm text-gray-500 mt-1">Leave blank to save as draft. Set a date to publish.</p>
+  </div>
+
+  <div class="flex gap-4">
+    <%= form.submit "Save Article", class: "px-6 py-3 bg-gold-600 text-white font-medium rounded-lg hover:bg-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 transition-colors cursor-pointer" %>
+    <%= link_to "Cancel", articles_path, class: "px-6 py-3 bg-gray-300 text-gray-800 font-medium rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-colors" %>
+  </div>
+<% end %>

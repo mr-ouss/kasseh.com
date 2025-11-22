@@ -59,6 +59,27 @@
 
   <body class="<%= content_for?(:body_class) ? yield(:body_class) : '' %> loading">
     <%= render "shared/dashboard_nav" if Current.user && !content_for?(:skip_navigation) %>
+    
+    <%# Flash Messages %>
+    <% if flash.any? %>
+      <div class="fixed top-4 right-4 z-50 space-y-2">
+        <% flash.each do |type, message| %>
+          <div class="<%= type == 'notice' ? 'bg-green-500' : 'bg-red-500' %> text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-3 animate-slide-in-right">
+            <% if type == 'notice' %>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            <% else %>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            <% end %>
+            <span><%= message %></span>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    
     <%= yield %>
   </body>
 </html>

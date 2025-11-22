@@ -44,7 +44,11 @@ module Authentication
       # Clear the cookie if it was used
       cookies.delete(:return_to_after_auth) if cookie_return_to.present?
 
-      return_to || root_path
+      # Sanitize and validate the return URL
+      sanitized_url = sanitize_return_to(return_to)
+      
+      # If sanitization failed or URL is invalid, use root path
+      sanitized_url.present? ? sanitized_url : root_path
     end
 
     def start_new_session_for(user)

@@ -90,6 +90,9 @@ class SessionsController < ApplicationController
     def sanitize_return_to(raw_value)
       return if raw_value.blank?
 
+      # Reject asset paths (images, CSS, JS, etc.)
+      return if raw_value.match?(/\.(png|jpg|jpeg|gif|svg|css|js|ico|woff|woff2|ttf|eot)(\?.*)?$/i)
+
       parsed = parse_uri(raw_value)
 
       if parsed&.host.present?

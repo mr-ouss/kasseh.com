@@ -168,6 +168,64 @@
       </div>
     </section>
 
+    <% if @recent_articles.any? %>
+    <!-- Blog Section -->
+    <section id="articles" class="section more-blog">
+      <div class="w-layout-blockcontainer container w-container">
+        <div class="more-blog-wrapper">
+          <div class="section-title-wrapper more-blog">
+            <div class="section-top-button">
+              <a href="/articles" class="section-top-link w-inline-block">
+                <div class="section-top-icons black"><img loading="lazy" src="/images/arrow-right-W.svg" alt="Arrow Icon" class="primary-button-icon"><img loading="lazy" src="/images/arrow-right-W.svg" alt="Arrow Icon" class="primary-button-icon"></div>
+                <div class="primary-button-texts">
+                  <div class="primary-button-text">Latest Articles</div>
+                  <div class="primary-button-text">Latest Articles</div>
+                </div>
+              </a>
+            </div>
+            <h2 class="section-title">Insights, Ideas & Inspiration</h2>
+          </div>
+          <div class="more-blog-wrap">
+            <div class="blog-cl-wrapper">
+              <div role="list" class="blog-cl-wrap more-blog">
+                <% @recent_articles.each do |article| %>
+                  <div role="listitem" class="blog-cl-item">
+                    <div class="blog-single-wrap">
+                      <a href="<%= article_path(article) %>" class="blog-item-image-wrap w-inline-block">
+                        <% if article.featured_image.attached? %>
+                          <%= image_tag article.featured_image, loading: "lazy", alt: article.title, class: "blog-item-image" %>
+                        <% else %>
+                          <img src="https://placehold.co/600x400/1a1a1f/d4a962?text=<%= URI.encode_www_form_component(article.title) %>" loading="lazy" alt="<%= article.title %>" class="blog-item-image">
+                        <% end %>
+                        <div class="image-overly"></div>
+                      </a>
+                      <div class="blog-content-wrap">
+                        <div class="blog-meta-wrap">
+                          <div class="blog-item-ctg">Technology</div>
+                          <div class="blog-meta-divide">|</div>
+                          <div class="blog-item-date"><%= article.published_at&.strftime("%b %d, %Y") %></div>
+                        </div>
+                        <a href="<%= article_path(article) %>" class="blog-item-title"><%= article.title %></a>
+                        <p class="blog-item-details"><%= article.excerpt %></p>
+                      </div>
+                      <a href="<%= article_path(article) %>" class="blog-button w-inline-block">
+                        <div class="blog-btn-texts">
+                          <div class="blog-btn-text">Read More</div>
+                          <div class="blog-btn-text black">Read More</div>
+                        </div>
+                        <div class="blog-btn-icons"><img src="/images/arrow-right-W.svg" loading="lazy" alt="Blog Btn Icon" class="blog-btn-icon"><img src="/images/arrow-right-B.svg" loading="lazy" alt="Blog Btn Icon" class="blog-btn-icon"></div>
+                      </a>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <% end %>
+
     <section class="section footer">
       <div class="w-layout-blockcontainer container w-container">
         <div class="footer-wrapper">

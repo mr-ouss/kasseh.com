@@ -1,9 +1,13 @@
 class ArticlesController < ApplicationController
-  allow_unauthenticated_access
-  before_action :set_article, only: [ :show ]
+  allow_unauthenticated_access only: [ :index, :show ]
+  before_action :set_article, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @articles = Article.published.order(published_at: :desc)
+    if authenticated?
+      @articles = Article.all.order(created_at: :desc)
+    else
+      @articles = Article.published.order(published_at: :desc)
+    end
     @featured_articles = Article.published.featured.limit(3)
   end
 
@@ -11,11 +15,51 @@ class ArticlesController < ApplicationController
     # Article is already set by before_action
   end
 
+  def new
+    @article = Article.new
+  end
+
+  def create
+    @article = Article.new(article_params)
+    @article.author = Current.user.name if Current.user
+
+    if @article.save
+      redirect_to @article, notice: "Article was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    # Article is already set by before_action
+  end
+
+  def update
+    if @article.update(article_params)
+      redirect_to @article, notice: "Article was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @article.destroy
+    redirect_to articles_path, notice: "Article was successfully deleted."
+  end
+
   private
 
   def set_article
-    @article = Article.published.find_by!(slug: params[:id])
+    if authenticated?
+      @article = Article.find_by!(slug: params[:id])
+    else
+      @article = Article.published.find_by!(slug: params[:id])
+    end
   rescue ActiveRecord::RecordNotFound
     redirect_to articles_path, alert: "Article not found"
+  end
+
+  def article_params
+    params.require(:article).permit(:title, :content, :author, :excerpt, :featured, :published_at)
   end
 end
