@@ -25,6 +25,19 @@ class User < ApplicationRecord
   scope :regular_users, -> { where(admin: false) }
   scope :recent, -> { order(created_at: :desc) }
 
+  # Display name for forms and UI
+  def display_name
+    if first_name.present? && last_name.present?
+      "#{first_name} #{last_name}"
+    elsif first_name.present?
+      first_name
+    elsif last_name.present?
+      last_name
+    else
+      email_address.split('@').first.titleize
+    end
+  end
+
   # Find or create user from OAuth provider data
   def self.find_or_create_from_auth(auth)
     # First, try to find by provider and uid (exact match)

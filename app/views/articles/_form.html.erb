@@ -1,8 +1,8 @@
-<%= form_with(model: article, local: true, class: "space-y-6") do |form| %>
+<%= form_with(model: article, local: true) do |form| %>
   <% if article.errors.any? %>
-    <div class="bg-red-500/20 border border-red-500/50 text-red-200 p-4 rounded-lg">
-      <h2 class="font-bold text-lg mb-2"><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
-      <ul class="list-disc list-inside">
+    <div class="form-error">
+      <h2 class="form-error-title"><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+      <ul class="form-error-list">
         <% article.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
@@ -10,43 +10,125 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, class: "block text-sm font-medium mb-2" %>
-    <%= form.text_field :title, class: "w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-500 transition-colors", placeholder: "Enter article title" %>
+  <div class="form-group">
+    <%= form.label :title, "Title", class: "form-label" %>
+    <%= form.text_field :title, class: "form-input", placeholder: "Enter article title" %>
   </div>
 
-  <div>
-    <%= form.label :content, class: "block text-sm font-medium mb-2" %>
-    <%= form.text_area :content, rows: 15, class: "w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-500 transition-colors font-serif", placeholder: "Write your article content here..." %>
+  <div class="form-group">
+    <%= form.label :content, "Content", class: "form-label" %>
+    <div class="editor-toolbar">
+      <button type="button" class="editor-btn" onclick="formatText('bold')" title="Bold (Ctrl+B)">
+        <strong>B</strong>
+      </button>
+      <button type="button" class="editor-btn" onclick="formatText('italic')" title="Italic (Ctrl+I)">
+        <em>I</em>
+      </button>
+      <button type="button" class="editor-btn" onclick="formatText('underline')" title="Underline (Ctrl+U)">
+        <u>U</u>
+      </button>
+      <span class="editor-separator"></span>
+      <button type="button" class="editor-btn" onclick="insertHeading()" title="Heading">
+        H1
+      </button>
+      <button type="button" class="editor-btn" onclick="insertList('ul')" title="Bullet List">
+        • List
+      </button>
+      <button type="button" class="editor-btn" onclick="insertList('ol')" title="Numbered List">
+        1. List
+      </button>
+      <span class="editor-separator"></span>
+      <button type="button" class="editor-btn" onclick="insertLink()" title="Insert Link">
+        🔗 Link
+      </button>
+      <button type="button" class="editor-btn" onclick="insertImage()" title="Insert Image">
+        🖼️ Image
+      </button>
+      <button type="button" class="editor-btn" onclick="insertCode()" title="Code Block">
+        &lt;/&gt; Code
+      </button>
+      <span class="editor-separator"></span>
+      <button type="button" class="editor-btn" onclick="insertQuote()" title="Quote">
+        " Quote
+      </button>
+    </div>
+    <%= form.text_area :content, rows: 20, class: "form-textarea editor-content", id: "article_content", placeholder: "Write your article content here...\n\nUse the toolbar above to format text, add links, images, and more." %>
+    <p class="form-hint">
+      <span id="word-count">0 words</span> · 
+      <span id="char-count">0 characters</span> · 
+      <span id="read-time">0 min read</span>
+    </p>
   </div>
 
-  <div>
-    <%= form.label :excerpt, class: "block text-sm font-medium mb-2" %>
-    <%= form.text_area :excerpt, rows: 3, class: "w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-500 transition-colors", placeholder: "Brief excerpt (optional - will be auto-generated if left blank)" %>
-    <p class="text-sm text-gray-500 mt-1">Leave blank to auto-generate from content</p>
-  </div>
+  <!-- SEO Section -->
+  <div class="form-section">
+    <h3 class="form-section-title">SEO & Metadata</h3>
+    
+    <div class="form-group">
+      <%= form.label :excerpt, "Meta Description / Excerpt", class: "form-label" %>
+      <%= form.text_area :excerpt, rows: 3, class: "form-textarea", maxlength: 160, placeholder: "Brief description for SEO and article previews (optional - will be auto-generated if left blank)" %>
+      <p class="form-hint">
+        <span id="excerpt-count">0</span>/160 characters · Optimal length: 120-160 characters
+      </p>
+    </div>
 
-  <div>
-    <%= form.label :author, class: "block text-sm font-medium mb-2" %>
-    <%= form.text_field :author, class: "w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-500 transition-colors", placeholder: "Author name" %>
-  </div>
-
-  <div class="flex items-center gap-4">
-    <div>
-      <%= form.label :featured, class: "flex items-center cursor-pointer" %>
-      <%= form.check_box :featured, class: "mr-2 h-5 w-5 text-gold-500 rounded border-gray-300 focus:ring-gold-500" %>
-      <span class="text-sm font-medium">Feature this article</span>
+    <div class="form-group">
+      <%= form.label :featured_image, "Featured Image", class: "form-label" %>
+      <div class="image-upload-wrapper">
+        <div class="image-upload-area" id="image-upload-area" onclick="document.getElementById('article_featured_image').click()">
+          <% if article.featured_image.attached? %>
+            <%= image_tag article.featured_image, id: "image-preview", class: "image-preview" %>
+            <div class="image-overlay">
+              <span class="image-change-text">Click to change image</span>
+            </div>
+          <% else %>
+            <div class="image-placeholder" id="image-placeholder">
+              <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <p class="image-placeholder-text">Click to upload featured image</p>
+              <p class="image-placeholder-hint">Recommended: 1200x630px · Max 5MB</p>
+            </div>
+            <img id="image-preview" class="image-preview" style="display: none;">
+          <% end %>
+        </div>
+        <%= form.file_field :featured_image, accept: "image/*", style: "display: none;", id: "article_featured_image", onchange: "previewImage(event)" %>
+      </div>
+      <p class="form-hint">This image will be used for social sharing and when the article is featured</p>
     </div>
   </div>
 
-  <div>
-    <%= form.label :published_at, "Publish Date", class: "block text-sm font-medium mb-2" %>
-    <%= form.datetime_local_field :published_at, class: "w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-500 transition-colors" %>
-    <p class="text-sm text-gray-500 mt-1">Leave blank to save as draft. Set a date to publish.</p>
+  <!-- Publishing Options -->
+  <div class="form-section">
+    <h3 class="form-section-title">Publishing Options</h3>
+    
+    <div class="form-group">
+      <%= form.label :author, "Author", class: "form-label" %>
+      <%= form.select :author, 
+          options_for_select(
+            @users.map { |u| [u.display_name, u.display_name] },
+            form.object.author
+          ),
+          { prompt: "Select an author" },
+          { class: "form-input" } %>
+    </div>
+
+    <div class="form-group">
+      <div class="form-checkbox-wrapper">
+        <%= form.check_box :featured, class: "form-checkbox" %>
+        <%= form.label :featured, "Feature this article on the homepage", class: "form-checkbox-label" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :published_at, "Publish Date", class: "form-label" %>
+      <%= form.datetime_local_field :published_at, class: "form-input" %>
+      <p class="form-hint">Leave blank to save as draft. Set a date and time to publish.</p>
+    </div>
   </div>
 
-  <div class="flex gap-4">
-    <%= form.submit "Save Article", class: "px-6 py-3 bg-gold-600 text-white font-medium rounded-lg hover:bg-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 transition-colors cursor-pointer" %>
-    <%= link_to "Cancel", articles_path, class: "px-6 py-3 bg-gray-300 text-gray-800 font-medium rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-colors" %>
+  <div class="form-actions">
+    <%= form.submit "Save Article", class: "form-submit-btn" %>
+    <%= link_to "Cancel", articles_path, class: "form-cancel-btn" %>
   </div>
 <% end %>

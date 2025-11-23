@@ -91,7 +91,7 @@
     "@type": "Person",
     "name": "<%= @article.author.presence || 'Quentin Kasseh' %>"
   },
-  "datePublished": "<%= @article.published_at.iso8601 %>",
+  "datePublished": "<%= (@article.published_at || @article.created_at).iso8601 %>",
   "dateModified": "<%= @article.updated_at.iso8601 %>"
 }
 </script>

@@ -17,27 +17,30 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @users = User.order(:first_name, :last_name, :email_address)
   end
 
   def create
     @article = Article.new(article_params)
-    @article.author = Current.user.name if Current.user
 
     if @article.save
       redirect_to @article, notice: "Article was successfully created."
     else
+      @users = User.order(:first_name, :last_name, :email_address)
       render :new, status: :unprocessable_entity
     end
   end
 
   def edit
     # Article is already set by before_action
+    @users = User.order(:first_name, :last_name, :email_address)
   end
 
   def update
     if @article.update(article_params)
       redirect_to @article, notice: "Article was successfully updated."
     else
+      @users = User.order(:first_name, :last_name, :email_address)
       render :edit, status: :unprocessable_entity
     end
   end
@@ -60,6 +63,6 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :content, :author, :excerpt, :featured, :published_at)
+    params.require(:article).permit(:title, :content, :author, :excerpt, :featured, :published_at, :featured_image)
   end
 end

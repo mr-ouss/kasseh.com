@@ -1,4 +1,7 @@
 class Article < ApplicationRecord
+  # Active Storage
+  has_one_attached :featured_image
+
   # Validations
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: true, format: { with: /\A[a-z0-9-]+\z/, message: "only allows lowercase letters, numbers, and hyphens" }
