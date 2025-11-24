@@ -111,11 +111,11 @@ Based on the Kenzo Webflow template with Instrument Sans as the primary typeface
 ### Landing Page
 
 **Hero Section**:
-- Three.js particle animation (1000 particles by default)
-- Stimulus controller at app/javascript/controllers/hero_animation_controller.js
-- Mouse-responsive 3D rotation with smooth interpolation
-- WebGL rendering with antialiasing and alpha transparency
-- Configurable particle count and colors via Stimulus values
+- Animated mountain background with sliding parallax effect
+- CSS-based animations using Webflow framework
+- Responsive design with mobile and desktop optimizations
+- Smooth fade-in animations for content elements
+- Lottie animation for hamburger menu icon
 
 **Content**:
 - Comprehensive structured data (JSON-LD Person schema)
@@ -545,9 +545,10 @@ Based on the Kenzo Webflow template with Instrument Sans as the primary typeface
 - thruster (HTTP acceleration)
 
 **JavaScript**:
-- Three.js (hero animation)
 - Stimulus controllers
 - Importmap for module management
+- Webflow animations and interactions
+- Lottie animations for UI elements
 
 **External Services**:
 - Google OAuth (authentication)
