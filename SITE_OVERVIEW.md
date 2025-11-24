@@ -196,9 +196,9 @@ Based on the Kenzo Webflow template with Instrument Sans as the primary typeface
 
 **Asset Pipeline**:
 - Propshaft for asset serving
-- Tailwind CSS v4 with standalone CLI
+- Tailwind CSS v4 with @theme directive configuration
 - Importmap for JavaScript module management
-- Three.js imported via importmap
+- Public CSS files for landing page (Webflow framework styles)
 
 **Background Jobs**:
 - Solid Queue for Active Job backend
