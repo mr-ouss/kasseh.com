@@ -1,12 +1,13 @@
 # actionlint: disable=all
-name: Deploy Rails App
+name: Deploy Rails App (Disabled)
 
+# Workflow disabled - site migrated to Ghost.org
 on:
-  push:
-    branches: [ master ]
-    paths-ignore:
-      - 'README.md'
   workflow_dispatch:
+  # push:
+  #   branches: [ master ]
+  #   paths-ignore:
+  #     - 'README.md'
 
 concurrency:
   group: deploy-production

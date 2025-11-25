@@ -2,23 +2,26 @@
 
 Personal website for Quentin O. Kasseh - Technology Entrepreneur, Founder, and Computer Scientist.
 
-[![Ruby](https://img.shields.io/badge/Ruby-3.4-red.svg)](https://www.ruby-lang.org/)
-[![Rails](https://img.shields.io/badge/Rails-8.1-red.svg)](https://rubyonrails.org/)
-
 ---
 
 ## About
 
-This is the source code for my personal website at [kasseh.com](https://kasseh.com). The site features:
+This repository contains the archived source code for a Rails-based version of [kasseh.com](https://kasseh.com).
 
-- **Personal Portfolio** - Showcasing my work and professional journey
+**Current Status**: The live site now runs on **[Ghost.org](https://ghost.org)** for improved content management and publishing capabilities.
+
+This Rails application served as the initial implementation and includes:
+
+- **Personal Portfolio** - Showcasing work and professional journey
 - **Writing Platform** - Blog and articles about technology, entrepreneurship, and innovation
 - **Restricted Authentication** - Secure access for authorized users only
 - **Modern Design** - Clean, elegant aesthetic with smooth animations
 
 ---
 
-## Tech Stack
+## Historical Tech Stack
+
+This Rails implementation used:
 
 - **Rails 8.1** - Latest Ruby on Rails framework
 - **Tailwind CSS** - Utility-first CSS framework with custom theme
@@ -28,7 +31,22 @@ This is the source code for my personal website at [kasseh.com](https://kasseh.c
 
 ---
 
-## Getting Started
+## Archive Notice
+
+⚠️ **This codebase is no longer in active development.**
+
+The live site has migrated to Ghost.org. This repository is preserved for:
+- Reference and learning purposes
+- Potential future Rails projects
+- Documentation of the original implementation
+
+If you're interested in building a similar personal site, feel free to explore the code and use it as inspiration.
+
+---
+
+## Local Development (Historical)
+
+If you want to run this archived Rails version locally:
 
 ### Prerequisites
 
@@ -160,15 +178,15 @@ bin/rails console
 
 ---
 
-## Deployment
+## Deployment (Historical)
 
-The site is configured for deployment with:
+This Rails version was previously configured for deployment with:
 - Kamal 2 for container orchestration
 - SQLite for production database
 - Solid Queue for background jobs
 - Thruster for HTTP caching
 
-See `config/deploy.yml` for deployment configuration.
+**Current deployment**: The live site at kasseh.com now uses Ghost.org's managed hosting platform.
 
 ---
 

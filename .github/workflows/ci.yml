@@ -1,9 +1,11 @@
-name: CI
+name: CI (Disabled)
 
+# Workflow disabled - site migrated to Ghost.org
 on:
-  pull_request:
-  push:
-    branches: [ master ]
+  workflow_dispatch:
+  # pull_request:
+  # push:
+  #   branches: [ master ]
 
 jobs:
   # Check if CI should run (only on configured repositories with secrets)
