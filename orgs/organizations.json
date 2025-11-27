@@ -1,0 +1,57 @@
+{
+  "snowflake": {
+    "@type": "Organization",
+    "name": "Snowflake",
+    "url": "https://www.snowflake.com"
+  },
+  "dbt-labs": {
+    "@type": "Organization",
+    "name": "dbt Labs",
+    "url": "https://www.getdbt.com"
+  },
+  "relationalai": {
+    "@type": "Organization",
+    "name": "RelationalAI",
+    "url": "https://relational.ai"
+  },
+  "matillion": {
+    "@type": "Organization",
+    "name": "Matillion",
+    "url": "https://www.matillion.com"
+  },
+  "monte-carlo": {
+    "@type": "Organization",
+    "name": "Monte Carlo",
+    "url": "https://www.montecarlodata.com"
+  },
+  "fivetran": {
+    "@type": "Organization",
+    "name": "Fivetran",
+    "url": "https://www.fivetran.com"
+  },
+  "airbyte": {
+    "@type": "Organization",
+    "name": "Airbyte",
+    "url": "https://airbyte.com"
+  },
+  "stardog": {
+    "@type": "Organization",
+    "name": "Stardog",
+    "url": "https://www.stardog.com"
+  },
+  "bigeye": {
+    "@type": "Organization",
+    "name": "Bigeye",
+    "url": "https://www.bigeye.com"
+  },
+  "looker": {
+    "@type": "Organization",
+    "name": "Looker",
+    "url": "https://looker.com"
+  },
+  "hex": {
+    "@type": "Organization",
+    "name": "Hex",
+    "url": "https://hex.tech"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "TITLE_HERE",
+  "description": "DESCRIPTION_HERE",
+  "datePublished": "YYYY-MM-DD",
+  "dateModified": "YYYY-MM-DD",
+  "author": {
+    "@type": "Person",
+    "name": "Quentin Kasseh",
+    "url": "https://kasseh.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Against Entropy",
+    "url": "https://kasseh.com"
+  },
+  "mentions": [
+    {
+      "@type": "Organization",
+      "name": "COMPANY_NAME",
+      "url": "COMPANY_URL"
+    }
+  ]
+}

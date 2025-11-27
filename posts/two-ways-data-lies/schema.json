@@ -1,0 +1,31 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Two Ways Your Data Lies to You",
+  "description": "Syntactic drift vs semantic drift. Why the modern data stack catches structural failures but misses silent meaning corruption.",
+  "author": {
+    "@type": "Person",
+    "name": "Quentin Kasseh",
+    "url": "https://kasseh.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Against Entropy",
+    "url": "https://kasseh.com"
+  },
+  "mentions": [
+    {"@type": "Organization", "name": "Snowflake", "url": "https://www.snowflake.com"},
+    {"@type": "Organization", "name": "dbt Labs", "url": "https://www.getdbt.com"},
+    {"@type": "Organization", "name": "RelationalAI", "url": "https://relational.ai"},
+    {"@type": "Organization", "name": "Matillion", "url": "https://www.matillion.com"},
+    {"@type": "Organization", "name": "Monte Carlo", "url": "https://www.montecarlodata.com"},
+    {"@type": "Organization", "name": "Fivetran", "url": "https://www.fivetran.com"},
+    {"@type": "Organization", "name": "Airbyte", "url": "https://airbyte.com"},
+    {"@type": "Organization", "name": "Stardog", "url": "https://www.stardog.com"},
+    {"@type": "Organization", "name": "Bigeye", "url": "https://www.bigeye.com"},
+    {"@type": "Organization", "name": "Looker", "url": "https://looker.com"},
+    {"@type": "Organization", "name": "Hex", "url": "https://hex.tech"}
+  ]
+}
+</script>
