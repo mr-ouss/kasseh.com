@@ -7,12 +7,12 @@
   "author": {
     "@type": "Person",
     "name": "Quentin Kasseh",
-    "url": "https://kasseh.com"
+    "url": "https://www.kasseh.com"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Against Entropy",
-    "url": "https://kasseh.com"
+    "url": "https://www.kasseh.com"
   },
   "mentions": [
     {"@type": "Organization", "name": "Snowflake", "url": "https://www.snowflake.com"},
