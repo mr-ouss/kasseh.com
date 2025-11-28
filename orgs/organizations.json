@@ -53,5 +53,125 @@
     "@type": "Organization",
     "name": "Hex",
     "url": "https://hex.tech"
+  },
+  "blue-yonder": {
+    "@type": "Organization",
+    "name": "Blue Yonder",
+    "url": "https://blueyonder.com"
+  },
+  "cash-app": {
+    "@type": "Organization",
+    "name": "Cash App",
+    "url": "https://cash.app"
+  },
+  "block": {
+    "@type": "Organization",
+    "name": "Block",
+    "url": "https://block.xyz"
+  },
+  "att": {
+    "@type": "Organization",
+    "name": "AT&T",
+    "url": "https://www.att.com"
+  },
+  "salesforce": {
+    "@type": "Organization",
+    "name": "Salesforce",
+    "url": "https://www.salesforce.com"
+  },
+  "blackrock": {
+    "@type": "Organization",
+    "name": "BlackRock",
+    "url": "https://www.blackrock.com"
+  },
+  "alation": {
+    "@type": "Organization",
+    "name": "Alation",
+    "url": "https://www.alation.com"
+  },
+  "atlan": {
+    "@type": "Organization",
+    "name": "Atlan",
+    "url": "https://atlan.com"
+  },
+  "cube": {
+    "@type": "Organization",
+    "name": "Cube",
+    "url": "https://cube.dev"
+  },
+  "honeydew": {
+    "@type": "Organization",
+    "name": "Honeydew",
+    "url": "https://www.honeydew.ai"
+  },
+  "mistral-ai": {
+    "@type": "Organization",
+    "name": "Mistral AI",
+    "url": "https://mistral.ai"
+  },
+  "omni": {
+    "@type": "Organization",
+    "name": "Omni",
+    "url": "https://omni.co"
+  },
+  "select-star": {
+    "@type": "Organization",
+    "name": "Select Star",
+    "url": "https://www.selectstar.com"
+  },
+  "sigma": {
+    "@type": "Organization",
+    "name": "Sigma",
+    "url": "https://www.sigmacomputing.com"
+  },
+  "thoughtspot": {
+    "@type": "Organization",
+    "name": "ThoughtSpot",
+    "url": "https://www.thoughtspot.com"
+  },
+  "neo4j": {
+    "@type": "Organization",
+    "name": "Neo4j",
+    "url": "https://neo4j.com"
+  },
+  "tigergraph": {
+    "@type": "Organization",
+    "name": "TigerGraph",
+    "url": "https://www.tigergraph.com"
+  },
+  "microsoft": {
+    "@type": "Organization",
+    "name": "Microsoft",
+    "url": "https://www.microsoft.com"
+  },
+  "openai": {
+    "@type": "Organization",
+    "name": "OpenAI",
+    "url": "https://openai.com"
+  },
+  "databricks": {
+    "@type": "Organization",
+    "name": "Databricks",
+    "url": "https://www.databricks.com"
+  },
+  "tableau": {
+    "@type": "Organization",
+    "name": "Tableau",
+    "url": "https://www.tableau.com"
+  },
+  "bhp": {
+    "@type": "Organization",
+    "name": "BHP",
+    "url": "https://www.bhp.com"
+  },
+  "rio-tinto": {
+    "@type": "Organization",
+    "name": "Rio Tinto",
+    "url": "https://www.riotinto.com"
+  },
+  "spark-nz": {
+    "@type": "Organization",
+    "name": "Spark NZ",
+    "url": "https://www.spark.co.nz"
   }
 }

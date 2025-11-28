@@ -1,0 +1,47 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Knowledge Graphs on Snowflake: The Architecture Shift Nobody Saw Coming",
+  "description": "How Snowflake evolved from data warehouse to AI Data Cloud, and why knowledge graphs running inside Snowflake represent the next decade of enterprise data architecture.",
+  "author": {
+    "@type": "Person",
+    "name": "Quentin Kasseh",
+    "url": "https://www.kasseh.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Against Entropy",
+    "url": "https://www.kasseh.com"
+  },
+  "mentions": [
+    {"@type": "Organization", "name": "Snowflake", "url": "https://www.snowflake.com"},
+    {"@type": "Organization", "name": "RelationalAI", "url": "https://relational.ai"},
+    {"@type": "Organization", "name": "Blue Yonder", "url": "https://blueyonder.com"},
+    {"@type": "Organization", "name": "Cash App", "url": "https://cash.app"},
+    {"@type": "Organization", "name": "Block", "url": "https://block.xyz"},
+    {"@type": "Organization", "name": "AT&T", "url": "https://www.att.com"},
+    {"@type": "Organization", "name": "Spark NZ", "url": "https://www.spark.co.nz"},
+    {"@type": "Organization", "name": "dbt Labs", "url": "https://www.getdbt.com"},
+    {"@type": "Organization", "name": "Salesforce", "url": "https://www.salesforce.com"},
+    {"@type": "Organization", "name": "BlackRock", "url": "https://www.blackrock.com"},
+    {"@type": "Organization", "name": "Alation", "url": "https://www.alation.com"},
+    {"@type": "Organization", "name": "Atlan", "url": "https://atlan.com"},
+    {"@type": "Organization", "name": "Cube", "url": "https://cube.dev"},
+    {"@type": "Organization", "name": "Hex", "url": "https://hex.tech"},
+    {"@type": "Organization", "name": "Honeydew", "url": "https://www.honeydew.ai"},
+    {"@type": "Organization", "name": "Mistral AI", "url": "https://mistral.ai"},
+    {"@type": "Organization", "name": "Omni", "url": "https://omni.co"},
+    {"@type": "Organization", "name": "Select Star", "url": "https://www.selectstar.com"},
+    {"@type": "Organization", "name": "Sigma", "url": "https://www.sigmacomputing.com"},
+    {"@type": "Organization", "name": "ThoughtSpot", "url": "https://www.thoughtspot.com"},
+    {"@type": "Organization", "name": "Neo4j", "url": "https://neo4j.com"},
+    {"@type": "Organization", "name": "TigerGraph", "url": "https://www.tigergraph.com"},
+    {"@type": "Organization", "name": "BHP", "url": "https://www.bhp.com"},
+    {"@type": "Organization", "name": "Rio Tinto", "url": "https://www.riotinto.com"},
+    {"@type": "Organization", "name": "Microsoft", "url": "https://www.microsoft.com"},
+    {"@type": "Organization", "name": "OpenAI", "url": "https://openai.com"},
+    {"@type": "Organization", "name": "United Nations", "url": "https://www.un.org"}
+  ]
+}
+</script>
