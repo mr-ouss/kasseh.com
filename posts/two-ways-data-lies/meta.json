@@ -1,0 +1,5 @@
+{
+  "metaTitle": "Semantic Drift vs Syntactic Drift: The 2 Ways Your Data Lies",
+  "excerpt": "Syntactic drift vs. semantic drift. Why the modern data stack catches structural failures but misses silent corruption of meaning, and what to do about it.",
+  "metaDescription": "Syntactic drift breaks things loudly. Semantic drift breaks things silently. Why the modern data stack misses meaning corruption."
+}

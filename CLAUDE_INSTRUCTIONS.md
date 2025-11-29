@@ -22,6 +22,7 @@ kasseh.com/
 ├── posts/                    # Blog posts (one folder per article)
 │   └── {slug}/
 │       ├── post.md           # Article content in Markdown
+│       ├── meta.json         # SEO metadata (title, excerpt, description)
 │       └── schema.json       # JSON-LD schema for SEO
 ├── orgs/
 │   └── organizations.json    # Reusable Organization schema entries
@@ -42,15 +43,38 @@ kasseh.com/
    - Concrete examples with specific tool/company names
    - Problem-first structure
 
-3. **Generate the schema.json**: Create JSON-LD for SEO
+3. **Create the meta.json**: Generate SEO metadata
+   - `metaTitle`: Full, optimized title for search engines
+   - `excerpt`: 1-2 sentence summary for previews and cards
+   - `metaDescription`: Max 145 characters for search results
+
+4. **Generate the schema.json**: Create JSON-LD for SEO
    - Copy template from `templates/article-schema.json`
    - Fill in headline, description
    - Add all mentioned organizations to the `mentions` array
    - Wrap in `<script type="application/ld+json">` tags
 
-4. **Update organizations.json**: Add any new companies referenced
+5. **Update organizations.json**: Add any new companies referenced
    - Use kebab-case keys (e.g., "dbt-labs", "relational-ai")
    - Include official company name and URL
+
+## Meta.json Format
+
+Every post needs a `meta.json` file with this structure:
+
+```json
+{
+  "metaTitle": "Full Title for Search Engines and Social Sharing",
+  "excerpt": "A 1-2 sentence summary of the article for previews, RSS feeds, and social cards.",
+  "metaDescription": "Max 145 characters. Appears in Google search results. Keep it compelling."
+}
+```
+
+**Field guidelines:**
+
+- `metaTitle`: **Max 60 characters.** Optimized for search engines. Can differ from the H1.
+- `excerpt`: Brief, informative summary. Used for article cards and social previews.
+- `metaDescription`: **Max 145 characters.** This appears directly in search results, so make it compelling.
 
 ## Schema.json Format
 
@@ -92,8 +116,11 @@ After Claude creates/updates content:
 
 1. Review the Markdown in `post.md`
 2. Copy Markdown content into Ghost editor
-3. Go to Post Settings → Code injection → Post Header
-4. Paste the contents of `schema.json`
+3. Go to Post Settings:
+   - Set meta title from `meta.json`
+   - Set meta description from `meta.json`
+   - Set excerpt from `meta.json`
+4. Go to Code injection → Post Header, paste the contents of `schema.json`
 5. Validate with Google Rich Results Test after publishing
 6. Commit changes to git
 

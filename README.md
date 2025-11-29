@@ -15,6 +15,7 @@ kasseh.com/
 ├── posts/                    # Blog posts
 │   └── {slug}/
 │       ├── post.md           # Markdown content
+│       ├── meta.json         # SEO metadata (title, excerpt, description)
 │       └── schema.json       # JSON-LD for Ghost code injection
 ├── orgs/
 │   └── organizations.json    # Reusable Organization schema library
@@ -24,23 +25,48 @@ kasseh.com/
 └── README.md
 ```
 
+## Post Metadata (meta.json)
+
+Each post includes a `meta.json` file with SEO metadata:
+
+```json
+{
+  "metaTitle": "Full title for search engines and social sharing",
+  "excerpt": "A 1-2 sentence summary of the article for previews and cards.",
+  "metaDescription": "Max 145 characters. Appears in search results."
+}
+```
+
+**Field guidelines:**
+
+- `metaTitle`: Max 60 characters. Optimized for search engines. Can differ from the H1 headline.
+- `excerpt`: A brief summary (1-2 sentences) for article cards, RSS feeds, and social previews.
+- `metaDescription`: Max 145 characters. This appears in Google search results.
+
 ## Workflow
 
 ### Creating a New Post
 
 1. Create a new folder in `posts/` with the URL slug as the name
 2. Write the post in `post.md`
-3. Copy `templates/article-schema.json` to `{slug}/schema.json`
-4. Fill in the headline, description, and dates
-5. Add relevant organizations from `orgs/organizations.json` to the `mentions` array
-6. Wrap the JSON in `<script type="application/ld+json">` tags
+3. Create `meta.json` with:
+   - `metaTitle`: SEO-optimized title
+   - `excerpt`: Brief summary for previews
+   - `metaDescription`: Max 145 characters for search results
+4. Copy `templates/article-schema.json` to `{slug}/schema.json`
+5. Fill in the headline, description, and dates
+6. Add relevant organizations from `orgs/organizations.json` to the `mentions` array
+7. Wrap the JSON in `<script type="application/ld+json">` tags
 
 ### Publishing to Ghost
 
 1. Open Ghost editor, create new post
 2. Paste Markdown content from `post.md`
-3. In post settings (gear icon) → Code injection → Post Header
-4. Paste the contents of `schema.json`
+3. In post settings (gear icon):
+   - Set the meta title from `meta.json`
+   - Set the meta description from `meta.json`
+   - Set the excerpt from `meta.json`
+4. In Code injection → Post Header, paste the contents of `schema.json`
 5. Publish
 6. Validate with [Google Rich Results Test](https://search.google.com/test/rich-results)
 7. Commit changes to git
@@ -59,6 +85,7 @@ See `CLAUDE_INSTRUCTIONS.md` for guidance when using Claude to write or edit con
 
 - Repository location: `/Users/kasseh/Projects/Personal Utilities/kasseh.com`
 - Schema format requirements
+- Meta.json requirements
 - Writing style reference (see project file: kasseh-writing-guide.md)
 
 ## Notes
@@ -67,3 +94,4 @@ See `CLAUDE_INSTRUCTIONS.md` for guidance when using Claude to write or edit con
 - Keep post slugs consistent between this repo and Ghost URLs
 - Commit after each publish to maintain version history
 - Reference kasseh-writing-guide.md for tone, style, and formatting rules
+- Meta descriptions must be 145 characters or fewer to avoid truncation in search results
