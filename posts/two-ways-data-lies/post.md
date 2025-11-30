@@ -18,6 +18,12 @@ Let me make this concrete.
 
 **Semantic drift** is when the meaning of your data changes while the structure stays identical. The column is still called `customer_status`. It still contains strings. But six months ago "active" meant "logged in within 30 days" and now it means "has a valid subscription." Same column. Same data type. Completely different meaning.
 
+Think of it like three cartographers mapping the same mountain. Each produces a topographic map with identical contour lines. The terrain is the same. But each cartographer calibrated their instruments differently. One map shows the peak at 14,200 feet. Another shows 8,900 feet. The third shows 5,200 feet.
+
+All three maps are technically correct. All three passed quality checks. All three cartographers used calibrated instruments. And if you tried to coordinate a rescue mission using all three maps, you'd send teams to three different elevations.
+
+The structure is identical. The meaning has diverged. That's semantic drift.
+
 Here's why this distinction matters: syntactic drift breaks things loudly. Semantic drift breaks things silently.
 
 When a column disappears, your pipeline throws an error. Your dbt model fails. Airflow sends you an alert at 3 am. You curse, you fix it, you move on. The system worked.
@@ -41,16 +47,13 @@ All of this is genuinely useful. None of it catches semantic drift.
 ## The Gap No One Talks About
 
 Here's a real scenario I've seen multiple times:
-
 A company tracks "Monthly Active Users" across three teams. Marketing defines it as "unique visitors who viewed any page". Product defines it as "users who completed a core action". Finance defines it as "users tied to a paying account".
-
 All three teams have dashboards. All three dashboards show a metric called "MAU." All three numbers are different. All three are technically correct according to their local definition.
-
+Three maps of the same mountain. Three different elevations. All passing inspection.
 Now imagine Product quietly changes their definition. They decide that viewing the settings page no longer counts as a "core action." They update their tracking. Their MAU drops 15%.
-
-What breaks? Nothing. The column is still called `mau`. The data type is still integer. The pipeline runs perfectly. The schema tests pass. The data contract holds.
-
-But now Product is making roadmap decisions based on a metric that diverged from what it meant six months ago. And no tool flagged it.
+What breaks? Nothing. The column is still called mau. The data type is still integer. The pipeline runs perfectly. The schema tests pass. The data contract holds.
+But now Product is making roadmap decisions based on a metric that diverged from what it meant six months ago. And no tool flagged it. 
+The cartographer recalibrated their instruments. The contour lines didn't change. Only the elevation readings did.
 
 ## Why dbt's Semantic Layer Doesn't Solve This
 
@@ -82,26 +85,18 @@ The question is whether you need a cultural fix or an architectural one. The ans
 
 ## The Solution That Exists But Nobody Wants
 
-Here's the part the data industry doesn't want to hear: this problem was solved decades ago. Ontologies. Knowledge graphs. Semantic technologies. The entire discipline of formal knowledge representation exists precisely to capture meaning, not just structure.
-
+HHere's the part the data industry doesn't want to hear: this problem was solved decades ago. Ontologies. Knowledge graphs. Semantic technologies. The entire discipline of formal knowledge representation exists precisely to capture meaning, not just structure.
 Dave McComb has been writing about this for years. His core argument is that most enterprise data problems stem from a fundamental architectural mistake: we treat applications as primary and data as a byproduct. Every system defines its own local vocabulary. "Customer" means something different in Salesforce than in your billing system than in your analytics warehouse. We then spend enormous effort reconciling these competing definitions downstream.
-
 The alternative is data-centric architecture. You define your business concepts once, formally, in an ontology. "Customer" has explicit relationships to "Account," "Contract," "Transaction". These aren't column names. They're semantic definitions that encode what things mean and how they relate. Applications become views over this shared conceptual model rather than sources of competing truth.
-
-Knowledge graphs operationalize this. Companies like **RelationalAI** are building graph capabilities directly into Snowflake, letting you layer semantic relationships over your existing warehouse. When you query "active customers," the system doesn't just return rows. It understands what "active" means in relation to "customer" and can enforce that meaning consistently.
-
+Knowledge graphs operationalize this. Companies like RelationalAI are building graph capabilities directly into Snowflake, letting you layer semantic relationships over your existing warehouse. When you query "active customers," the system doesn't just return rows. It understands what "active" means in relation to "customer" and can enforce that meaning consistently.
 This actually solves semantic drift. If your ontology defines "active" as "has logged in within 30 days", and someone wants to change that definition, they have to change the ontology. That change is versioned, visible, and propagates everywhere. You can't quietly update tracking logic in one system and have the meaning silently diverge.
 
 ## Why Almost Nobody Does This
 
 So why isn't everyone using knowledge graphs and ontologies?
-
 Because it requires the entire enterprise to commit to being data-centric. You can't bolt an ontology onto one team's workflow and call it done. The value comes from shared semantics across the organization. That means executive sponsorship, cross-functional governance, and a multi-year architectural transformation.
-
 Most companies want a tool. They want something they can install, configure, and check off a list. Ontology-driven architecture isn't a tool. It's a worldview.
-
 The vendors know this. Selling a schema testing feature is easy. Selling "restructure your entire relationship with data" is nearly impossible. So the industry keeps shipping incremental improvements to syntactic detection while ignoring the deeper problem.
-
 RelationalAI, Stardog, and others are trying to lower the barrier. Graph databases have gotten easier. Semantic layer tools are borrowing concepts from the ontology world. But we're still far from a world where formal knowledge representation is the default.
 
 ## What Works Today (Without Boiling the Ocean)
