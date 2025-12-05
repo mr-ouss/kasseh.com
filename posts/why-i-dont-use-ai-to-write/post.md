@@ -26,9 +26,15 @@ Every diagram, illustration, and visual in my deep dives and technical essays is
 
 This surprises people. AI image generation is fast. It's cheap. It produces visuals that look polished enough for a blog post. Why spend hours on custom illustrations when you could generate something "good enough" in seconds?
 
-Because "good enough" isn't the point.
+Because "good enough" isn't the point. And because visuals do something words cannot.
 
-When I create an illustration for a piece about semantic drift or knowledge graph architecture, I'm not decorating the essay. I'm thinking through the concept visually. The act of drawing forces decisions: What's the core relationship here? What's primary, what's secondary? How do I show causality without cluttering the frame?
+Think about shared references. When I write a sentence, you and I need to share verbal references for it to land. We need overlapping vocabulary, context, mental models built from similar reading. That overlap is often small.
+
+Visual references work differently. The overlap is larger. A well-made diagram creates shared understanding faster and more completely than paragraphs of explanation. It compresses complexity into something you can see all at once.
+
+This is why illustrations aren't decoration. They're a second channel of meaning.
+
+When I create an illustration for a piece about semantic drift or knowledge graph architecture, I'm thinking through the concept visually. The act of drawing forces decisions: What's the core relationship here? What's primary, what's secondary? How do I show causality without cluttering the frame?
 
 These decisions are part of the creative work. They clarify my own understanding. They shape how the reader will encounter the idea. A generated image can't do that. It can only produce a plausible visual that matches the statistical average of "what diagrams about this topic usually look like."
 
@@ -67,6 +73,12 @@ That's not how it works. At least not for me.
 Writing is thinking. The essay doesn't exist before I write it. I don't have a fully formed argument that I then transcribe. I have intuitions, fragments, half-formed contrarian takes. The act of writing is the act of discovering what I actually believe.
 
 When I wrote about semantic drift, I didn't start knowing the distinction between syntactic and semantic problems was the key frame. I started with a vague frustration: something is broken in how we handle data quality, and nobody is talking about it. The writing process forced clarity. Sentence by sentence, I had to commit. I had to choose words. Each choice constrained the next. By the end, I had an argument I couldn't have articulated at the beginning.
+
+There's a quote attributed to Cicero: "If I had more time, I would have written a shorter letter." Most people read this as a joke about editing. It's not. It's about distillation.
+
+The first draft is always long. It contains everything: the good ideas, the bad ideas, the tangents, the throat-clearing. The work is cutting. Finding the core. Removing everything that doesn't serve the argument. This takes time. It takes judgment. It takes knowing what you're trying to say, which you only discover by writing it badly first.
+
+AI can generate a first draft instantly. What it cannot do is distill. It doesn't know what matters because it doesn't have a point of view. It produces text that sounds complete but lacks the compression that comes from a mind deciding what to keep and what to kill.
 
 This is creative work. Not creative in the sense of fiction or poetry (though it shares more with those than most technical writers admit). Creative in the sense that something new comes into existence through the process. The output is not a rearrangement of existing pieces. It's a synthesis that didn't exist before.
 
