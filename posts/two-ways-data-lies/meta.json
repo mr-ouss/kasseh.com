@@ -1,5 +1,5 @@
 {
-  "metaTitle": "Semantic Drift vs Syntactic Drift: The 2 Ways Your Data Lies",
-  "excerpt": "Syntactic drift vs. semantic drift. Why the modern data stack catches structural failures but misses silent corruption of meaning, and what to do about it.",
-  "metaDescription": "Syntactic drift breaks things loudly. Semantic drift breaks things silently. Why the modern data stack misses meaning corruption."
+  "metaTitle": "The Two Ways Your Data Lies to You",
+  "excerpt": "There are two ways your data can fail you. One is loud. The other is silent. The entire data industry has organized itself around the loud one. This is a mistake.",
+  "metaDescription": "Syntactic drift breaks things loudly. Semantic drift breaks things silently. The data industry solved the wrong problem. Here's what actually destroys companies."
 }

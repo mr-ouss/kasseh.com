@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "The Two Ways Your Data Lies to You",
-  "description": "Syntactic drift vs semantic drift. Why the modern data stack catches structural failures but misses silent meaning corruption.",
+  "description": "Syntactic drift breaks things loudly. Semantic drift breaks things silently. The data industry solved the wrong problem. Here's what actually destroys companies.",
   "author": {
     "@type": "Person",
     "name": "Quentin Kasseh",
@@ -14,18 +14,25 @@
     "name": "Against Entropy",
     "url": "https://www.kasseh.com"
   },
+  "keywords": ["semantic drift", "syntactic drift", "data quality", "knowledge graphs", "ontology", "data-centric architecture", "dbt", "data engineering"],
   "mentions": [
-    {"@type": "Organization", "name": "Snowflake", "url": "https://www.snowflake.com"},
+    {"@type": "Thing", "name": "Semantic Drift", "url": "https://grokipedia.com/page/Semantic_change"},
+    {"@type": "Thing", "name": "Knowledge Graph", "url": "https://grokipedia.com/page/Knowledge_graph"},
+    {"@type": "Thing", "name": "Ontology", "url": "https://grokipedia.com/page/Ontology_(information_science)"},
+    {"@type": "Thing", "name": "Applied Ontology", "url": "https://grokipedia.com/page/Applied_ontology"},
     {"@type": "Organization", "name": "dbt Labs", "url": "https://www.getdbt.com"},
-    {"@type": "Organization", "name": "RelationalAI", "url": "https://relational.ai"},
-    {"@type": "Organization", "name": "Matillion", "url": "https://www.matillion.com"},
-    {"@type": "Organization", "name": "Monte Carlo", "url": "https://www.montecarlodata.com"},
     {"@type": "Organization", "name": "Fivetran", "url": "https://www.fivetran.com"},
     {"@type": "Organization", "name": "Airbyte", "url": "https://airbyte.com"},
-    {"@type": "Organization", "name": "Stardog", "url": "https://www.stardog.com"},
-    {"@type": "Organization", "name": "Bigeye", "url": "https://www.bigeye.com"},
-    {"@type": "Organization", "name": "Looker", "url": "https://looker.com"},
-    {"@type": "Organization", "name": "Hex", "url": "https://hex.tech"}
+    {"@type": "Organization", "name": "Monte Carlo", "url": "https://www.montecarlodata.com"},
+    {"@type": "Organization", "name": "Matillion", "url": "https://www.matillion.com"},
+    {"@type": "Organization", "name": "Salesforce", "url": "https://www.salesforce.com"},
+    {"@type": "Organization", "name": "Semantic Arts", "url": "https://www.semanticarts.com"},
+    {"@type": "Person", "name": "Dave McComb", "url": "https://www.semanticarts.com"}
+  ],
+  "about": [
+    {"@type": "Thing", "name": "Data Quality", "url": "https://grokipedia.com/page/Data_quality"},
+    {"@type": "Thing", "name": "Data Engineering", "url": "https://grokipedia.com/page/Data_engineering"},
+    {"@type": "Thing", "name": "Data Modeling", "url": "https://grokipedia.com/page/Data_modeling"}
   ]
 }
 </script>
