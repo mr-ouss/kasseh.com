@@ -44,6 +44,14 @@ The modern data stack is very good at catching structural problems.
 
 All of this is useful. None of it catches semantic drift.
 
+Despite a decade of investment in data quality tooling, the problem is getting worse. A 2023 survey by Wakefield Research found that monthly data incidents rose from 59 to 67 year over year. Average time to resolution jumped 166%, from under six hours to fifteen. The tools got better. The outcomes got worse.
+
+<!-- CHART: Data Downtime is Getting Worse (2022 vs 2023) -->
+
+In 2022, business stakeholders identified data issues first 47% of the time. By 2023, that number hit 74%. The data team is not catching problems. The business is.
+
+<!-- CHART: Who Finds Data Issues First? (2022 vs 2023) -->
+
 When vendors say "drift detection," they mean structural drift. They mean syntactic changes. They have no answer for semantic changes because semantic changes do not show up in metadata.
 
 You cannot write a test for "this column still means what the business thinks it means." The meaning lives in someone's head. Often in several heads, each with a slightly different version.
@@ -88,7 +96,7 @@ If your organization is not ready for that transformation, you can still reduce 
 
 These are not solutions. They are management strategies. They treat the symptom, not the disease.
 
-But they are achievable without a transformation program.
+But they are achievable without a five-year transformation program.
 
 ## The Questions Data Leaders Cannot Answer
 
