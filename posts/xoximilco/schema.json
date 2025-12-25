@@ -1,0 +1,26 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Xoximilco",
+  "description": "A travel essay about stumbling into an authentic Mexican experience in Cancun: floating canals, mariachi music, traditional food, and strangers becoming friends through shared experience.",
+  "datePublished": "2025-12-24",
+  "dateModified": "2025-12-24",
+  "author": {
+    "@type": "Person",
+    "name": "Quentin Kasseh",
+    "url": "https://www.kasseh.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Against Entropy",
+    "url": "https://www.kasseh.com"
+  },
+  "mentions": [
+    {"@type": "Place", "name": "Xoximilco", "url": "https://www.xcaret.com/en/parks-and-tours/xoximilco/"},
+    {"@type": "Place", "name": "Xochimilco", "url": "https://en.wikipedia.org/wiki/Xochimilco"},
+    {"@type": "Place", "name": "Cancun", "url": "https://en.wikipedia.org/wiki/Cancun"}
+  ]
+}
+</script>
+
