@@ -1,6 +1,8 @@
 # Xoximilco
 
-*December 23, 2025. Cancun, Mexico.*
+*A Night on the Canals in Mexico*
+
+December 23, 2025. Mexico.
 
 Miyera told me this would be an experience. She was right.
 
@@ -13,8 +15,6 @@ When she learned I was here to relax, that I'd already done the ruins and cenote
 She wants to celebrate her birthday there someday.
 
 2 hours later, I was in a van.
-
----
 
 ## The Van
 
@@ -30,8 +30,6 @@ The whole van would erupt at something, and Jose would glance at me in the rearv
 
 I laughed too. That's the thing about being the outsider: if you lean into it, it becomes its own kind of belonging.
 
----
-
 ## Arriving
 
 When we pulled up, the surprise amplified.
@@ -42,21 +40,13 @@ If I wasn't brown, I would have stood out completely.
 
 People spoke to me in Spanish first. When I didn't respond, they switched to broken English. I responded in broken Spanish. We met somewhere in the middle.
 
-![The courtyard](/content/images/2025/12/IMG_2651-1.jpeg)
-
-![La Isla, the docking station](/content/images/2025/12/IMG_2652-1-1.jpeg)
-
 I realized I'd stumbled into a pocket of Mexico that tourists like me rarely find. This wasn't designed for Americans. This was Latin tourists coming to experience something deeply Mexican, something from their shared cultural roots.
 
-*I was an accident in the best possible way.*
-
----
+I was an accident in the best possible way.
 
 ## What Xoximilco Actually Is
 
 David, our host for the night, explained it to me later.
-
-![Our boat for the evening](/content/images/2025/12/IMG_2671-1.jpeg)
 
 This place is a replica. The original is Xochimilco, in Mexico City. The real one has ancient canals, a functioning church, a real cemetery. It sits on a lake surrounded by chinampas, the floating gardens the Aztecs built centuries ago.
 
@@ -68,8 +58,6 @@ But knowing it's a replica doesn't diminish it. The songs are real. The recipes 
 
 ## The Night Sky
 
-![Crescent moon, clear starry sky](/content/images/2025/12/IMG_2682-1.jpeg)
-
 The sky stopped me before anything else.
 
 You forget, living in cities, that stars can look like this. Bright. Insistent. A crescent moon hung over the water like it had been placed there by a set designer who knew exactly what he was doing.
@@ -77,8 +65,6 @@ You forget, living in cities, that stars can look like this. Bright. Insistent. 
 I took pictures, knowing they wouldn't capture it. You take them anyway.
 
 ## The Food
-
-![The main food plate](/content/images/2025/12/IMG_2691-1.jpeg)
 
 The chicken with chocolate was a discovery.
 
@@ -102,17 +88,13 @@ I had no tooth and the tequila still tasted great. When the drink is right, noth
 
 ## The Music
 
-![The mariachi band](/content/images/2025/12/IMG_2727-1.jpeg)
-
 The music was pure.
 
 I mean that literally. No tracks. No backing vocals. No production to hide behind. Just voices and instruments and something you either have or you don't.
 
-![Musicians performing](/content/images/2025/12/IMG_2687-1.jpeg)
-
 Their women sing. Not just technically, though they have that. They feel it. You watch their faces and you know this isn't performance. This is transmission.
 
-I videotaped some of it, asked about the songs that marked me. The melodies are still in my head.
+I videotaped some of it, asked about the songs that marked me. The melodies are still in my head. At the end of the essay, I added a YouTube link to a song that's stuck in my head.
 
 ## The Game
 
@@ -132,36 +114,20 @@ Omar, the guy next to me, told me it's also a bar game. They make bets on who ca
 
 When we asked David to join us for a drink after, he declined. They breathalyze the staff after every show. No exceptions.
 
-That's how seriously they take this. The experience is the product. *They protect it*.
+That's how seriously they take this. The experience is the product. They protect it.
 
 ## The People
-
-![Tequila, and more tequila](/content/images/2025/12/IMG_2720-1.jpeg)
 
 I was the only non-Spanish speaker on the boat.
 
 Everyone else was from Mexico, Chile, Colombia. All doing this for the first time. All discovering their own culture, or each other's, or both.
 
-I made friends. Their names are already fading but their faces aren't. We shared food and **electricity** and music and tequila. We held hands in a literal circuit while someone turned up the voltage.
+I made friends. Their names are already fading but their faces aren't. We shared food and electricity and music and tequila. We held hands in a literal circuit while someone turned up the voltage.
 
 That's how you meet people. Not through small talk. Through shared experience. Through something that demands you be present.
-
----
-
-![The stars](/content/images/2025/12/IMG_2761-1-1.jpeg)
 
 The stars were still out when we finished. Bright. Insistent.
 
 Miyera was right. This was an experience.
 
 Some things you can't capture in pictures. You take them anyway.
-
-*One of the songs performed live: [Nunca Es Suficiente by Natalia Lafourcade](https://www.youtube.com/watch?v=TdccAifjTSE). But, more raw, and alive.*
-
-![Gallery image 1](/content/images/2025/12/IMG_2749.jpeg)
-![Gallery image 2](/content/images/2025/12/IMG_2735.jpeg)
-![Gallery image 3](/content/images/2025/12/IMG_2716.jpeg)
-![Gallery image 4](/content/images/2025/12/IMG_2708.jpeg)
-![Gallery image 5](/content/images/2025/12/IMG_2705.jpeg)
-![Gallery image 6](/content/images/2025/12/IMG_2702.jpeg)
-

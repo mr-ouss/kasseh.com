@@ -2,10 +2,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Xoximilco",
-  "description": "A travel essay about stumbling into an authentic Mexican experience in Cancun: floating canals, mariachi music, traditional food, and strangers becoming friends through shared experience.",
-  "datePublished": "2025-12-24",
-  "dateModified": "2025-12-24",
+  "headline": "Xoximilco: A Night on the Canals in Mexico",
+  "description": "A personal essay about discovering Xoximilco in Cancun—the music, food, and connection found among strangers on colorful trajineras.",
   "author": {
     "@type": "Person",
     "name": "Quentin Kasseh",
@@ -19,8 +17,9 @@
   "mentions": [
     {"@type": "Place", "name": "Xoximilco", "url": "https://www.xcaret.com/en/parks-and-tours/xoximilco/"},
     {"@type": "Place", "name": "Xochimilco", "url": "https://en.wikipedia.org/wiki/Xochimilco"},
-    {"@type": "Place", "name": "Cancun", "url": "https://en.wikipedia.org/wiki/Cancun"}
-  ]
+    {"@type": "Place", "name": "Cancun", "url": "https://en.wikipedia.org/wiki/Canc%C3%BAn"},
+    {"@type": "Place", "name": "Mexico City", "url": "https://en.wikipedia.org/wiki/Mexico_City"}
+  ],
+  "keywords": ["Xoximilco", "Xochimilco", "Mexico travel", "Cancun", "trajineras", "Mexican culture", "travel essay"]
 }
 </script>
-
