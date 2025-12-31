@@ -197,3 +197,11 @@ Against Entropy.
 - **On information entropy:** [James Gleick's "The Information"](https://www.amazon.com/Information-History-Theory-Flood/dp/1400096235) tells the story of Claude Shannon and the birth of information theory.
 - **On data-centric architecture:** [Dave McComb's "The Data-Centric Revolution"](https://www.amazon.com/Data-Centric-Revolution-Restoring-Enterprise/dp/1634625404) explains why most enterprise data problems are actually architecture problems.
 - **On semantic drift:** My article [The Two Ways Your Data Lies to You](/semantic-drift-vs-syntactic-drift/) goes deep on syntactic vs. semantic drift.
+
+---
+
+💡 **A note on process**
+
+Everything you just read was written by a human. The illustrations were drawn by hand. I don't use AI to generate content for Against Entropy.
+
+If you want to know why, or how these essays come together, [here's the process](/why-i-dont-use-ai-to-write/).

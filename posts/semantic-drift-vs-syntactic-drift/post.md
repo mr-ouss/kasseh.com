@@ -119,3 +119,15 @@ Semantic drift has a solution too. Ontologies. Knowledge graphs. [Data-centric a
 Until that happens, we will keep building dashboards that lie to us politely.
 
 The data does not break. It just stops being true.
+
+---
+
+*This is the kind of analysis I publish in Against Entropy. If you're building data systems and want practical frameworks for problems the vendors won't talk about, subscribe below.*
+
+---
+
+💡 **A note on process**
+
+Everything you just read was written by a human. The illustrations were drawn by hand. I don't use AI to generate content for Against Entropy.
+
+If you want to know why, or how these essays come together, [here's the process](/why-i-dont-use-ai-to-write/).

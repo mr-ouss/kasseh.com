@@ -2,6 +2,10 @@
 
 *From data warehouse to reasoning engine.*
 
+**Disclosure:** I was Director of Engineering at RelationalAI. I've been following knowledge graphs and declarative databases for over a decade. What follows isn't a sales pitch. It's an honest assessment of where this technology actually is and whether it's worth your time.
+
+---
+
 Last month I saw a LinkedIn post that stopped me mid-scroll. Greg Macpherson from RelationalAI had built a knowledge graph to model the Great Artesian Basin, one of the largest freshwater aquifers in the world. The graph connected the Australian federal government, four state governments, BHP, Rio Tinto, aboriginal corporations, the Bureau of Meteorology, environmental legislation, and water rights. All running inside Snowflake. No external graph database. No data movement. No specialized infrastructure.
 
 The visualization showed what no relational schema could: the web of stakeholders, regulations, and resources that govern 1.7 million square kilometers of underground water spanning multiple jurisdictions.
@@ -161,3 +165,11 @@ That's the shift.
 ---
 
 *This is the kind of analysis I publish in Against Entropy. If you're building data systems and want practical frameworks for problems the vendors won't talk about, subscribe below.*
+
+---
+
+💡 **A note on process**
+
+Everything you just read was written by a human. The illustrations were drawn by hand. I don't use AI to generate content for Against Entropy.
+
+If you want to know why, or how these essays come together, [here's the process](/why-i-dont-use-ai-to-write/).

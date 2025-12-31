@@ -131,3 +131,11 @@ The stars were still out when we finished. Bright. Insistent.
 Miyera was right. This was an experience.
 
 Some things you can't capture in pictures. You take them anyway.
+
+---
+
+💡 **A note on process**
+
+Everything you just read was written by a human. The illustrations were drawn by hand. I don't use AI to generate content for Against Entropy.
+
+If you want to know why, or how these essays come together, [here's the process](/why-i-dont-use-ai-to-write/).
