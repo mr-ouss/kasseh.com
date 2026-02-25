@@ -1,0 +1,45 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.kasseh.com/against-entropy-001/"
+  },
+  "headline": "Against Entropy #001",
+  "description": "The first Against Entropy newsletter. What I've published, what I've been thinking about, and why it took five weeks to say hello.",
+  "author": {
+    "@type": "Person",
+    "name": "Quentin Kasseh",
+    "url": "https://kasseh.com/about/",
+    "jobTitle": "Founder",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Syntaxia"
+    },
+    "sameAs": [
+      "https://twitter.com/quentinkasseh",
+      "https://linkedin.com/in/quentink",
+      "https://instagram.com/quentinkasseh"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Against Entropy",
+    "url": "https://kasseh.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://kasseh.com/content/images/logo.png"
+    }
+  },
+  "datePublished": "2026-01-01",
+  "dateModified": "2026-01-01",
+  "isPartOf": {
+    "@type": "Blog",
+    "name": "Against Entropy",
+    "description": "Technical strategy for founders and engineers building real systems. No theory without practice."
+  },
+  "keywords": ["newsletter", "data infrastructure", "semantic drift", "entropy", "data engineering"],
+  "articleSection": "Newsletter"
+}
+</script>

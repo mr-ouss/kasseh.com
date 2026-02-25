@@ -1,0 +1,68 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "A Knowledge Graph Is Not a Technology",
+  "description": "A knowledge graph is not a graph database. It's a pattern built from three components: an ontology, instances, and relationships. Here's how to build one.",
+  "author": {
+    "@type": "Person",
+    "name": "Quentin Kasseh",
+    "url": "https://kasseh.com",
+    "jobTitle": "Founder",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Syntaxia",
+      "url": "https://www.syntaxia.com"
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Against Entropy",
+    "url": "https://kasseh.com"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://kasseh.com/knowledge-graph-is-not-a-technology/"
+  },
+  "keywords": ["knowledge graph", "graph database", "ontology", "knowledge graph vs graph database", "what is a knowledge graph", "data-centric architecture", "knowledge graph components", "semantic data modeling"],
+  "articleSection": "Data Architecture",
+  "inLanguage": "en-US",
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Knowledge Graph",
+      "description": "A pattern formed by the combination of an ontology, instances, and relationships"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Ontology",
+      "description": "A formal blueprint defining the concepts in a domain and the rules governing them"
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Neo4j",
+      "url": "https://neo4j.com",
+      "applicationCategory": "Graph Database"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "RelationalAI",
+      "url": "https://relational.ai",
+      "applicationCategory": "Knowledge Graph Engine"
+    },
+    {
+      "@type": "Organization",
+      "name": "Syntaxia",
+      "url": "https://www.syntaxia.com"
+    }
+  ],
+  "relatedLink": [
+    "https://www.kasseh.com/knowledge-graphs-on-snowflake/",
+    "https://www.syntaxia.com",
+    "https://neo4j.com",
+    "https://relational.ai"
+  ]
+}
+</script>

@@ -1,0 +1,37 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Are You Oversharing With Your AI?",
+  "description": "Every major AI provider trains on your data by default. Business accounts don't. I read every privacy policy so you don't have to.",
+  "url": "https://www.kasseh.com/ai-oversharing/",
+  "author": {
+    "@type": "Person",
+    "name": "Quentin Kasseh",
+    "url": "https://www.kasseh.com/about",
+    "jobTitle": "Founder",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Syntaxia"
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Against Entropy",
+    "url": "https://www.kasseh.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.kasseh.com/content/images/size/w640/format/webp/2025/11/ElKaceh-Leo-v1-grey-300-1.png"
+    }
+  },
+  "datePublished": "2026-01-17",
+  "dateModified": "2026-01-17",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.kasseh.com/ai-oversharing/"
+  },
+  "keywords": ["AI privacy", "ChatGPT privacy", "Claude privacy", "Gemini privacy", "AI data training", "enterprise AI"],
+  "articleSection": "AI & Data",
+  "wordCount": 1580
+}
+</script>

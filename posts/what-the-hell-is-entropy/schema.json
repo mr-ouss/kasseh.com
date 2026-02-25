@@ -2,8 +2,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "What the Hell Is Entropy? Why Nolan Couldn't Fake It in TENET",
-  "description": "Christopher Nolan spent $200 million on TENET and couldn't CGI entropy reversal. What that tells us about physics, time, and why data systems drift toward chaos.",
+  "headline": "What Is Entropy? Physics, Information Theory, and Why It Matters for Data",
+  "description": "A deep explanation of entropy connecting thermodynamics, information theory, art, and data systems. Why fighting entropy is the only work worth doing.",
   "author": {
     "@type": "Person",
     "name": "Quentin Kasseh",
@@ -15,19 +15,19 @@
     "url": "https://www.kasseh.com"
   },
   "mentions": [
-    {"@type": "Movie", "name": "TENET", "director": {"@type": "Person", "name": "Christopher Nolan"}},
-    {"@type": "Person", "name": "Christopher Nolan", "url": "https://grokipedia.com/Christopher_Nolan"},
-    {"@type": "Person", "name": "Ludwig Boltzmann", "url": "https://grokipedia.com/Ludwig_Boltzmann"},
-    {"@type": "Person", "name": "Claude Shannon", "url": "https://grokipedia.com/Claude_Shannon"},
-    {"@type": "Person", "name": "Robert Smithson", "url": "https://grokipedia.com/Robert_Smithson"},
+    {"@type": "Person", "name": "Ludwig Boltzmann", "url": "https://grokipedia.com/page/Ludwig_Boltzmann"},
+    {"@type": "Person", "name": "Claude Shannon", "url": "https://grokipedia.com/page/Claude_Shannon"},
+    {"@type": "Person", "name": "Robert Smithson", "url": "https://grokipedia.com/page/Robert_Smithson"},
     {"@type": "Person", "name": "Dave McComb", "url": "https://www.amazon.com/Data-Centric-Revolution-Restoring-Enterprise/dp/1634625404"},
-    {"@type": "Organization", "name": "Syntaxia", "url": "https://syntaxia.io"},
+    {"@type": "Person", "name": "Sean Carroll", "url": "https://www.amazon.com/Eternity-Here-Quest-Ultimate-Theory/dp/0452296544"},
+    {"@type": "Person", "name": "James Gleick", "url": "https://www.amazon.com/Information-History-Theory-Flood/dp/1400096235"},
+    {"@type": "Organization", "name": "Syntaxia", "url": "https://www.syntaxia.com"},
     {"@type": "Organization", "name": "Bell Labs", "url": "https://www.bell-labs.com"}
   ],
   "about": [
-    {"@type": "Thing", "name": "Entropy", "url": "https://grokipedia.com/Entropy"},
-    {"@type": "Thing", "name": "Second law of thermodynamics", "url": "https://grokipedia.com/Second_law_of_thermodynamics"},
-    {"@type": "Thing", "name": "Information theory", "url": "https://grokipedia.com/Information_theory"},
+    {"@type": "Thing", "name": "Entropy", "url": "https://grokipedia.com/page/Entropy"},
+    {"@type": "Thing", "name": "Second law of thermodynamics", "url": "https://grokipedia.com/page/Second_law_of_thermodynamics"},
+    {"@type": "Thing", "name": "Information theory", "url": "https://grokipedia.com/page/Information_theory"},
     {"@type": "Thing", "name": "Semantic drift"},
     {"@type": "Thing", "name": "Knowledge graphs"},
     {"@type": "Thing", "name": "Data governance"}

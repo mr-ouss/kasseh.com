@@ -16,11 +16,14 @@ kasseh.com/
 │   └── {slug}/
 │       ├── post.md           # Markdown content
 │       ├── meta.json         # SEO metadata (title, excerpt, description)
-│       └── schema.json       # JSON-LD for Ghost code injection
+│       ├── schema.json       # JSON-LD for Ghost code injection
+│       └── images/           # Downloaded post images
 ├── orgs/
 │   └── organizations.json    # Reusable Organization schema library
 ├── templates/
 │   └── article-schema.json   # Base schema template
+├── scripts/
+│   └── ghost_sync.py         # Ghost → repo sync script
 ├── CLAUDE_INSTRUCTIONS.md    # Instructions for AI assistance
 └── README.md
 ```
@@ -70,6 +73,17 @@ Each post includes a `meta.json` file with SEO metadata:
 5. Publish
 6. Validate with [Google Rich Results Test](https://search.google.com/test/rich-results)
 7. Commit changes to git
+
+### Syncing from Ghost
+
+To pull the latest published content from Ghost into the repo, run `/ghost-sync` in Claude Code. This will:
+
+1. Fetch all published posts via the Ghost Content API
+2. Write or update `post.md`, `meta.json`, and `schema.json` for each post
+3. Download images to `posts/{slug}/images/`
+4. Report what was created, updated, or unchanged
+
+Requires [1Password CLI](https://developer.1password.com/docs/cli/) (`op`) and [uv](https://docs.astral.sh/uv/). The Ghost Content API key is read from the 1Password Private vault.
 
 ### Adding a New Organization
 
