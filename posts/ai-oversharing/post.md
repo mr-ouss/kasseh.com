@@ -116,3 +116,10 @@ Corporate accounts aren't just for corporations. Small team plans exist. Freelan
 The fear Sara described, that queasy feeling about oversharing with machines, makes sense. But fear shouldn't stop you from using tools that make your work better. Understanding should replace it.
 
 Your data either stays private or it doesn't. Know which door you're walking through.
+
+💡
+
+****A note on process****  
+Everything you just read was written by a human.   
+The illustrations were drawn by hand. I don't use AI to generate content for Against Entropy.   
+If you want to know why, or how these essays come together, [here's the process.](https://www.kasseh.com/why-i-dont-use-ai-to-write/)

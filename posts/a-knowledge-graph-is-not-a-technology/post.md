@@ -121,3 +121,10 @@ But the **value of a knowledge graph lives in the ontology, not the database**. 
 **The next time someone pitches you a knowledge graph solution, ask yourself whether they're selling you a technology or helping you build the pattern.**
 
 The technology is the easy part. The pattern is where the value lives.
+
+💡
+
+****A note on process****  
+Everything you just read was written by a human.   
+The illustrations were drawn by hand. I don't use AI to generate content for Against Entropy.   
+If you want to know why, or how these essays come together, [here's the process.](https://www.kasseh.com/why-i-dont-use-ai-to-write/)
