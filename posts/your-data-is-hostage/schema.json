@@ -1,0 +1,51 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Your Data Is Hostage and the Ransom Is an AI Subscription",
+  "description": "Salesforce and Meta are locking your data inside their platforms to force you onto their AI. The asset being captured is not data. It is meaning.",
+  "url": "https://www.kasseh.com/your-data-is-hostage/",
+  "author": {
+    "@type": "Person",
+    "name": "Quentin Kasseh",
+    "url": "https://www.kasseh.com/about",
+    "jobTitle": "Founder",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Syntaxia"
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Against Entropy",
+    "url": "https://www.kasseh.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.kasseh.com/content/images/size/w640/format/webp/2025/11/ElKaceh-Leo-v1-grey-300-1.png"
+    }
+  },
+  "datePublished": "2026-03-01",
+  "dateModified": "2026-03-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.kasseh.com/your-data-is-hostage/"
+  },
+  "keywords": ["data lock-in", "Salesforce Slack API", "Meta WhatsApp AI", "semantic drift", "ontology", "enterprise AI", "data portability", "walled gardens"],
+  "articleSection": "Data Architecture",
+  "wordCount": 2319,
+  "mentions": [
+    {"@type": "Organization", "name": "Salesforce", "url": "https://www.salesforce.com"},
+    {"@type": "Organization", "name": "Meta", "url": "https://about.meta.com"},
+    {"@type": "Organization", "name": "Slack", "url": "https://slack.com"},
+    {"@type": "Organization", "name": "Informatica", "url": "https://www.informatica.com"},
+    {"@type": "Organization", "name": "MuleSoft", "url": "https://www.mulesoft.com"},
+    {"@type": "Organization", "name": "Tableau", "url": "https://www.tableau.com"},
+    {"@type": "Organization", "name": "Glean", "url": "https://www.glean.com"},
+    {"@type": "Organization", "name": "Microsoft", "url": "https://www.microsoft.com"},
+    {"@type": "Organization", "name": "Apple", "url": "https://www.apple.com"},
+    {"@type": "Organization", "name": "Amazon", "url": "https://www.amazon.com"},
+    {"@type": "Organization", "name": "Google", "url": "https://www.google.com"},
+    {"@type": "Organization", "name": "HubSpot", "url": "https://www.hubspot.com"}
+  ]
+}
+</script>

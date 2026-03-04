@@ -173,5 +173,50 @@
     "@type": "Organization",
     "name": "Spark NZ",
     "url": "https://www.spark.co.nz"
+  },
+  "meta": {
+    "@type": "Organization",
+    "name": "Meta",
+    "url": "https://about.meta.com"
+  },
+  "slack": {
+    "@type": "Organization",
+    "name": "Slack",
+    "url": "https://slack.com"
+  },
+  "informatica": {
+    "@type": "Organization",
+    "name": "Informatica",
+    "url": "https://www.informatica.com"
+  },
+  "mulesoft": {
+    "@type": "Organization",
+    "name": "MuleSoft",
+    "url": "https://www.mulesoft.com"
+  },
+  "glean": {
+    "@type": "Organization",
+    "name": "Glean",
+    "url": "https://www.glean.com"
+  },
+  "apple": {
+    "@type": "Organization",
+    "name": "Apple",
+    "url": "https://www.apple.com"
+  },
+  "amazon": {
+    "@type": "Organization",
+    "name": "Amazon",
+    "url": "https://www.amazon.com"
+  },
+  "google": {
+    "@type": "Organization",
+    "name": "Google",
+    "url": "https://www.google.com"
+  },
+  "hubspot": {
+    "@type": "Organization",
+    "name": "HubSpot",
+    "url": "https://www.hubspot.com"
   }
 }
