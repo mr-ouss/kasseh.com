@@ -218,5 +218,35 @@
     "@type": "Organization",
     "name": "HubSpot",
     "url": "https://www.hubspot.com"
+  },
+  "hl7": {
+    "@type": "Organization",
+    "name": "HL7",
+    "url": "https://www.hl7.org",
+    "sameAs": [
+      "https://www.linkedin.com/company/hl7"
+    ]
+  },
+  "fda": {
+    "@type": "Organization",
+    "name": "FDA",
+    "url": "https://www.fda.gov",
+    "sameAs": [
+      "https://www.linkedin.com/company/food-and-drug-administration"
+    ]
+  },
+  "schema-org": {
+    "name": "Schema.org",
+    "url": "https://schema.org",
+    "sameAs": [
+      "https://www.w3.org/community/schemaorg/"
+    ]
+  },
+  "snomed-international": {
+    "name": "SNOMED International",
+    "url": "https://www.snomed.org",
+    "sameAs": [
+      "https://www.linkedin.com/company/snomed-international"
+    ]
   }
 }

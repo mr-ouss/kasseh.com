@@ -1,0 +1,1 @@
+/Users/kasseh/Projects/Personal Utilities/kasseh.com/agents/content-production/kasseh-ghost-publisher.md

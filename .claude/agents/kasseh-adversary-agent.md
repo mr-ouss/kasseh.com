@@ -1,0 +1,1 @@
+/Users/kasseh/Projects/Personal Utilities/kasseh.com/agents/content-shaping/kasseh-adversary-agent.md

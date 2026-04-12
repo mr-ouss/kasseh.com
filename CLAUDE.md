@@ -13,6 +13,7 @@ and the Against Entropy newsletter by Quentin Kasseh.
 - Organizations library: `orgs/organizations.json`
 - Schema template: `templates/article-schema.json`
 - Ghost sync script: `scripts/ghost_sync.py`
+- Ghost push script: `scripts/ghost_push.py`
 
 ## Conventions
 
@@ -51,6 +52,21 @@ uv run scripts/ghost_sync.py
 
 Requires 1Password CLI signed in. Reads API key from
 `op://Private/ghost-content-api-key/credential`.
+
+## Ghost Push
+
+Push a local post to Ghost as a draft (or update an existing draft):
+
+```bash
+uv run scripts/ghost_push.py posts/{slug}/
+```
+
+Requires 1Password CLI signed in. Reads Admin API key from
+`op://Private/ghost-admin-api-key/credential`.
+
+The script tracks the Ghost link via `.ghost.json` in the post directory.
+First run creates a draft; subsequent runs update it. See the
+kasseh-ghost-push skill for details.
 
 ---
 
@@ -199,8 +215,10 @@ manual edits.
 3. Present file set to user for final review.
 4. Remind user to update `datePublished` and `dateModified` in
    `schema.json` before going live.
+5. Offer to push the draft to Ghost:
+   `uv run scripts/ghost_push.py posts/[slug]/`
 
-**User checkpoint:** Final approval. User publishes to Ghost manually.
+**User checkpoint:** Final approval. User publishes the draft in Ghost.
 
 ---
 
@@ -234,3 +252,7 @@ manual edits.
 - **Ghost sync:** If the user wants to revise an existing published post,
   run `uv run scripts/ghost_sync.py` first to ensure the repo has the
   latest version from Ghost. See the kasseh-ghost-sync skill for details.
+- **Ghost push:** After Phase 6 packaging, push the draft to Ghost using
+  `uv run scripts/ghost_push.py posts/[slug]/`. The script is idempotent:
+  first run creates a draft, subsequent runs update it. See the
+  kasseh-ghost-push skill for details.

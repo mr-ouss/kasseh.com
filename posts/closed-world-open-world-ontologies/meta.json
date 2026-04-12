@@ -1,0 +1,5 @@
+{
+  "metaTitle": "Closed World, Open World: What the Database Assumes",
+  "excerpt": "SQL treats absence as fact. A knowledge graph treats it as uncertainty. When two systems built on different world assumptions meet at a join, a federated query, or an AI agent's tool call, one of them is wrong about what silence means. The industry builds better maps. The borders remain undrawn.",
+  "metaDescription": "SQL assumes absence means false. Knowledge graphs assume absence means unknown. This gap breaks data systems at every cross-source boundary."
+}

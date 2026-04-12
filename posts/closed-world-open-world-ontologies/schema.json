@@ -1,0 +1,50 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Closed World, Open World: What the Database Assumes",
+  "description": "SQL assumes absence means false. Knowledge graphs assume absence means unknown. This gap breaks data systems at every cross-source boundary.",
+  "author": {
+    "@type": "Person",
+    "name": "Quentin Kasseh",
+    "url": "https://www.kasseh.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Against Entropy",
+    "url": "https://www.kasseh.com"
+  },
+  "datePublished": "YYYY-MM-DDTHH:MM:SSZ",
+  "dateModified": "YYYY-MM-DDTHH:MM:SSZ",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.kasseh.com/closed-world-open-world-ontologies/"
+  },
+  "mentions": [
+    {"@type": "Organization", "name": "Snowflake", "url": "https://www.snowflake.com"},
+    {"@type": "Organization", "name": "dbt Labs", "url": "https://www.getdbt.com"},
+    {"@type": "Organization", "name": "Google", "url": "https://www.google.com"},
+    {"@type": "Organization", "name": "Microsoft", "url": "https://www.microsoft.com"},
+    {"@type": "Organization", "name": "Stardog", "url": "https://www.stardog.com"},
+    {"@type": "Organization", "name": "Neo4j", "url": "https://neo4j.com"},
+    {"@type": "Organization", "name": "Atlan", "url": "https://atlan.com"},
+    {"@type": "Organization", "name": "Databricks", "url": "https://www.databricks.com"},
+    {"@type": "Organization", "name": "HL7", "url": "https://www.hl7.org"},
+    {"@type": "Organization", "name": "FDA", "url": "https://www.fda.gov"},
+    {"@type": "Organization", "name": "Schema.org", "url": "https://schema.org"},
+    {"@type": "Organization", "name": "SNOMED International", "url": "https://www.snomed.org"}
+  ],
+  "keywords": [
+    "closed-world assumption",
+    "open-world assumption",
+    "ontology",
+    "knowledge graphs",
+    "data integration",
+    "semantic layer",
+    "AI agents",
+    "dbt",
+    "data mesh",
+    "completeness"
+  ]
+}
+</script>

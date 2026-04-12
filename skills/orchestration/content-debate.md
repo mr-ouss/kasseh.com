@@ -148,8 +148,12 @@ manual edits.
 3. Present file set to user for final review.
 4. Remind user to update `datePublished` and `dateModified` in
    `schema.json` before going live.
+5. Push the draft to Ghost using the kasseh-ghost-push skill:
+   `uv run scripts/ghost_push.py posts/[slug]/`
+   This creates a Ghost draft (or updates the existing one if `.ghost.json`
+   is already present). The script writes `.ghost.json` to track the link.
 
-**User checkpoint:** Final approval. User publishes to Ghost manually.
+**User checkpoint:** Final approval. User publishes the draft in Ghost.
 
 ---
 
@@ -183,3 +187,7 @@ manual edits.
 - **Ghost sync:** If the user wants to revise an existing published post,
   run `uv run scripts/ghost_sync.py` first to ensure the repo has the
   latest version from Ghost. See the kasseh-ghost-sync skill for details.
+- **Ghost push:** After Phase 6 packaging, push the draft to Ghost using
+  `uv run scripts/ghost_push.py posts/[slug]/`. The script is idempotent:
+  first run creates a draft, subsequent runs update it. See the
+  kasseh-ghost-push skill for details.
