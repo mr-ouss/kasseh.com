@@ -67,15 +67,44 @@ When writing a section:
 
 Internalize these patterns from the voice reference:
 
-**Sentence rhythm:** Long sentences that build across clauses, developing
-an idea, followed by short sentences that land. The short sentence earns
-its punch from the momentum before it. Never stack multiple short
-sentences without a longer sentence between them.
+**The narrator in the room:** Quentin is a character in every essay,
+including deep technical ones. Write in first person: "I built", "I
+watched this fail", "let me tell you about", "let me make this concrete".
+Biography is evidence (RelationalAI, Tunisia, English as third language).
+Target 15 to 40 first-person sentences per 100. Never write about "the
+author" or "this essay": the narrator talks to the reader, he does not
+narrate the document.
 
-**Specificity as authority:** Use real tool names, real column names, real
-business scenarios with numbers. Generic examples ("Company X") weaken
-the voice. Specific examples ("a `customer_status` column in Snowflake")
-strengthen it.
+**Direct address as default:** The reader is "you". Order the reader
+around in walkthroughs: "Make coffee. Pour in cream." / "Pick one business
+term. Just one." Target 15 to 35 direct-address sentences per 100.
+
+**Sentence rhythm:** Long sentences that build across clauses, developing
+an idea, followed by short sentences that land. Verdict sentences (3 to 6
+words) get their own paragraph: "This is a mistake." / "It's not."
+
+**Density (Koe register):** Paragraphs run 1 to 3 sentences, under 45
+words, one idea each, roughly 60% single-sentence paragraphs in argument
+sections. Longer paragraphs only for worked examples. No transition words
+("however", "furthermore"): use standalone "Because...", "So...", or a
+short question. Every major section ends on a quotable line.
+
+**Bluntness (Hormozi register):** Zero hedging on things known from
+experience. No "maybe", "perhaps", "arguably", "IMO", no
+hedge-parentheticals. Uncertainty is a verdict ("I don't know. Nobody
+knows."), never qualifier soup. End evidence blocks with a 3 to 6 word
+absolute. Recommendations ship with a built-in test: "Ask three teams to
+define churn. Count the answers."
+
+**Signature moves (use them, they are legal):** two-beat parallel verdicts
+("The data does not break. It just stops being true."), fragment triples
+("Not chaos. Not randomness. Just probability."), staccato runs with
+earned momentum, rhetorical absolutes in verdict position ("Nobody is.
+Ever."), "Let me" gear-shifts, "Look," openers.
+
+**Specificity as authority:** Real tool names, real column names, real
+business scenarios with numbers, real people, personal proof over cited
+authority. Generic examples ("Company X") weaken the voice.
 
 **Fair hearing before critique:** When discussing tools or approaches that
 fall short, give them genuine credit first. The critique lands harder
@@ -84,9 +113,6 @@ because the reader already trusts the fairness.
 **Tension through structure, not adjectives:** Do not tell the reader
 something is "dangerous" or "critical." Show the scenario and let the
 danger become obvious.
-
-**Inclusive framing:** "We can detect" not "You can detect." The reader is
-included in the observation, not lectured at.
 
 ### What good looks like
 
@@ -118,15 +144,19 @@ whitepaper, not a builder writing for builders.
 
 Before submitting any section, verify:
 
+- [ ] The narrator is present: first-person sentences in THIS section,
+      not just the intro
+- [ ] Direct address: the reader is "you"
 - [ ] No em dashes anywhere
 - [ ] No AI-sounding phrases (check the prohibited list in writing-guide)
-- [ ] No negative contrast structures ("it's not X, it's Y")
-- [ ] No generic "everyone" / "nobody" claims
+- [ ] No meta-narration ("this essay", "the reader", "the author")
+- [ ] No trailing hedges ("maybe", "perhaps", "IMO", hedge-parentheticals)
+- [ ] No cliché collective filler ("everyone knows", "nobody talks about")
 - [ ] No invented anecdotes or unnamed collective projections
 - [ ] Punctuation outside quotation marks
-- [ ] No choppy stacked short sentences without surrounding longer prose
-- [ ] No first-person reflective phrases ("keeps coming back to me") in
-      professional content
+- [ ] Paragraphs 1 to 3 sentences in argument prose; verdict lines
+      isolated on their own paragraph
+- [ ] Section ends on a quotable landing
 - [ ] Real tool names, column names, or scenarios where the structural
       brief calls for specificity
 - [ ] The section serves its stated purpose from the structural brief

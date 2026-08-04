@@ -28,24 +28,43 @@ problems and explain what's wrong. The draft-agent handles the fixes.
 
 ### 1. Language Rule Violations (Hard Failures)
 
-These are non-negotiable. Every instance must be flagged:
+These are non-negotiable. Every instance must be flagged. The
+kasseh-writing-guide skill (v2) is the authority; this list summarizes it:
 
 - **Em dashes** anywhere in the text
 - **AI-sounding phrases:** "leverage," "cutting-edge," "delve," "dive in,"
-  "robust," "rot," "utilize," "landscape," "paradigm shift," "synergy,"
-  "quietly," "nobody asks the harder question," "the pattern nobody talks
-  about," "here's the uncomfortable truth"
-- **Negative contrast structures:** "it's not X, it's Y" or "you don't
-  have X, you have Y"
-- **Generic collective claims:** "everyone knows," "nobody talks about,"
-  "most people ignore"
+  "robust," "utilize," "landscape," "paradigm shift," "synergy"
+- **Meta-narration:** "this essay," "the reader," "the author," "the
+  section below," any sentence narrating the document instead of making
+  the argument, any permission-granting ("the reader is welcome to hold
+  the other view")
+- **Missing narrator:** an essay (or any full section) with no
+  first-person presence is a hard failure. Target: 15+ first-person
+  sentences per 100 across the piece
+- **Trailing hedges and hedge-parentheticals:** "maybe," "perhaps," "IMO,"
+  "arguably," "it could be argued," "(more often than you'd think)"
+- **The flabby single-sentence contrast template:** "it's not just X,
+  it's Y"
+- **Cliché collective filler:** "everyone knows," "nobody talks about,"
+  "nobody asks the harder question," "here's the uncomfortable truth"
 - **Invented anecdotes** or projection framing attributed to unnamed
   collectives
 - **Punctuation inside quotation marks** (must be outside, British style)
-- **Choppy stacked short sentences** without surrounding longer prose
-  earning them
-- **First-person reflective phrases** in professional content ("keeps
-  coming back to me," "I keep thinking about")
+- **Hyperbole adjectives:** "insane," "fantastic," "game-changing"
+- **Density violations:** paragraphs over 3 sentences or ~45 words in
+  running argument (worked examples excepted), verdict sentences buried
+  mid-paragraph, named abstractions used without a one-time plain-words
+  definition
+
+Do NOT flag (these are signature moves, explicitly legal per guide v2):
+two-beat parallel verdicts ("The data does not break. It just stops being
+true." / "It's not. A knowledge graph is a pattern."), fragment triples
+("Not chaos. Not randomness. Just probability."), staccato runs with
+earned momentum ("Make coffee. Pour in cream. Watch it swirl."),
+rhetorical absolutes in verdict position ("Nobody is. Ever."), the word
+"quietly," "Look," openers, and first-person framing of any kind. When in
+doubt between flagging a short-sentence run and letting it stand, let it
+stand and note it as a judgment call.
 
 ### 2. Voice Violations (Soft Failures)
 
@@ -68,7 +87,14 @@ These require judgment. Flag when the voice drifts from calibration:
   potentially be argued that..." Flag with: "Voice: hedge pile. State
   the claim or cut it."
 - **Lecture:** Condescending explanations. "You need to understand that..."
-  Flag with: "Voice: lecturing. The reader is a peer."
+  Flag with: "Voice: lecturing. The reader is a peer." (Do not confuse
+  with the "Let me" gear-shift into an example, which is the house move.)
+- **Ghost-writer drift:** Prose that is competent but has nobody home.
+  No "I," no "you," no stake, 60+ word paragraphs. Flag with: "Voice:
+  ghost-writer. Put the narrator back in the room."
+- **Verdict starvation:** A major section with no standalone verdict line
+  and no aphoristic landing. Flag with: "Voice: no landing. Section ends
+  without a quotable verdict."
 
 ### 3. Structural Violations
 

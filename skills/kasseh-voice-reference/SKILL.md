@@ -1,127 +1,235 @@
-# Voice Reference for Against Entropy
+# Voice Reference for Against Entropy (v2)
 
-This skill provides published article excerpts as voice calibration
-references. Load this alongside the writing-guide skill when producing
-prose drafts.
+Published article excerpts as voice calibration. Load this alongside the
+writing-guide skill when producing prose drafts.
 
 The purpose is not to copy these passages but to internalize their rhythm,
 specificity, and tone. The draft should sound like it was written by the
 same person who wrote these.
 
+v2 note: every excerpt below is quoted from PUBLISHED post.md files in
+this repo, not from drafts. v1 quoted a draft opening that never shipped.
+The calibration corpus now leads with the high-first-person pieces,
+because the narrator is the voice.
+
 ---
 
-## Reference 1: "The Two Ways Your Data Lies to You"
+## Reference 1: "What the Hell Is Entropy?" (published)
 
-Published on kasseh.com. This is the benchmark piece for Against Entropy
-voice.
+The physical-walkthrough register. The reader is ordered around, then the
+verdict lands.
 
-### Opening (scene-setting, cognitive dissonance):
-
-> Last week I had lunch with two Snowflake executives. Smart people. Deep
-> product knowledge. But when I brought up semantic drift, I watched
-> something familiar happen: a slight pause, a careful nod, then a pivot
-> to schema evolution features.
+> Make coffee. Pour in cream. Watch it swirl. Beautiful for about two
+> seconds. Then it's brown. Mixed. Done.
 >
-> This happens every time.
+> Now unmix it.
 >
-> The data industry has spent a decade building sophisticated tooling for
-> one type of data failure while almost completely ignoring another. We can
-> detect when a column disappears. We cannot detect when its meaning
-> changes.
+> You can't. I can't. Nobody can. Not with any tool that exists or will
+> ever exist. Not if you sat there for a billion years. That cream is
+> never coming back.
+
+**What to internalize:** Imperatives put the reader's hands on the
+concept. "Now unmix it." is a two-word paragraph doing the work of a
+section. The absolutes ("Nobody can. Ever.") are verdicts, not filler.
+Staccato is legal when every fragment moves the scene forward.
+
+> Here's what bothers me and maybe you as you're reading it: physics says
+> it's allowed. Every molecule could, in theory, wander back to where it
+> started. The math allows it.
+
+**What to internalize:** The narrator has a stake ("what bothers me") and
+pulls the reader in beside him. Curiosity stated as experience, not as
+"interestingly".
+
+---
+
+## Reference 2: "Why I Don't Use AI to Write" (published, the manifesto)
+
+The first-person declarative register.
+
+> People ask why I don't use AI to write my essays.
 >
-> That second problem is the one that actually destroys companies.
-
-**What to internalize:** The opening is a scene, not a claim. It earns the
-thesis by showing a moment of cognitive failure in smart people. The short
-paragraph "This happens every time." is earned by the scene before it.
-The two-sentence contrast ("We can detect... We cannot detect...") lands
-because it's specific and parallel.
-
-### Technical specificity (real tools, real columns, real scenarios):
-
-> Syntactic drift is when the structure of your data changes. A column gets
-> renamed. A data type shifts from integer to string. A table disappears.
-> An API starts returning a new field. These are structural changes to the
-> shape of data.
+> The question usually comes with an assumption baked in: that writing is
+> a means to an end. That the goal is the published artifact. That
+> anything which produces that artifact faster is obviously better.
 >
-> Semantic drift is when the meaning of your data changes while the
-> structure stays identical. The column is still called customer_status.
-> It still contains strings. But six months ago "active" meant "logged in
-> within 30 days" and now it means "has a valid subscription." Same column.
-> Same data type. Completely different meaning.
+> I understand the logic. I reject the premise.
 
-**What to internalize:** Real column names (`customer_status`). Real values
-("active"). Real definitions with timelines ("six months ago"). The
-explanation is concrete enough that a reader can point to it in their own
-warehouse.
+**What to internalize:** "I understand the logic. I reject the premise."
+is the two-beat parallel verdict in first person. Six words of setup
+credit, four words of knife. This is the Hormozi register done Kasseh's
+way.
 
-### Tool acknowledgment (fair, specific, not dismissive):
+> Let me be specific about what I do and don't use.
 
-> dbt gives you schema tests. You can assert that columns exist, that
-> they're not null, that they contain expected values. The newer data
-> contracts feature lets you explicitly define the structure your models
-> expect and fail builds when upstream changes break that contract. This
-> is real progress for structural integrity.
+**What to internalize:** "Let me" is the gear-shift verb. It announces a
+walkthrough while keeping the narrator in the room. Use it for examples,
+limitations, and concrete sections: "Let me make this concrete." / "Let
+me walk through the three major providers." / "Let me be direct about the
+limitations."
 
-**What to internalize:** Tools named specifically. Features described
-accurately. Credit given where due ("This is real progress"). The
-dismissal comes later, after the fair hearing.
+---
 
-### The gap statement (earned, not declared):
+## Reference 3: "Semantic Drift vs Syntactic Drift" (published, the
+benchmark technical piece)
 
-> All of this is genuinely useful. None of it catches semantic drift.
+The technical authority register. Note: this is his LEAST first-person
+technical essay. Its openings and verdicts are perfect; under the current
+direction, add the narrator to this register ("let me tell you what I saw
+at RelationalAI"), do not subtract the verdicts.
 
-**What to internalize:** Two sentences. The first validates everything
-that came before. The second delivers the thesis. The contrast is
-structural (the position of the sentences), not lexical (no "but" or
-"however").
+### Opening (two-beat framing, verdict isolated):
 
-### Closing (quiet, confident, memorable):
+> There are two ways your data can fail you. One is loud. The other is
+> silent. The entire data industry has organized itself around the loud
+> one.
+>
+> This is a mistake.
 
-> The data doesn't break. It just stops being true.
+**What to internalize:** Four sentences of setup, then a four-word verdict
+on its own line. No hedge, no "arguably". The essay's whole thesis is
+loaded before the first header.
 
-**What to internalize:** No exclamation. No call to arms. A quiet
-observation that sticks because it reframes everything the reader just
-absorbed. The verb "stops" does the work: it implies a process, not an
-event.
+### Technical specificity (real columns, real timelines):
+
+> When a column disappears from your database, your pipeline breaks. You
+> get an alert. Someone curses at 3am, fixes it, and moves on. The system
+> worked.
+>
+> When the meaning of a column changes but its name stays the same,
+> nothing breaks. Your dashboards render. Your tests pass. Your executives
+> make decisions. They just make them on data that no longer means what
+> they think it means.
+
+**What to internalize:** Parallel scenarios, second person throughout,
+concrete artifacts (alert, 3am, dashboards, tests). The danger is shown,
+never labeled "dangerous".
+
+### The gear-shift into example:
+
+> Let me make this concrete.
+>
+> Three teams at a company track Monthly Active Users.
+
+### Closing (the aphoristic lock):
+
+> The data does not break. It just stops being true.
+
+**What to internalize:** Two beats, parallel shape, the second turns the
+knife. No exclamation, no call to arms. This sentence shape (v1 banned it
+as "negative contrast") is his most recognizable move. Use it at closes
+and section landings, earned by the argument before it.
+
+---
+
+## Reference 4: "AI Oversharing" (published)
+
+The scene-first opening register. A person in frame one.
+
+> Last week, my wife Sara told me she doesn't have a personal account with
+> any AI tool, yet.
+>
+> She's an operations manager at a tech company. She uses Gemini and
+> ChatGPT through her corporate accounts, but always with one foot out the
+> door. Every prompt gets a mental audit before she hits enter.
+
+**What to internalize:** Real person, real job, real behavior. The essay's
+thesis will emerge from this scene, not be declared over it. Named people
+(Sara, Catalina, the intern) are corpus infrastructure.
+
+> Look, I'm not here to tell you to stop using AI. That ship has sailed.
+
+**What to internalize:** The "Look," opener is legal and published. Blunt
+concession, four-word verdict. This is bluntness aimed at trust, not at
+performance.
+
+---
+
+## Reference 5: "A Knowledge Graph Is Not a Technology" (published)
+
+The verdict-then-rebuild register.
+
+> People hear "knowledge graph" and immediately reach for a product. They
+> think it's something you buy. Something you install. A database with a
+> different query language and a marketing team that uses the word
+> "semantic"...
+>
+> It's not. A knowledge graph is a pattern. It's what emerges when you
+> combine three things correctly.
+
+**What to internalize:** Build the misconception fairly, then demolish it
+in two words. "It's not." as a standalone start-of-paragraph verdict is
+the house move for correcting industry vocabulary.
+
+---
+
+## Reference 6: "Against Entropy 001" (published, the dispatch)
+
+The letter register.
+
+> I owe you an email.
+>
+> You subscribed to Against Entropy. Some of you weeks ago. And I've been
+> publishing posts, building out the site, figuring out the rhythm of this
+> thing. But I haven't actually sent you anything.
+>
+> So here we are. The first dispatch. A little late, a little rough around
+> the edges. That feels appropriate.
+
+**What to internalize:** First line is four words and entirely personal.
+The reader is one person receiving a letter. Confidence includes admitting
+lateness without apologizing twice. This is the skeleton for newsletter
+dispatches.
 
 ---
 
 ## Voice Markers to Match
 
-These patterns recur across Quentin's writing and should be present in
-any draft:
+### The narrator in the room
+"I" carries experience and stake: "I was Director of Engineering at
+RelationalAI", "I spent time at a military academy in Tunisia", "English
+is my 3rd language". Biography is evidence. Every essay has a narrator,
+including deep technical ones.
 
 ### Sentence rhythm
-Long sentences that build (developing an idea across clauses), followed
-by short sentences that land (delivering the payoff). The short sentence
-earns its punch from the momentum before it.
+Long sentences that build, short sentences that land. The short sentence
+earns its punch from the momentum before it. Verdicts get their own
+paragraph.
 
 ### Specificity as authority
-Real tool names (dbt, Matillion, Monte Carlo, Fivetran, Airbyte). Real
-column names (`customer_status`, `mau`). Real business scenarios with
-numbers ("drops 15%"). This specificity signals builder credibility.
+Real tool names (dbt, Fivetran, Monte Carlo, Protégé). Real column names
+(`customer_status`, `mau`). Real people (Sara, Catalina, Dave McComb).
+Real money ($8B Informatica). Real biography. Numbers over adjectives.
 
-### Fair hearing before critique
-Tools and approaches get genuine credit before their gaps are identified.
-The critique lands harder because the reader already trusts the fairness
-of the analysis.
+### Fair hearing before the knife
+Tools and approaches get genuine credit before their gaps are identified:
+"All of this is useful. None of it catches semantic drift."
 
 ### Tension through structure, not adjectives
-The writing doesn't tell you something is "dangerous" or "critical." It
-shows you the scenario and lets the danger become obvious. Implicit
-tension over explicit alarm.
+Show the scenario, let the danger become obvious. Never "critically
+important".
 
-### Inclusive framing
-"We can detect" not "You can detect." "Most companies want a tool" not
-"Your company wants a tool." The reader is included in the observation,
-not lectured at.
+### Direct address as default
+The reader is "you", walked through steps, asked questions with built-in
+tests: "Ask three teams to define churn. Count the answers."
+
+### Blunt uncertainty
+"I don't know. Nobody knows." / "Is it for everyone? No." Uncertainty is
+delivered as verdict, never as qualifier soup.
 
 ---
 
 ## Anti-Patterns to Avoid
 
-These are patterns that would break the voice:
+### The ghost-writer (the pipeline's failure mode)
+> "With that on the table, the opening scene clarifies rather than
+> dissolves. The reader is welcome to hold the other view until section
+> five makes its case."
+
+Nobody is home. Meta-narration, permission-granting, zero narrator. If a
+paragraph could have been written about the essay instead of by its
+author, rewrite it. Related tell: calling Quentin "the author" in his own
+prose.
 
 ### The vendor pitch
 > "Ontology-driven architecture offers a transformative approach to
@@ -138,19 +246,20 @@ Clickbait framing. The voice is confident, not performative.
 > "You need to understand that semantic drift is fundamentally different
 > from syntactic drift. Let me explain why this matters."
 
-Condescending. The reader already knows they're reading. Don't narrate
-the explanation.
+Condescending. ("Let me make this concrete" shifts gears into an example;
+"let me explain why this matters" narrates the explanation. The first is
+the move, the second is the lecture.)
 
 ### The hedge pile
 > "It could potentially be argued that in some cases, semantic drift
 > might possibly create challenges for certain organizations."
 
-The voice is opinionated. State the claim. Acknowledge the tradeoff.
-Do not hedge the claim itself.
+State the claim. Acknowledge the tradeoff once, plainly. Do not hedge the
+claim itself.
 
 ### The AI assistant
 > "Let's dive into the fascinating world of semantic drift and explore
 > how it impacts modern data architectures."
 
 If a sentence could appear in a ChatGPT response to "explain semantic
-drift," it does not belong in Against Entropy.
+drift", it does not belong in Against Entropy.

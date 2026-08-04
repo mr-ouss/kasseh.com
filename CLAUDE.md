@@ -31,16 +31,28 @@ and the Against Entropy newsletter by Quentin Kasseh.
 
 ## Writing Rules
 
-Load the `kasseh-writing-guide` skill for full rules. Summary:
+Load the `kasseh-writing-guide` skill for full rules (v2, 2026-08-04).
+Summary:
 
+- First person always: Quentin narrates every essay, including technical
+  ones ("let me tell you about", "I watched this fail")
+- Direct address: the reader is "you"
+- Blunt verdicts (Hormozi register): no hedging, verdict lines isolated
+  on their own paragraph
+- Dense prose (Koe register): 1-3 sentence paragraphs, every sentence
+  advances, aphoristic landings per section
 - No AI phrases: "leverage," "landscape," "cutting-edge," "delve,"
   "dive in," "robust," "utilize," "synergy"
-- No negative contrast: "it's not X, it's Y"
-- No generic claims: "everyone knows," "nobody talks about"
-- No invented anecdotes
+- No meta-narration: "this essay," "the reader," "the author"
+- Signature moves are legal: two-beat parallel verdicts ("The data does
+  not break. It just stops being true."), fragment triples, staccato runs
+- No cliché collective filler: "everyone knows," "nobody talks about"
+- No invented anecdotes; personal proof over cited authority
 - Start with problems, not solutions
 - Real tool names, column names, specific scenarios
 - Ontology is grounded in business meaning first; data maps to it
+- Feedback loop: capture draft feedback in `analysis/feedback-log.md`;
+  promote recurring lessons into the writing guide
 
 ## Ghost Sync
 

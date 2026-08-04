@@ -1,10 +1,16 @@
-# Writing Guide for Against Entropy
+# Writing Guide for Against Entropy (v2)
 
 This skill defines the voice, structural patterns, and editorial rules for
 Quentin Kasseh's blog at kasseh.com and the Against Entropy newsletter.
 
 Load this skill before producing any content artifact: thesis documents,
 structural briefs, prose drafts, or edit reports.
+
+v2 (2026-08-04) rewrites the voice rules around three directives from
+Quentin: first-person narration everywhere, Hormozi-grade bluntness, and
+Koe-grade information density. It also legalizes signature moves from his
+published corpus that v1 wrongly banned. Evidence base:
+`analysis/voice-fingerprint.md` and `analysis/external-voice-references.md`.
 
 ---
 
@@ -22,44 +28,80 @@ thought leadership polish.
 
 ---
 
+## The Narrator Rule (non-negotiable, supersedes everything below)
+
+Quentin is a character in every essay, including the most technical ones.
+The analysis is his, the scars are his, the prose must be too.
+
+- Write in first person. "I built", "I watched this fail", "let me tell
+  you about", "let me make this concrete". The "Let me" gear-shift is his
+  native move: use it to open examples, limitations, and walkthroughs.
+- Address the reader directly as "you". Order the reader around when
+  walking through steps: "Make coffee. Pour in cream." / "Open Settings.
+  Go to Data Controls." / "Pick one business term. Just one."
+- Use "I" for experience, stake, and biography. Drop "I think" before
+  verdicts: state the verdict. "I think most teams skip this step" is
+  weaker than "Most teams skip this step. I watched three do it last year."
+- Personal proof beats appeals to authority. "I was Director of
+  Engineering at RelationalAI" outranks any Gartner citation. Real
+  projects, real table names, real costs in hours or dollars.
+- Meta-narration is banned in prose: never "this essay", "the reader",
+  "the author", "the section below will show". The narrator talks to the
+  reader; he does not narrate the document. (Headers and CTA excepted.)
+- Never grant the reader permission to disagree ("the reader is welcome to
+  hold the other view"). Make the claim. Handle the objection. Move on.
+
+Target profile, derived from his best published work: 15 to 40 first-person
+sentences per 100, 15 to 35 direct-address sentences per 100, in every
+essay including technical deep dives.
+
+---
+
 ## Voice Calibration
 
-The target tone is direct, opinionated, and technically grounded: the
-nonchalant confidence of Anthony Bourdain applied to enterprise data. Ideas
-build within sentences. Paragraphs develop momentum. The writing is
-observational and aphoristic, favoring implicit tension over spelled-out
-contrasts.
+Direct, opinionated, technically grounded. Bourdain's nonchalant confidence
+for the scenes, Hormozi's bluntness for the verdicts, Koe's density for the
+argument. Ideas build within sentences. Paragraphs stay light. The writing
+is observational and aphoristic.
 
-Write for readers already familiar with terms like semantic layer, ontology,
-AI debt, agent orchestration, and decision intelligence. These do not need
-definition.
+Write for readers already familiar with terms like semantic layer,
+ontology, AI debt, agent orchestration, and decision intelligence. These
+do not need definition.
 
 ### Too formal:
 > "Organizations must consider the implications of semantic inconsistency
 > across their data infrastructure."
 
 ### Too casual:
-> "Look, your data is basically lying to you and nobody's gonna tell you."
+> "Your data is basically lying to you and nobody's gonna tell you."
+
+(The problem words are "basically" and "gonna". A "Look," opener is fine
+and in the published corpus: "Look, I'm not here to tell you to stop using
+AI. That ship has sailed.")
 
 ### Just right:
-> "The data industry has spent a decade building sophisticated tooling for
-> one type of data failure while almost completely ignoring another. We can
-> detect when a column disappears. We cannot detect when its meaning
-> changes."
+> "There are two ways your data can fail you. One is loud. The other is
+> silent. The entire data industry has organized itself around the loud
+> one.
+>
+> This is a mistake."
 
 ---
 
 ## Writing Influences
 
-Draw from the style and approach of:
-
-- **Dave McComb**: Data-centric architecture, ontologies, the case against
+- **Alex Hormozi**: verdict sentences, zero hedging, personal proof with
+  numbers, objection stated then crushed, complexity dismissal
+- **Dan Koe**: letter format, one idea per paragraph, reframe chains,
+  aphorism landings, transition economy
+- **Anthony Bourdain**: scene-setting, a person in the first frame,
+  nonchalant confidence
+- **Dave McComb**: data-centric architecture, ontologies, the case against
   application-centricity
-- **Jason Fried**: Direct, opinionated, contrarian business thinking
-- **Frank Slootman**: No-nonsense executive communication, bias toward action
-- **Jim Collins**: Research-backed frameworks, disciplined thinking
-- **Tim Urban**: Complex concepts made accessible through analogy and humor
-- **William Zinsser**: Clear writing, remove unnecessary words, no fluff
+- **Jason Fried**: direct, contrarian business thinking
+- **Frank Slootman**: no-nonsense escalation, bias toward action
+- **Tim Urban**: complex concepts through analogy and humor
+- **William Zinsser**: remove unnecessary words, no fluff
 
 ---
 
@@ -68,29 +110,44 @@ Draw from the style and approach of:
 ### Punctuation
 Punctuation goes outside quotation marks (logical/British style).
 Correct: "this is correct".  Wrong: "this is incorrect."
+No em dashes. Use commas, colons, periods, or parentheses.
 
-### Prohibited Constructions
-- No em dashes. Use commas, colons, periods, or parentheses.
-- No negative contrast structures: "it's not X, it's Y." State the point
-  directly.
-- No generic assumptions about what "everyone" or "nobody" does, thinks,
-  or ignores. State observations specifically or leave them out.
-- No choppy stacked short sentences. Short punches must be earned by
-  surrounding prose.
-- No first-person reflective phrases like "keeps coming back to me" in
-  professional content. Prefer authoritative, impersonal framing.
-- No "you don't have X, you have Y" negative contrast structure.
-- Inclusive first-person framing preferred over declarative positioning
-  when writing in first person (e.g., "we may be skipping a step" over
-  "I think most people are skipping a step").
-- No invented personal anecdotes. No projection framing attributed to
-  unnamed collectives.
+### Prohibited
+- Meta-narration: "this essay", "the reader", "the author", any sentence
+  that narrates the document instead of making the argument.
+- Trailing hedges and hedge-parentheticals: "maybe", "perhaps", "IMO",
+  "arguably", "it could be argued", "(more often than you'd think)".
+  Honest uncertainty is allowed only as a verdict: "I don't know. Nobody
+  knows." / "Is it for everyone? No."
+- The flabby single-sentence contrast template: "it's not just X, it's Y".
+- Cliché collective filler: "nobody talks about", "everyone knows",
+  "nobody asks the harder question", "the pattern nobody talks about",
+  "here's the uncomfortable truth".
+- Invented anecdotes. Composite and anonymize real ones only. (Personal
+  proof makes this self-enforcing: only real stories have table names.)
+- AI phrases: "leverage", "cutting-edge", "delve", "dive in", "robust",
+  "utilize", "landscape", "paradigm shift", "synergy". If a sentence could
+  appear in a generic LLM answer, delete it.
+- Hyperbole adjectives: "insane", "fantastic", "game-changing". Verdicts
+  must be checkable, not loud.
 
-### Prohibited Phrases
-Never use: "leverage," "cutting-edge," "delve," "dive in," "robust,"
-"rot," "utilize," "landscape," "paradigm shift," "synergy," "quietly,"
-"nobody asks the harder question," "the pattern nobody talks about,"
-"here's the uncomfortable truth."
+### Explicitly allowed (v1 banned these; his published corpus runs on them)
+- **Two-beat parallel verdicts**, his single most recognizable move:
+  "The data does not break. It just stops being true." / "It's not. A
+  knowledge graph is a pattern." / "The tools got better. The outcomes got
+  worse." Two short sentences, parallel shape, second one turns the knife.
+- **Fragment triples**: "Not chaos. Not randomness. Just probability." /
+  "No recordings. No listeners. No reuse."
+- **Staccato runs** when walking the reader through something physical or
+  landing a verdict: "Make coffee. Pour in cream. Watch it swirl.
+  Beautiful for about two seconds. Then it's brown. Mixed. Done." The test
+  is earned momentum, not sentence count.
+- **Rhetorical absolutes in verdict position**: "You're not beating those
+  odds. Nobody is. Ever." Ban stays only on the lazy filler forms listed
+  above.
+- **"quietly"** and similar quiet-failure vocabulary. His benchmark piece
+  uses it twice.
+- **"Look," openers** and honest asides. He is a person, not a whitepaper.
 
 ### Preferred Substitutions
 
@@ -100,8 +157,62 @@ Never use: "leverage," "cutting-edge," "delve," "dive in," "robust,"
 | utilize | use |
 | landscape | space, industry, field |
 | cutting-edge | new, recent, modern |
-| rot | degrade |
 | paradigm shift | change, transition |
+| "I think X" (before a verdict) | "X." |
+| "most people" (unsupported) | a countable population: "of the last five data teams I worked with, four" |
+
+---
+
+## Density Rules (Koe register)
+
+Every sentence advances the argument, reframes the idea, or sets up the
+next move. If it does none of those, delete it.
+
+- Paragraphs in running argument: 1 to 3 sentences, under 45 words. Roughly
+  60% single-sentence paragraphs in argument sections. Longer paragraphs
+  are allowed only for worked examples (a failing pipeline, a real schema,
+  a migration story).
+- Verdict sentences get their own paragraph. "This is a mistake." never
+  hides mid-paragraph.
+- Transition economy: no "however", "furthermore", "additionally". Use
+  standalone "Because...", "So...", "In other words...", or a short
+  question ("Why does this fail?").
+- Reframe chains for causal arguments: each sentence hands its object to
+  the next as subject. "The pipeline feeds the metric. The metric feeds
+  the forecast. The forecast feeds the headcount plan."
+- Parallel definition pairs instead of definition sections: "A schema
+  describes storage. An ontology describes meaning."
+- Concrete triplets to ground abstractions: "dbt marts nobody queries,
+  Collibra glossaries nobody reads, LookML nobody trusts."
+- Aphorism landings: one standalone quotable line per 100 to 150 words.
+  Every major section ends on one.
+- Named frameworks as compression handles: coin the term early ("semantic
+  drift", "meaning governance"), pay the plain-words definition once,
+  spend the token everywhere. Every named abstraction gets one plain
+  definition on first use.
+- Disbelief pre-emption: after a strong claim, concede the reaction in
+  under six words ("This sounds extreme.") and proceed. Never hedge the
+  claim itself.
+
+## Bluntness Rules (Hormozi register)
+
+- End evidence blocks with a 3 to 6 word absolute: "The glossary is not
+  governance." / "Nobody owns that number."
+- Define by fiat when the industry has blurred a term: "A metric is a
+  decision rule with a number attached. That's all." Then instances, then
+  restate.
+- Zero hedging on things actually known from direct experience. Reserve
+  uncertainty for genuinely uncertain claims, stated once, plainly: "I
+  have seen this fail twice; that is my whole sample."
+- Objection handling: quote the objection in the reader's words, answer in
+  one line, move on.
+- Imperatives ship with a built-in test the reader can run this week:
+  "Ask three teams to define churn. Count the answers."
+- Complexity dismissal after reducing a vendor-inflated topic to its 2 or
+  3 real moving parts: "That's the whole mechanism."
+- Load-bearing conclusions under 8 words.
+- Do not import: money flexing, hard-sell CTAs, urgency mechanics,
+  profanity, gym anecdotes, unsupported universal openers.
 
 ---
 
@@ -264,6 +375,14 @@ of missing semantics. The second half reinterprets everything.
 ambition), Dave McComb (reframing enterprise data as an architecture
 problem, not a tooling problem).
 
+### 7. The Letter (dispatch format)
+
+For newsletter dispatches and personal essays. Cold-open in first person
+("I owe you an email."), talk to the reader as one person, walk through
+what happened or what was built, close with what's next. This is the Koe
+skeleton: claim about the reader's world up top, argument in the middle,
+one operational section at the end.
+
 ### Blending Archetypes
 
 The best essays often blend: a Zoom opening that feeds into a Ratchet. An
@@ -290,14 +409,16 @@ best metaphors:
 3. **Extend** to show the concept in action
 4. **Payoff** by showing how the solution resolves the metaphor
 
+One extended metaphor per essay. Two competing metaphors dilute both.
+
 ---
 
 ## Formatting Guidelines
 
 ### Paragraphs:
-- Keep paragraphs short (2-4 sentences typical)
-- One idea per paragraph
-- Use line breaks to create rhythm and pacing
+- 1 to 3 sentences. One idea per paragraph.
+- Verdict lines stand alone.
+- Use line breaks to create rhythm and pacing.
 
 ### Headlines and Subheads:
 - Clear, descriptive section headers
@@ -329,6 +450,10 @@ The "meaning tax" / "renting your own meaning back" framing connects
 platform data lock-in to institutional ontology capture. This framing has
 resonated and can be referenced.
 
+The vendor is the recurring villain: "problems the vendors won't talk
+about", "not from a vendor's sales deck". Anti-vendor skepticism is brand
+infrastructure. Fair hearing first, then the knife.
+
 ---
 
 ## Closing and CTA
@@ -343,23 +468,32 @@ Or variations:
 > "If you're tired of dashboards that lie to you politely, Against Entropy
 > is where I write about the fixes."
 
+One CTA, at the end, quietly. Nothing on kasseh.com is a funnel step.
+
 ---
 
 ## Pre-Publish Checklist
 
 Before publishing, verify:
 
-- Opens with a move, not a generic claim
-- Problem is grounded in specific examples (tool names, column names, real scenarios)
-- Existing tools/approaches acknowledged fairly
-- The thesis is defensible (survived adversarial pressure)
-- At least one visceral metaphor grounds the concept
-- Practical alternatives offered for readers who can't go all-in
-- Closes with a memorable line or provocative question
-- No em dashes
-- No AI-sounding phrases
-- No negative contrast structures
-- No generic "everyone" / "nobody" claims
-- No invented anecdotes
-- Punctuation outside quotation marks
-- Reads like a smart colleague explaining, not a vendor selling
+- The narrator is present: 15+ first-person sentences per 100, from the
+  first section, not just the intro
+- Direct address throughout: the reader is "you", ordered around in the
+  practical sections
+- Opens with a move, not a generic claim; a person or scene in frame one
+- Zero meta-narration ("this essay", "the reader", "the author")
+- Zero trailing hedges ("maybe", "perhaps", "IMO", hedge-parentheticals)
+- Verdict sentences isolated on their own lines
+- Paragraphs 1 to 3 sentences in argument sections
+- At least one two-beat parallel contrast per major section
+- Problem grounded in specific examples (tool names, column names, real
+  scenarios); personal proof over cited authority
+- Existing tools/approaches acknowledged fairly before critique
+- One extended visceral metaphor, introduced, called back, paid off
+- Practical exit ramp with a built-in test the reader can run this week
+- Every named abstraction defined once in plain words
+- Closes with an aphoristic line that reframes the piece
+- No em dashes; punctuation outside quotation marks
+- No AI-sounding phrases; no hyperbole adjectives
+- Reads like Quentin telling you something he knows, not a vendor selling
+  and not a ghost-writer summarizing
