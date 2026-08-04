@@ -1,0 +1,40 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Best Foundation for AI Starts Without AI",
+  "description": "AI agents fabricate through missing commitments. Retrieval can recover what you built. It cannot recover which foreclosures still bind.",
+  "author": {
+    "@type": "Person",
+    "name": "Quentin Kasseh",
+    "url": "https://www.kasseh.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Against Entropy",
+    "url": "https://www.kasseh.com"
+  },
+  "datePublished": "YYYY-MM-DDTHH:MM:SSZ",
+  "dateModified": "YYYY-MM-DDTHH:MM:SSZ",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.kasseh.com/knowledge-base-ai-debt/"
+  },
+  "mentions": [
+    {"@type": "Organization", "name": "Anthropic", "url": "https://www.anthropic.com"},
+    {"@type": "Organization", "name": "Cursor", "url": "https://www.cursor.com"},
+    {"@type": "Organization", "name": "Linear", "url": "https://linear.app"},
+    {"@type": "Organization", "name": "Notion", "url": "https://www.notion.so"},
+    {"@type": "Organization", "name": "Granola", "url": "https://www.granola.ai"},
+    {"@type": "Organization", "name": "Glean", "url": "https://www.glean.com"},
+    {"@type": "Organization", "name": "a16z", "url": "https://a16z.com"},
+    {"@type": "Organization", "name": "Gartner", "url": "https://www.gartner.com"},
+    {"@type": "Organization", "name": "Obsidian", "url": "https://obsidian.md"},
+    {"@type": "Organization", "name": "Basecamp", "url": "https://basecamp.com"},
+    {"@type": "Organization", "name": "GitHub", "url": "https://github.com"},
+    {"@type": "Organization", "name": "Syntaxia", "url": "https://www.syntaxia.com"},
+    {"@type": "Organization", "name": "Slack", "url": "https://slack.com"}
+  ],
+  "keywords": ["AI debt", "knowledge management", "binding commitments", "decision logging", "agentic retrieval", "engineering culture", "substrate quality"]
+}
+</script>

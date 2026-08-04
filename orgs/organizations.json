@@ -248,5 +248,90 @@
     "sameAs": [
       "https://www.linkedin.com/company/snomed-international"
     ]
+  },
+  "anthropic": {
+    "@type": "Organization",
+    "name": "Anthropic",
+    "url": "https://www.anthropic.com",
+    "sameAs": [
+      "https://www.linkedin.com/company/anthropicresearch"
+    ]
+  },
+  "cursor": {
+    "@type": "Organization",
+    "name": "Cursor",
+    "url": "https://www.cursor.com",
+    "sameAs": [
+      "https://www.linkedin.com/company/cursor-ai"
+    ]
+  },
+  "linear": {
+    "@type": "Organization",
+    "name": "Linear",
+    "url": "https://linear.app",
+    "sameAs": [
+      "https://www.linkedin.com/company/linear-app"
+    ]
+  },
+  "notion": {
+    "@type": "Organization",
+    "name": "Notion",
+    "url": "https://www.notion.so",
+    "sameAs": [
+      "https://www.linkedin.com/company/notionhq"
+    ]
+  },
+  "granola": {
+    "@type": "Organization",
+    "name": "Granola",
+    "url": "https://www.granola.ai",
+    "sameAs": [
+      "https://www.linkedin.com/company/granola-ai"
+    ]
+  },
+  "a16z": {
+    "@type": "Organization",
+    "name": "a16z",
+    "url": "https://a16z.com",
+    "sameAs": [
+      "https://www.linkedin.com/company/a16z"
+    ]
+  },
+  "gartner": {
+    "@type": "Organization",
+    "name": "Gartner",
+    "url": "https://www.gartner.com",
+    "sameAs": [
+      "https://www.linkedin.com/company/gartner"
+    ]
+  },
+  "obsidian": {
+    "@type": "Organization",
+    "name": "Obsidian",
+    "url": "https://obsidian.md",
+    "sameAs": [
+      "https://www.linkedin.com/company/obsidianmd"
+    ]
+  },
+  "basecamp": {
+    "@type": "Organization",
+    "name": "Basecamp",
+    "url": "https://basecamp.com",
+    "sameAs": [
+      "https://www.linkedin.com/company/basecamp"
+    ]
+  },
+  "github": {
+    "@type": "Organization",
+    "name": "GitHub",
+    "url": "https://github.com",
+    "sameAs": [
+      "https://www.linkedin.com/company/github"
+    ]
+  },
+  "syntaxia": {
+    "@type": "Organization",
+    "name": "Syntaxia",
+    "url": "https://www.syntaxia.com"
   }
 }
